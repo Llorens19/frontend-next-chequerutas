@@ -1,3 +1,5 @@
+import SearchHome from '@/components/frontend/search/SearchHome';
+
 const Home = () => {
 
   const styles = {
@@ -17,6 +19,7 @@ const Home = () => {
       >
         <h1 className="text-white text-4xl font-bold">Bienvenido</h1>
         <p className="text-white mt-4">Este es un fondo en blanco y negro</p>
+        <SearchHome/>
       </section>
     </>
   );
