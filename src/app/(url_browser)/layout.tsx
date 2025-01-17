@@ -1,5 +1,4 @@
-import Header from '@/components/frontend/layout/Header';
-import Navbar from '@/components/frontend/layout/Navbar';
+import Header from '@/components/layout/Header';
 
 import { ReactNode } from 'react';
 

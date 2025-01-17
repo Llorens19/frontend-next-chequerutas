@@ -1,5 +1,7 @@
 import { ReactNode } from 'react';
 import './globals.css';
+import 'flowbite';
+
 
 const RootLayout = ({ children }: { children: ReactNode }) => {
     return children;
