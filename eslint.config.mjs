@@ -22,7 +22,6 @@ const eslintConfig = [
             'semi': ['error', 'always'], // Errores si no hay punto y coma
             'quotes': ['warn', 'single'], // Advertencias si no se usan comillas simples
             'no-unused-vars': 'warn', // Advertencias por variables no utilizadas
-            'no-console': 'warn', // Advertencias por uso de console.log
             '@typescript-eslint/no-unused-vars': 'warn', // Advertencias por variables TS no utilizadas
             '@typescript-eslint/no-explicit-any': 'warn', // Advertencias por uso de any
         },

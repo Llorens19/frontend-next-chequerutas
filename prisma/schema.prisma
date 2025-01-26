@@ -1,0 +1,204 @@
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider = "postgresql"
+  url      = env("DATABASE_URL")
+}
+
+model achievements {
+  id_achievement     String               @id @default(dbgenerated("gen_random_uuid()")) @db.Uuid
+  image_url          String?
+  title              String               @db.VarChar(255)
+  description        String?
+  created_at         DateTime?            @default(now()) @db.Timestamp(6)
+  achievements_users achievements_users[]
+}
+
+model achievements_users {
+  id_achievement_user String       @id @default(dbgenerated("gen_random_uuid()")) @db.Uuid
+  id_achievement      String       @db.Uuid
+  id_user             String       @db.Uuid
+  achieved_at         DateTime?    @default(now()) @db.Timestamp(6)
+  achievements        achievements @relation(fields: [id_achievement], references: [id_achievement], onDelete: Cascade, onUpdate: NoAction)
+  users               users        @relation(fields: [id_user], references: [id_user], onDelete: Cascade, onUpdate: NoAction)
+}
+
+model admins {
+  id_admin String @id @default(dbgenerated("gen_random_uuid()")) @db.Uuid
+  id_user  String @db.Uuid
+  users    users  @relation(fields: [id_user], references: [id_user], onDelete: Cascade, onUpdate: NoAction)
+}
+
+model blacklist_tokens {
+  id_token   String    @id @default(dbgenerated("gen_random_uuid()")) @db.Uuid
+  token      String
+  expires_at DateTime  @db.Timestamp(6)
+  created_at DateTime? @default(now()) @db.Timestamp(6)
+}
+
+model categories {
+  id_category   String    @id @default(dbgenerated("gen_random_uuid()")) @db.Uuid
+  name_category String    @db.VarChar(255)
+  desc_category String?
+  img_category  String?
+  slug_category String    @unique @db.VarChar(255)
+  created_at    DateTime? @default(now()) @db.Timestamp(6)
+  updated_at    DateTime? @default(now()) @db.Timestamp(6)
+  routes        routes[]
+
+  @@index([slug_category], map: "idx_categories_slug")
+}
+
+model clients {
+  id_client String  @id @default(dbgenerated("gen_random_uuid()")) @db.Uuid
+  id_user   String  @db.Uuid
+  phone     String? @db.VarChar(15)
+  users     users   @relation(fields: [id_user], references: [id_user], onDelete: Cascade, onUpdate: NoAction)
+}
+
+model comments {
+  id_comment        String     @id @default(dbgenerated("gen_random_uuid()")) @db.Uuid
+  id_user           String     @db.Uuid
+  id_route          String     @db.Uuid
+  body              String
+  img_comment       String?
+  id_parent_comment String?    @db.Uuid
+  created_at        DateTime?  @default(now()) @db.Timestamp(6)
+  updated_at        DateTime?  @default(now()) @db.Timestamp(6)
+  comments          comments?  @relation("commentsTocomments", fields: [id_parent_comment], references: [id_comment], onDelete: Cascade, onUpdate: NoAction)
+  other_comments    comments[] @relation("commentsTocomments")
+  routes            routes     @relation(fields: [id_route], references: [id_route], onDelete: Cascade, onUpdate: NoAction)
+  users             users      @relation(fields: [id_user], references: [id_user], onDelete: Cascade, onUpdate: NoAction)
+
+  @@index([id_route], map: "idx_comments_route_id")
+  @@index([id_user], map: "idx_comments_user_id")
+}
+
+model favorites {
+  id_favorite String    @id @default(dbgenerated("gen_random_uuid()")) @db.Uuid
+  id_user     String    @db.Uuid
+  id_route    String    @db.Uuid
+  created_at  DateTime? @default(now()) @db.Timestamp(6)
+  routes      routes    @relation(fields: [id_route], references: [id_route], onDelete: Cascade, onUpdate: NoAction)
+  users       users     @relation(fields: [id_user], references: [id_user], onDelete: Cascade, onUpdate: NoAction)
+
+  @@index([id_route], map: "idx_favorites_route_id")
+  @@index([id_user], map: "idx_favorites_user_id")
+}
+
+model images_routes {
+  id_image   String    @id @default(dbgenerated("gen_random_uuid()")) @db.Uuid
+  id_route   String    @db.Uuid
+  image_url  String
+  type       String?   @default("gallery") @db.VarChar(50)
+  created_at DateTime? @default(now()) @db.Timestamp(6)
+  routes     routes    @relation(fields: [id_route], references: [id_route], onDelete: Cascade, onUpdate: NoAction)
+}
+
+model notifications {
+  id_notification     String                @id @default(dbgenerated("gen_random_uuid()")) @db.Uuid
+  title               String                @db.VarChar(255)
+  description         String?
+  created_at          DateTime?             @default(now()) @db.Timestamp(6)
+  notifications_users notifications_users[]
+}
+
+model notifications_users {
+  id_notification_user String        @id @default(dbgenerated("gen_random_uuid()")) @db.Uuid
+  id_notification      String        @db.Uuid
+  id_user              String        @db.Uuid
+  is_read              Boolean?      @default(false)
+  created_at           DateTime?     @default(now()) @db.Timestamp(6)
+  notifications        notifications @relation(fields: [id_notification], references: [id_notification], onDelete: Cascade, onUpdate: NoAction)
+  users                users         @relation(fields: [id_user], references: [id_user], onDelete: Cascade, onUpdate: NoAction)
+}
+
+model ratings {
+  id_rating     String          @id @default(dbgenerated("gen_random_uuid()")) @db.Uuid
+  description   String?
+  users_ratings users_ratings[]
+}
+
+model refresh_tokens {
+  id_refresh_token String    @id @default(dbgenerated("gen_random_uuid()")) @db.Uuid
+  id_user          String    @db.Uuid
+  token            String
+  expires_at       DateTime  @db.Timestamp(6)
+  created_at       DateTime? @default(now()) @db.Timestamp(6)
+  users            users     @relation(fields: [id_user], references: [id_user], onDelete: Cascade, onUpdate: NoAction)
+}
+
+model routes {
+  id_route          String          @id @default(dbgenerated("gen_random_uuid()")) @db.Uuid
+  id_user           String          @db.Uuid
+  title             String          @db.VarChar(255)
+  description       String?
+  coordinates       Json
+  level             String?         @db.VarChar(50)
+  distance          Float?
+  duration          Int?
+  average_rating    Float?          @default(0)
+  start_coordinates String?
+  id_category       String?         @db.Uuid
+  slug_route        String?         @unique @db.VarChar(255)
+  is_public         Boolean?        @default(true)
+  created_at        DateTime?       @default(now()) @db.Timestamp(6)
+  updated_at        DateTime?       @default(now()) @db.Timestamp(6)
+  comments          comments[]
+  favorites         favorites[]
+  images_routes     images_routes[]
+  categories        categories?     @relation(fields: [id_category], references: [id_category], onUpdate: NoAction)
+  users             users           @relation(fields: [id_user], references: [id_user], onDelete: Cascade, onUpdate: NoAction)
+  users_ratings     users_ratings[]
+
+  @@index([slug_route], map: "idx_routes_slug")
+  @@index([id_user], map: "idx_routes_user_id")
+  @@index([id_category], map: "idx_routes_id_category")
+}
+
+model users {
+  id_user             String                @id @default(dbgenerated("gen_random_uuid()")) @db.Uuid
+  img_user            String?
+  email               String                @unique @db.VarChar(150)
+  username            String                @unique @db.VarChar(50)
+  name                String?               @db.VarChar(100)
+  surname             String?               @db.VarChar(100)
+  birthdate           DateTime?             @db.Date
+  bio                 String?
+  password            String                @db.VarChar(255)
+  role                String?               @default("client") @db.VarChar(20)
+  is_active           Boolean?              @default(true)
+  is_deleted          Boolean?              @default(false)
+  premium_level       Int?                  @default(0)
+  created_at          DateTime?             @default(now()) @db.Timestamp(6)
+  updated_at          DateTime?             @default(now()) @db.Timestamp(6)
+  achievements_users  achievements_users[]
+  admins              admins[]
+  clients             clients[]
+  comments            comments[]
+  favorites           favorites[]
+  notifications_users notifications_users[]
+  refresh_tokens      refresh_tokens[]
+  routes              routes[]
+  users_ratings       users_ratings[]
+}
+
+/// This table contains check constraints and requires additional setup for migrations. Visit https://pris.ly/d/check-constraints for more info.
+model users_ratings {
+  id_user_rating String    @id @default(dbgenerated("gen_random_uuid()")) @db.Uuid
+  id_rating      String    @db.Uuid
+  id_user        String    @db.Uuid
+  id_route       String    @db.Uuid
+  rating_value   Int?
+  comment        String?
+  created_at     DateTime? @default(now()) @db.Timestamp(6)
+  updated_at     DateTime? @default(now()) @db.Timestamp(6)
+  ratings        ratings   @relation(fields: [id_rating], references: [id_rating], onDelete: Cascade, onUpdate: NoAction)
+  routes         routes    @relation(fields: [id_route], references: [id_route], onDelete: Cascade, onUpdate: NoAction)
+  users          users     @relation(fields: [id_user], references: [id_user], onDelete: Cascade, onUpdate: NoAction)
+
+  @@index([id_route], map: "idx_users_ratings_route_id")
+  @@index([id_user], map: "idx_users_ratings_user_id")
+}
