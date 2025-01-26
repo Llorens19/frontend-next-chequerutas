@@ -29,7 +29,7 @@ const Home = async () => {
         <SearchHome />
       </section>
       <section className="sport-carousel p-4">
-        <h2 className="flex justify-center text-2xl font-bold text-deep-orange-600 mb-4">
+        <h2 className="flex justify-center text-2xl font-bold text-white mb-4">
           Categorias
         </h2>
         <CarouselCategory categories={categories} />

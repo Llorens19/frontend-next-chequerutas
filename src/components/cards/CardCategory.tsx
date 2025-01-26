@@ -12,7 +12,7 @@ const CardCategory = ({ category }: { category: ICategory }) => {
         height={800}
       />
 
-      <h3 className="pb-4 text-base sm:text-lg font-bold text-text1 transition-opacity duration-500 group-hover:opacity-0 absolute inset-0 flex items-end justify-center bg-black bg-opacity-50 opacity-100">
+      <h3 className="sm:pb-8 text-base sm:text-lg font-bold text-text1 transition-opacity duration-500 group-hover:opacity-0 absolute inset-0 flex items-center sm:items-end justify-center bg-black bg-opacity-50 opacity-100">
         {category.nameCategory}
       </h3>
 
