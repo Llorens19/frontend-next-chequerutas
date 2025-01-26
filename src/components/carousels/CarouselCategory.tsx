@@ -114,7 +114,7 @@ const CarouselCategory = ({ categories }: ICategories) => {
               className="carousel-slide flex-shrink-0 w-full grid grid-cols-3 gap-4"
             >
               {stack.map((category) => (
-                <CardCategory key={category.id_category} category={category} />
+                <CardCategory key={category.idCategory} category={category} />
               ))}
             </div>
           ))}
