@@ -1,4 +1,4 @@
-import type { NextConfig } from "next";
+import type { NextConfig } from 'next';
 
 const nextConfig: NextConfig = {
   reactStrictMode: true,
@@ -6,10 +6,10 @@ const nextConfig: NextConfig = {
     return [
       {
         source: '/api/:path*',
-        destination: 'http://localhost:3000/api/:path*'
-      }
-    ]
-  }
+        destination: 'http://localhost:3000/api/:path*',
+      },
+    ];
+  },
 };
 
 export default nextConfig;
