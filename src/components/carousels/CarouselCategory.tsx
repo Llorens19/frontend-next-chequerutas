@@ -40,7 +40,6 @@ const CarouselCategory = ({ categories }: ICategories) => {
     const touchX = e.touches[0].clientX;
     const deltaX = touchX - startX;
 
-    // Detect significant movement to swipe
     if (deltaX > 50) {
       prev();
       setIsDragging(false);
