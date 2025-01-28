@@ -1,6 +1,6 @@
 import { CategoryService } from '@/services/category.service';
 import { categoryFilterDto } from '@/shared/dto/categoryFilter.dto';
-import { useQueries, useQuery } from '@tanstack/react-query';
+import { useQuery } from '@tanstack/react-query';
 
 // export const useCategoryQuery = () => {
 //   return useQueries({

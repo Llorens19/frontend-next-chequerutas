@@ -16,12 +16,6 @@ const CarouselCategory = ({ categories }: ICategories) => {
 
 
 
-
-
-
-
-
-
   const [index, setIndex] = useState<number>(0);
   const [startX, setStartX] = useState<number | null>(null);
   const [isDragging, setIsDragging] = useState(false);
