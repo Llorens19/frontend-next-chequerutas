@@ -41,7 +41,7 @@ const CardRoute = ({ route }: ICardRouteInput) => {
               </li>
               <li className="flex gap-2">
                 <span className="font-bold text-text4">Nivel</span>{' '}
-                {route.level ? <LevelRating level={route.level} /> : '-'}
+                {route.level ? <LevelRating level={Number(route.level)} /> : '-'}
               </li>
             </ul>
           </div>

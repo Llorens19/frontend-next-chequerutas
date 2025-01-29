@@ -62,7 +62,7 @@ const FilterRoute = () => {
           <Rating
             name="difficulty-rating"
             value={level}
-            precision={1}
+            precision={0.5}
             max={5}
             onChange={onChangeLevel}
             icon={<TerrainIcon fontSize="inherit" />}

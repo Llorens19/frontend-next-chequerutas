@@ -1,3 +1,3 @@
 export interface ILevelRatingProps {
-  level: number | string;
+  level: number;
 }

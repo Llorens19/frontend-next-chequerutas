@@ -1,4 +1,5 @@
-import { useQuery } from "@tanstack/react-query";
+import { RouteService } from '@/services/route.service';
+import { useQuery } from '@tanstack/react-query';
 
 export const useLocationQuery = () =>
   useQuery({

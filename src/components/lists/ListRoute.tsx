@@ -9,7 +9,7 @@ import { IRouteFilters } from '@/interfaces/services/route/getRoutes.interface';
 
 const ListRoute = () => {
   const searchParams = useSearchParams();
-  const [filters, setFilters] = useState<IRouteFilters>({ limit: 0, offset: 0 });
+  const [filters, setFilters] = useState<IRouteFilters>({ limit: 10, offset: 0 });
 
   useEffect(() => {
     const encodedFilters = searchParams.get('filters');
@@ -26,6 +26,8 @@ const ListRoute = () => {
   }, [searchParams]);
 
   const { data: routes, refetch } = useRoutesQuery(filters);
+
+  console.log('routes', routes);
 
 
   useEffect(() => {

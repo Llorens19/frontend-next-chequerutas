@@ -5,12 +5,12 @@ import { ILevelRatingProps } from '@/interfaces/components/ratings/LevelRating.i
 
 const LevelRating = ({ level }: ILevelRatingProps) => {
 
-  const levelNumber = typeof level === 'string' ? parseFloat(level) : level;
+
 
   return (
     <Rating
       name="difficulty-rating"
-      value={levelNumber}
+      value={level}
       precision={0.5}
       max={5}
       readOnly
@@ -28,11 +28,11 @@ const LevelRating = ({ level }: ILevelRatingProps) => {
         },
         '& .MuiRating-iconFilled': {
           color:
-            levelNumber >= 5
+            level >= 5
               ? '#ff0000'
-              : levelNumber >= 4
+              : level >= 4
               ? '#ff5722'
-              : levelNumber >= 2.5
+              : level >= 2.5
               ? '#ff9800'
               : '#55ff55',
         },
