@@ -42,7 +42,7 @@ const FilterRoute = () => {
 
 
   return (
-    <section className="bg-color3 fixed w-full mt-16">
+    <section className="bg-color3 fixed w-full mt-16 z-50">
       <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-6 gap-16 m-4 mx-20">
 
 

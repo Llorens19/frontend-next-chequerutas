@@ -4,7 +4,7 @@ const CardRouteMobile = () => {
 
   return (
     <>
-      <div className="bg-color3 p-4 border border-contrast3 rounded-lg flex flex-col">
+      <div className="bg-color3 p-4 border border-contrast3 rounded-lg flex flex-col mb-8">
         {/* Fila 1 */}
 
         <div className="flex justify-center align-center mb-4 border-b  items-center border-contrast3 pb-2 gap-4">
