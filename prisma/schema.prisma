@@ -7,38 +7,37 @@ datasource db {
   url      = env("DATABASE_URL")
 }
 
-model achievements {
-  idAchievement     String               @id @default(dbgenerated("gen_random_uuid()")) @map("id_achievement") @db.Uuid
-  imageUrl          String?              @map("image_url")
-  title             String               @db.VarChar(255)
+model Achievements {
+  idAchievement     String              @id @default(dbgenerated("gen_random_uuid()")) @map("id_achievement") @db.Uuid
+  imageUrl          String?             @map("image_url")
+  title             String              @db.VarChar(255)
   description       String?
-  createdAt         DateTime?            @default(now()) @map("created_at") @db.Timestamp(6)
-  achievementsUsers achievementsUsers[]
+  createdAt         DateTime?           @default(now()) @map("created_at") @db.Timestamp(6)
+  achievementsUsers AchievementsUsers[]
+
+  @@map("achievements")
 }
 
-model achievementsUsers {
+model AchievementsUsers {
   idAchievementUser String       @id @default(dbgenerated("gen_random_uuid()")) @map("id_achievement_user") @db.Uuid
   idAchievement     String       @map("id_achievement") @db.Uuid
   idUser            String       @map("id_user") @db.Uuid
   achievedAt        DateTime?    @default(now()) @map("achieved_at") @db.Timestamp(6)
-  achievements      achievements @relation(fields: [idAchievement], references: [idAchievement], onDelete: Cascade, onUpdate: NoAction)
-  users             users        @relation(fields: [idUser], references: [idUser], onDelete: Cascade, onUpdate: NoAction)
+  achievement       Achievements @relation(fields: [idAchievement], references: [idAchievement], onDelete: Cascade, onUpdate: NoAction)
+  user              Users        @relation(fields: [idUser], references: [idUser], onDelete: Cascade, onUpdate: NoAction)
+
+  @@map("achievements_users")
 }
 
-model admins {
+model Admins {
   idAdmin String @id @default(dbgenerated("gen_random_uuid()")) @map("id_admin") @db.Uuid
-  idUser  String @map("id_user") @db.Uuid
-  users   users  @relation(fields: [idUser], references: [idUser], onDelete: Cascade, onUpdate: NoAction)
+  idUser  String @unique @map("id_user") @db.Uuid
+  user    Users  @relation(fields: [idUser], references: [idUser], onDelete: Cascade, onUpdate: NoAction)
+
+  @@map("admins")
 }
 
-model blacklistTokens {
-  idToken   String    @id @default(dbgenerated("gen_random_uuid()")) @map("id_token") @db.Uuid
-  token     String
-  expiresAt DateTime  @map("expires_at") @db.Timestamp(6)
-  createdAt DateTime? @default(now()) @map("created_at") @db.Timestamp(6)
-}
-
-model categories {
+model Categories {
   idCategory   String    @id @default(dbgenerated("gen_random_uuid()")) @map("id_category") @db.Uuid
   nameCategory String    @map("name_category") @db.VarChar(255)
   descCategory String?   @map("desc_category")
@@ -46,97 +45,123 @@ model categories {
   slugCategory String    @unique @map("slug_category") @db.VarChar(255)
   createdAt    DateTime? @default(now()) @map("created_at") @db.Timestamp(6)
   updatedAt    DateTime? @default(now()) @map("updated_at") @db.Timestamp(6)
-  routes       routes[]
+  routes       Routes[]
 
   @@index([slugCategory], map: "idx_categories_slug")
+  @@map("categories")
 }
 
-model clients {
+model Clients {
   idClient String  @id @default(dbgenerated("gen_random_uuid()")) @map("id_client") @db.Uuid
-  idUser   String  @map("id_user") @db.Uuid
+  idUser   String  @unique @map("id_user") @db.Uuid
   phone    String? @db.VarChar(15)
-  users    users   @relation(fields: [idUser], references: [idUser], onDelete: Cascade, onUpdate: NoAction)
+  user     Users   @relation(fields: [idUser], references: [idUser], onDelete: Cascade, onUpdate: NoAction)
+
+  @@map("clients")
 }
 
-model comments {
-  idComment        String     @id @default(dbgenerated("gen_random_uuid()")) @map("id_comment") @db.Uuid
-  idUser           String     @map("id_user") @db.Uuid
-  idRoute          String     @map("id_route") @db.Uuid
-  body             String
-  imgComment       String?    @map("img_comment")
-  idParentComment  String?    @map("id_parent_comment") @db.Uuid
-  createdAt        DateTime?  @default(now()) @map("created_at") @db.Timestamp(6)
-  updatedAt        DateTime?  @default(now()) @map("updated_at") @db.Timestamp(6)
-  comments         comments?  @relation("commentsTocomments", fields: [idParentComment], references: [idComment], onDelete: Cascade, onUpdate: NoAction)
-  otherComments    comments[] @relation("commentsTocomments")
-  routes           routes     @relation(fields: [idRoute], references: [idRoute], onDelete: Cascade, onUpdate: NoAction)
-  users            users      @relation(fields: [idUser], references: [idUser], onDelete: Cascade, onUpdate: NoAction)
+model Comments {
+  idComment       String     @id @default(dbgenerated("gen_random_uuid()")) @map("id_comment") @db.Uuid
+  idUser          String     @map("id_user") @db.Uuid
+  idRoute         String     @map("id_route") @db.Uuid
+  body            String
+  imgComment      String?    @map("img_comment")
+  idParentComment String?    @map("id_parent_comment") @db.Uuid
+  createdAt       DateTime?  @default(now()) @map("created_at") @db.Timestamp(6)
+  updatedAt       DateTime?  @default(now()) @map("updated_at") @db.Timestamp(6)
+  parentComment   Comments?  @relation("CommentsToComments", fields: [idParentComment], references: [idComment], onDelete: Cascade, onUpdate: NoAction)
+  replies         Comments[] @relation("CommentsToComments")
+  route           Routes     @relation(fields: [idRoute], references: [idRoute], onDelete: Cascade, onUpdate: NoAction)
+  user            Users      @relation(fields: [idUser], references: [idUser], onDelete: Cascade, onUpdate: NoAction)
 
   @@index([idRoute], map: "idx_comments_route_id")
   @@index([idUser], map: "idx_comments_user_id")
+  @@map("comments")
 }
 
-model favorites {
+model Favorites {
   idFavorite String    @id @default(dbgenerated("gen_random_uuid()")) @map("id_favorite") @db.Uuid
   idUser     String    @map("id_user") @db.Uuid
   idRoute    String    @map("id_route") @db.Uuid
   createdAt  DateTime? @default(now()) @map("created_at") @db.Timestamp(6)
-  routes     routes    @relation(fields: [idRoute], references: [idRoute], onDelete: Cascade, onUpdate: NoAction)
-  users      users     @relation(fields: [idUser], references: [idUser], onDelete: Cascade, onUpdate: NoAction)
+  route      Routes    @relation(fields: [idRoute], references: [idRoute], onDelete: Cascade, onUpdate: NoAction)
+  user       Users     @relation(fields: [idUser], references: [idUser], onDelete: Cascade, onUpdate: NoAction)
 
   @@index([idRoute], map: "idx_favorites_route_id")
   @@index([idUser], map: "idx_favorites_user_id")
+  @@map("favorites")
 }
 
-model imagesRoutes {
-  idImage    String    @id @default(dbgenerated("gen_random_uuid()")) @map("id_image") @db.Uuid
-  idRoute    String    @map("id_route") @db.Uuid
-  imageUrl   String    @map("image_url")
-  type       String?   @default("gallery") @db.VarChar(50)
+model ImagesRoutes {
+  idImage   String    @id @default(dbgenerated("gen_random_uuid()")) @map("id_image") @db.Uuid
+  idRoute   String    @map("id_route") @db.Uuid
+  imageUrl  String    @map("image_url")
+  type      String?   @default("gallery") @db.VarChar(50)
+  createdAt DateTime? @default(now()) @map("created_at") @db.Timestamp(6)
+  route     Routes    @relation(fields: [idRoute], references: [idRoute], onDelete: Cascade, onUpdate: NoAction)
+
+  @@map("images_routes")
+}
+
+model Locations {
+  idLocation String    @id @default(dbgenerated("gen_random_uuid()")) @map("id_location") @db.Uuid
+  name       String    @map("n_location") @db.VarChar(255)
+  latitude   Float
+  longitude  Float
   createdAt  DateTime? @default(now()) @map("created_at") @db.Timestamp(6)
-  routes     routes    @relation(fields: [idRoute], references: [idRoute], onDelete: Cascade, onUpdate: NoAction)
+  routes     Routes[]
+
+  @@map("locations")
 }
 
-model notifications {
+model Notifications {
   idNotification     String                @id @default(dbgenerated("gen_random_uuid()")) @map("id_notification") @db.Uuid
   title              String                @db.VarChar(255)
   description        String?
   createdAt          DateTime?             @default(now()) @map("created_at") @db.Timestamp(6)
-  notificationsUsers notificationsUsers[]
+  notificationsUsers NotificationsUsers[]
+
+  @@map("notifications")
 }
 
-model notificationsUsers {
+model NotificationsUsers {
   idNotificationUser String        @id @default(dbgenerated("gen_random_uuid()")) @map("id_notification_user") @db.Uuid
   idNotification     String        @map("id_notification") @db.Uuid
   idUser             String        @map("id_user") @db.Uuid
   isRead             Boolean?      @default(false) @map("is_read")
   createdAt          DateTime?     @default(now()) @map("created_at") @db.Timestamp(6)
-  notifications      notifications @relation(fields: [idNotification], references: [idNotification], onDelete: Cascade, onUpdate: NoAction)
-  users              users         @relation(fields: [idUser], references: [idUser], onDelete: Cascade, onUpdate: NoAction)
+  notification       Notifications @relation(fields: [idNotification], references: [idNotification], onDelete: Cascade, onUpdate: NoAction)
+  user               Users         @relation(fields: [idUser], references: [idUser], onDelete: Cascade, onUpdate: NoAction)
+
+  @@map("notifications_users")
 }
 
-model ratings {
+model Ratings {
   idRating     String          @id @default(dbgenerated("gen_random_uuid()")) @map("id_rating") @db.Uuid
   description  String?
-  usersRatings usersRatings[]
+  usersRatings UsersRatings[]
+
+  @@map("ratings")
 }
 
-model refreshTokens {
+model RefreshTokens {
   idRefreshToken String    @id @default(dbgenerated("gen_random_uuid()")) @map("id_refresh_token") @db.Uuid
   idUser         String    @map("id_user") @db.Uuid
   token          String
   expiresAt      DateTime  @map("expires_at") @db.Timestamp(6)
   createdAt      DateTime? @default(now()) @map("created_at") @db.Timestamp(6)
-  users          users     @relation(fields: [idUser], references: [idUser], onDelete: Cascade, onUpdate: NoAction)
+  user           Users     @relation(fields: [idUser], references: [idUser], onDelete: Cascade, onUpdate: NoAction)
+
+  @@map("refresh_tokens")
 }
 
-model routes {
+model Routes {
   idRoute            String          @id @default(dbgenerated("gen_random_uuid()")) @map("id_route") @db.Uuid
   idUser             String          @map("id_user") @db.Uuid
   title              String          @db.VarChar(255)
   description        String?
   coordinates        Json
-  level              String?         @db.VarChar(50)
+  level              Decimal?        @db.Decimal(5, 2)
   distance           Float?
   duration           Int?
   averageRating      Float?          @default(0) @map("average_rating")
@@ -149,27 +174,30 @@ model routes {
   positiveGradient   Decimal?        @map("positive_gradient") @db.Decimal
   negativeGradient   Decimal?        @map("negative_gradient") @db.Decimal
   cumulativeGradient Decimal?        @map("cumulative_gradient") @db.Decimal
-  location           String?
-  comments           comments[]
-  favorites          favorites[]
-  imagesRoutes       imagesRoutes[]
-  categories         categories?     @relation(fields: [idCategory], references: [idCategory], onUpdate: NoAction)
-  users              users           @relation(fields: [idUser], references: [idUser], onDelete: Cascade, onUpdate: NoAction)
-  usersRatings       usersRatings[]
+  location           Json?
+  idLocation         String?         @map("id_location") @db.Uuid
+  comments           Comments[]
+  favorites          Favorites[]
+  imagesRoutes       ImagesRoutes[]
+  category           Categories?     @relation(fields: [idCategory], references: [idCategory], onUpdate: NoAction)
+  locationInfo       Locations?      @relation(fields: [idLocation], references: [idLocation], onUpdate: NoAction)
+  user               Users           @relation(fields: [idUser], references: [idUser], onDelete: Cascade, onUpdate: NoAction)
+  usersRatings       UsersRatings[]
 
+  @@index([idCategory], map: "idx_routes_id_category")
   @@index([slugRoute], map: "idx_routes_slug")
   @@index([idUser], map: "idx_routes_user_id")
-  @@index([idCategory], map: "idx_routes_id_category")
+  @@map("routes")
 }
 
-model users {
+model Users {
   idUser             String                @id @default(dbgenerated("gen_random_uuid()")) @map("id_user") @db.Uuid
   imgUser            String?               @map("img_user")
   email              String                @unique @db.VarChar(150)
   username           String                @unique @db.VarChar(50)
   name               String?               @db.VarChar(100)
   surname            String?               @db.VarChar(100)
-  birthdate          DateTime?             @db.Date
+  birthdate          DateTime?             @map("birthdate") @db.Date
   bio                String?
   password           String                @db.VarChar(255)
   role               String?               @default("client") @db.VarChar(20)
@@ -178,18 +206,22 @@ model users {
   premiumLevel       Int?                  @default(0) @map("premium_level")
   createdAt          DateTime?             @default(now()) @map("created_at") @db.Timestamp(6)
   updatedAt          DateTime?             @default(now()) @map("updated_at") @db.Timestamp(6)
-  achievementsUsers  achievementsUsers[]
-  admins             admins[]
-  clients            clients[]
-  comments           comments[]
-  favorites          favorites[]
-  notificationsUsers notificationsUsers[]
-  refreshTokens      refreshTokens[]
-  routes             routes[]
-  usersRatings       usersRatings[]
+  achievementsUsers  AchievementsUsers[]
+  admin              Admins?
+  client             Clients?
+  comments           Comments[]
+  favorites          Favorites[]
+  notificationsUsers NotificationsUsers[]
+  refreshTokens      RefreshTokens[]
+  routes             Routes[]
+  usersRatings       UsersRatings[]
+
+  @@index([email], map: "idx_users_email")
+  @@index([username], map: "idx_users_username")
+  @@map("users")
 }
 
-model usersRatings {
+model UsersRatings {
   idUserRating String    @id @default(dbgenerated("gen_random_uuid()")) @map("id_user_rating") @db.Uuid
   idRating     String    @map("id_rating") @db.Uuid
   idUser       String    @map("id_user") @db.Uuid
@@ -198,10 +230,11 @@ model usersRatings {
   comment      String?
   createdAt    DateTime? @default(now()) @map("created_at") @db.Timestamp(6)
   updatedAt    DateTime? @default(now()) @map("updated_at") @db.Timestamp(6)
-  ratings      ratings   @relation(fields: [idRating], references: [idRating], onDelete: Cascade, onUpdate: NoAction)
-  routes       routes    @relation(fields: [idRoute], references: [idRoute], onDelete: Cascade, onUpdate: NoAction)
-  users        users     @relation(fields: [idUser], references: [idUser], onDelete: Cascade, onUpdate: NoAction)
+  rating       Ratings   @relation(fields: [idRating], references: [idRating], onDelete: Cascade, onUpdate: NoAction)
+  route        Routes    @relation(fields: [idRoute], references: [idRoute], onDelete: Cascade, onUpdate: NoAction)
+  user         Users     @relation(fields: [idUser], references: [idUser], onDelete: Cascade, onUpdate: NoAction)
 
   @@index([idRoute], map: "idx_users_ratings_route_id")
   @@index([idUser], map: "idx_users_ratings_user_id")
+  @@map("users_ratings")
 }

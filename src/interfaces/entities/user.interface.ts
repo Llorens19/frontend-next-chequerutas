@@ -1,8 +1,8 @@
 import { IAdminFields } from '@/interfaces/entities/admin.interface';
 import { IClientFields } from '@/interfaces/entities/client.interface';
-import { users } from '@prisma/client';
+import { Users } from '@prisma/client';
 
-export type IUser = users;
+export type IUser = Users;
 
 export interface IUserGeneric extends IUser {
   admin?: IAdminFields;

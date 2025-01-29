@@ -4,7 +4,7 @@ import { useQuery } from '@tanstack/react-query';
 
 export const useRoutesQuery = (filters:IRouteFilters) =>
   useQuery({
-    queryKey: ['routes', filters],
+    queryKey: ['routes', 'filters', filters],
     queryFn: async () => await RouteService.getRoutes(filters),
     staleTime: 20000,
   });

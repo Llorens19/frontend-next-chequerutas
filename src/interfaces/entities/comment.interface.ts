@@ -1,6 +1,6 @@
-import { comments } from '@prisma/client';
+import { Comments } from '@prisma/client';
 
-export type IComment = comments;
+export type IComment = Comments;
 
 export interface IComents{
   categories:IComment[];
