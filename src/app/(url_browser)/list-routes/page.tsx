@@ -8,22 +8,14 @@ export const metadata: Metadata = {
 };
 
 const Routes = async () => {
-  const filters = {
-    title: '',
-    level: '',
-    distance: 0,
-    category: '',
-    location: '',
-    limit: 0,
-    offset: 0,
-  };
+
 
   return (
     <>
       <FilterRoute />
       <div className="flex flex-row h-full w-11/12 mx-auto mt-48 gap-8">
         <div className="w-3/5">
-          <ListRoute filters={filters} />
+          <ListRoute />
         </div>
         <div className="w-2/5 h-[80vh] sticky top-48 ">
           <div className="w-full h-full bg-gray-200 flex items-center justify-center rounded-lg">

@@ -1,6 +1,3 @@
-import { text } from 'stream/consumers';
-
-/** @type {import('tailwindcss').Config} */
 module.exports = {
   content: [
     './index.html',

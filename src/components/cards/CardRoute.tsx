@@ -3,7 +3,6 @@ import { ICardRouteInput } from '@/interfaces/components/cards/CardRoute.interfa
 import Image from 'next/image';
 
 const CardRoute = ({ route }: ICardRouteInput) => {
-  console.log(route);
   return (
     <div className="flex bg-color2 shadow-lg rounded-lg overflow-hidden p-8 mb-8">
       <div className="w-1/2">

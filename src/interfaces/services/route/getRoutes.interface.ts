@@ -1,7 +1,8 @@
 export interface IRouteFilters {
   title?: string;
   level?: string;
-  distance?: number | number[];
+  distanceMax?: number;
+  distanceMin?: number;
   category?: string;
   location?: string;
   limit?: number;
