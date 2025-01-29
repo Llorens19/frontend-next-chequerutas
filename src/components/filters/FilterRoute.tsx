@@ -1,6 +1,6 @@
 'use client';
 
-import { useEffect, useState, SyntheticEvent } from 'react';
+import { useEffect } from 'react';
 import { useSearchParams, useRouter } from 'next/navigation';
 import { Slider } from '@mui/material';
 import Rating from '@mui/material/Rating';
@@ -8,57 +8,25 @@ import TerrainIcon from '@mui/icons-material/Terrain';
 import TerrainOutlinedIcon from '@mui/icons-material/TerrainOutlined';
 import SelectForm from '@/components/selects/SelectForm';
 import SearchFilters from '@/components/searches/SearchFilters';
-import { useCateogryFilterQuery } from '@/queries/category.query';
-import { useLocationQuery } from '@/queries/location.query';
-import { ILocation } from '@/interfaces/entities/location.interface';
+
+import useFilterRouteSearchOptions from '@/hooks/components/filters/FilterRoute/useFilterRouteSearchOptions.hook';
+import useFilterRouteControl from '@/hooks/components/filters/FilterRoute/useFilterRouteControl.hook';
 
 const FilterRoute = () => {
-  const [distanceMax, setDistanceMax] = useState<number>(40);
-  const [distanceMin, setDistanceMin] = useState<number>(0);
-  const [level, setLevel] = useState<number>(0);
-  const [category, setCategory] = useState<string | null>(null);
-
-  const { data: categoryOptions } = useCateogryFilterQuery();
-
-  const { data: locationOptions } = useLocationQuery();
-
-  console.log(locationOptions);
+  const { categoryOptions, locationOptions } = useFilterRouteSearchOptions();
 
 
-  const locationOptionsDto = locationOptions?.locations
-    ? locationOptions.locations.map((location: ILocation) => ({
-        label: location.nLocation,
-        value: location.idLocation,
-      }))
-    : [];
+
+  const { distanceMax, distanceMin, level, category,
+    onChangeCategory, onChangeLevel, onChangeDistance, onSelectLocation, onSelectTitle,
+    onClickDelete
+  } = useFilterRouteControl();
+
 
   const router = useRouter();
   const searchParams = useSearchParams();
 
-  const onChangeCategory = (value: string) => setCategory(value);
-
-  const onChangeLevel = (event: SyntheticEvent, value: number | null) => {
-    setLevel(value ?? 0);
-  };
-
-  const onChangeDistance = (event: Event, value: number | number[]) => {
-    const [min, max] = value as number[];
-    setDistanceMin(min);
-    setDistanceMax(max);
-  };
-
-  const onClickDelete = () => {
-    setDistanceMax(40);
-    setDistanceMin(0);
-    setLevel(0);
-    setCategory(null);
-  };
-
-  const onSelectLocation = (value: string) => {
-    console.log(value);
-  };
-
-  const updateRoute = () => {
+  const updateUrl = () => {
     const filters = { distanceMax, distanceMin, level, category };
     const encodedFilters = btoa(JSON.stringify(filters));
 
@@ -69,7 +37,7 @@ const FilterRoute = () => {
   };
 
   useEffect(() => {
-    updateRoute();
+    updateUrl();
   }, [distanceMax, distanceMin, level, category]);
 
   return (
@@ -112,14 +80,13 @@ const FilterRoute = () => {
           <label className="text-white">Ubicación</label>
           <SearchFilters
             onSelect={onSelectLocation}
-            options={locationOptionsDto}
+            options={locationOptions}
           />
         </div>
 
         <div className="flex flex-col w-full justify-end">
           <label className="text-white">Nombre</label>
-          <SearchFilters onSelect={onSelectLocation}
-            options={locationOptionsDto} />
+          <SearchFilters onSelect={onSelectTitle} options={locationOptions} />
         </div>
 
         <div className="flex flex-col w-full justify-end">

@@ -1,7 +1,10 @@
+export interface ISearchOption {
+  label: string;
+  value: string;
+}
+
+
 export interface ISearchFiltersProps {
-  options: {
-    label: string;
-    value: string;
-  }[];
+  options: ISearchOption[];
   onSelect: (value: string) => void;
 }

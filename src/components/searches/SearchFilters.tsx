@@ -1,20 +1,17 @@
-import { useState } from 'react';
+'use client';
 import { ISearchFiltersProps } from '@/interfaces/components/searchers/SearchFilters.interface';
+import useSearchFilters from '@/hooks/components/searchers/SearchFilters/useSearchFilters.hook';
 
 const SearchFilters = ({ options, onSelect }: ISearchFiltersProps) =>{
 
-  const [isOpen, setIsOpen] = useState(false);
-  const [searchQuery, setSearchQuery] = useState('');
-
-  const handleOptionClick = (value: string, label: string) => {
-    onSelect(value);
-    setSearchQuery(label);
-    setIsOpen(false);
-  };
-
-  const filteredOptions = options.filter((option) =>
-    option.label.toLowerCase().includes(searchQuery.toLowerCase())
-  );
+  const {
+    isOpen,
+    searchQuery,
+    filteredOptions,
+    setSearchQuery,
+    setIsOpen,
+    handleOptionClick,
+  } = useSearchFilters(options, onSelect);
 
   return (
     <div className="relative w-fullmax-w-lg">
