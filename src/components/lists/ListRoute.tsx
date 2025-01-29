@@ -27,7 +27,6 @@ const ListRoute = () => {
 
   const { data: routes, refetch } = useRoutesQuery(filters);
 
-  console.log('routes', routes);
 
 
   useEffect(() => {

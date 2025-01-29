@@ -9,6 +9,8 @@ import TerrainOutlinedIcon from '@mui/icons-material/TerrainOutlined';
 import SelectForm from '@/components/selects/SelectForm';
 import SearchFilters from '@/components/searches/SearchFilters';
 import { useCateogryFilterQuery } from '@/queries/category.query';
+import { useLocationQuery } from '@/queries/location.query';
+import { ILocation } from '@/interfaces/entities/location.interface';
 
 const FilterRoute = () => {
   const [distanceMax, setDistanceMax] = useState<number>(40);
@@ -17,6 +19,18 @@ const FilterRoute = () => {
   const [category, setCategory] = useState<string | null>(null);
 
   const { data: categoryOptions } = useCateogryFilterQuery();
+
+  const { data: locationOptions } = useLocationQuery();
+
+  console.log(locationOptions);
+
+
+  const locationOptionsDto = locationOptions?.locations
+    ? locationOptions.locations.map((location: ILocation) => ({
+        label: location.nLocation,
+        value: location.idLocation,
+      }))
+    : [];
 
   const router = useRouter();
   const searchParams = useSearchParams();
@@ -38,6 +52,10 @@ const FilterRoute = () => {
     setDistanceMin(0);
     setLevel(0);
     setCategory(null);
+  };
+
+  const onSelectLocation = (value: string) => {
+    console.log(value);
   };
 
   const updateRoute = () => {
@@ -92,12 +110,16 @@ const FilterRoute = () => {
 
         <div className="flex flex-col w-full justify-end">
           <label className="text-white">Ubicación</label>
-          <SearchFilters />
+          <SearchFilters
+            onSelect={onSelectLocation}
+            options={locationOptionsDto}
+          />
         </div>
 
         <div className="flex flex-col w-full justify-end">
           <label className="text-white">Nombre</label>
-          <SearchFilters />
+          <SearchFilters onSelect={onSelectLocation}
+            options={locationOptionsDto} />
         </div>
 
         <div className="flex flex-col w-full justify-end">

@@ -3,17 +3,8 @@
 import { ICategories } from '@/interfaces/entities/category.interface';
 import CardCategory from '../cards/CardCategory';
 import { useState } from 'react';
-import { useRoutesQuery } from '@/queries/routes.query';
 
 const CarouselCategory = ({ categories }: ICategories) => {
-
-
-  const {data: user} = useRoutesQuery();
-
-  console.log(user);
-
-
-
 
 
   const [index, setIndex] = useState<number>(0);

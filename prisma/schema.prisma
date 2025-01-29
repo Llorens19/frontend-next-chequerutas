@@ -105,7 +105,7 @@ model ImagesRoutes {
 
 model Locations {
   idLocation String    @id @default(dbgenerated("gen_random_uuid()")) @map("id_location") @db.Uuid
-  name       String    @map("n_location") @db.VarChar(255)
+  nLocation  String    @map("n_location") @db.VarChar(255)
   latitude   Float
   longitude  Float
   createdAt  DateTime? @default(now()) @map("created_at") @db.Timestamp(6)

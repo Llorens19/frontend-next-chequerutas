@@ -6,11 +6,12 @@ import { IRouteFilters } from '@/interfaces/services/route/getRoutes.interface';
 
 export const RouteService = {
   getRoutes: (filters: IRouteFilters): Promise<IRoutes> => {
-    console.log('filters', filters);
     return ApiService.get<IRoutes>('routes', { params: filters });
   },
 
   getLocations: (): Promise<ILocations> => {
-    return ApiService.get<ILocations>('routes');
+    const resp =  ApiService.get<ILocations>('routes/locations');
+    console.log(resp);
+    return resp;
   }
 };
