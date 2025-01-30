@@ -1,6 +1,6 @@
-import { routes } from '@prisma/client';
+import { Routes } from '@prisma/client';
 
-export type IRoute = routes;
+export type IRoute = Routes;
 
 export interface IRoutes {
   routes: IRoute[];

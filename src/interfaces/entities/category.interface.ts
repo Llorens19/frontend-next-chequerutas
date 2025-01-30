@@ -1,6 +1,6 @@
-import { categories } from '@prisma/client';
+import { Categories } from '@prisma/client';
 
-export type ICategory = categories;
+export type ICategory = Categories;
 
 export interface ICategories{
   categories:ICategory[];

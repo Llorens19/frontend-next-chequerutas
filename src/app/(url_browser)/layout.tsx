@@ -12,7 +12,7 @@ const RootLayout = ({ children }: { children: ReactNode }) => {
   return (
     <>
       <html lang="es">
-        <body suppressHydrationWarning={true} className="bg-color2">
+        <body suppressHydrationWarning={true} className="bg-color1">
           <QueryClientProvider client={queryClient}>
             <div className="flex flex-col min-h-screen">
               <Header />

@@ -1,6 +1,3 @@
-import { text } from 'stream/consumers';
-
-/** @type {import('tailwindcss').Config} */
 module.exports = {
   content: [
     './index.html',
@@ -18,6 +15,8 @@ module.exports = {
         color5: '#6a6d69',
         text1: '#FFFFFF',
         text2: '#333333',
+        text3: '#666666',
+        text4: '#999999',
         contrast1: '#00b0ff',
         contrast2: '#ff7139',
         contrast3: '#006099',

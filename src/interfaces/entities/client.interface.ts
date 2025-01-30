@@ -1,8 +1,8 @@
 import { IUser } from '@/interfaces/entities/user.interface';
-import { clients } from '@prisma/client';
+import { Clients } from '@prisma/client';
 
 
-export type IClientFields = clients;
+export type IClientFields = Clients;
 
 export interface IClient extends IUser{
   client: IClientFields;
