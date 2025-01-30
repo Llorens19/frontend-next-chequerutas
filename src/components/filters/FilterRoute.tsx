@@ -13,21 +13,67 @@ import useFilterRouteSearchOptions from '@/hooks/components/filters/FilterRoute/
 import useFilterRouteControl from '@/hooks/components/filters/FilterRoute/useFilterRouteControl.hook';
 
 const FilterRoute = () => {
-  const { categoryOptions, locationOptions } = useFilterRouteSearchOptions();
-
-
-
-  const { distanceMax, distanceMin, level, category,
-    onChangeCategory, onChangeLevel, onChangeDistance, onSelectLocation, onSelectTitle,
-    onClickDelete
+  const { categoryOptions, locationOptions, titleOptions } =
+    useFilterRouteSearchOptions();
+  const {
+    distanceMax,
+    distanceMin,
+    level,
+    category,
+    title,
+    location,
+    setDistanceMax,
+    setDistanceMin,
+    setLevel,
+    setCategory,
+    setTitle,
+    setLocation,
+    onChangeCategory,
+    onChangeLevel,
+    onChangeDistance,
+    onSelectLocation,
+    onSelectTitle,
+    onClickDelete,
   } = useFilterRouteControl();
-
 
   const router = useRouter();
   const searchParams = useSearchParams();
 
+  useEffect(() => {
+    const encodedFilters = searchParams.get('filters');
+    if (encodedFilters) {
+      try {
+        const {
+          distanceMax,
+          distanceMin,
+          level,
+          category,
+          title,
+          location,
+        } = JSON.parse(atob(encodedFilters));
+
+        if (distanceMax) setDistanceMax(distanceMax);
+        if (distanceMin) setDistanceMin(distanceMin);
+        if (level) setLevel(level);
+        if (category) setCategory(category);
+        if (title) setTitle(title);
+        if (location) setLocation(location);
+
+      } catch (error) {
+        console.error('Error al decodificar los filtros de la URL:', error);
+      }
+    }
+  }, []);
+
   const updateUrl = () => {
-    const filters = { distanceMax, distanceMin, level, category };
+    const filters = {
+      distanceMax,
+      distanceMin,
+      level,
+      category,
+      title,
+      location,
+    };
     const encodedFilters = btoa(JSON.stringify(filters));
 
     const params = new URLSearchParams(searchParams);
@@ -38,7 +84,7 @@ const FilterRoute = () => {
 
   useEffect(() => {
     updateUrl();
-  }, [distanceMax, distanceMin, level, category]);
+  }, [distanceMax, distanceMin, level, category, title, location]);
 
   return (
     <section className="bg-color3 fixed w-full mt-16 z-50">
@@ -79,6 +125,7 @@ const FilterRoute = () => {
         <div className="flex flex-col w-full justify-end">
           <label className="text-white">Ubicación</label>
           <SearchFilters
+            value={location ?? ''}
             onSelect={onSelectLocation}
             options={locationOptions}
           />
@@ -86,7 +133,11 @@ const FilterRoute = () => {
 
         <div className="flex flex-col w-full justify-end">
           <label className="text-white">Nombre</label>
-          <SearchFilters onSelect={onSelectTitle} options={locationOptions} />
+          <SearchFilters
+            value={title ?? ''}
+            onSelect={onSelectTitle}
+            options={titleOptions}
+          />
         </div>
 
         <div className="flex flex-col w-full justify-end">

@@ -6,5 +6,6 @@ export interface ISearchOption {
 
 export interface ISearchFiltersProps {
   options: ISearchOption[];
+  value: string;
   onSelect: (value: string) => void;
 }

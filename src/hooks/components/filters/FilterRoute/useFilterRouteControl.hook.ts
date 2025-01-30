@@ -6,6 +6,8 @@ const useFilterRouteControl = () => {
   const [distanceMin, setDistanceMin] = useState<number>(0);
   const [level, setLevel] = useState<number>(0);
   const [category, setCategory] = useState<string | null>(null);
+  const [location, setLocation] = useState<string | null>(null);
+  const [title, setTitle] = useState<string | null>(null);
 
   const onChangeCategory = (value: string) => setCategory(value);
 
@@ -24,14 +26,16 @@ const useFilterRouteControl = () => {
     setDistanceMin(0);
     setLevel(0);
     setCategory(null);
+    setLocation(null);
+    setTitle(null);
   };
 
   const onSelectLocation = (value: string) => {
-    console.log(value);
+    setLocation(value);
   };
 
   const onSelectTitle = (value: string) => {
-    console.log(value);
+    setTitle(value);
   };
 
   return {
@@ -39,6 +43,14 @@ const useFilterRouteControl = () => {
     distanceMin,
     level,
     category,
+    location,
+    title,
+    setDistanceMax,
+    setDistanceMin,
+    setLevel,
+    setCategory,
+    setLocation,
+    setTitle,
     onChangeCategory,
     onChangeLevel,
     onChangeDistance,

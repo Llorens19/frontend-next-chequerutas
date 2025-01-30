@@ -13,5 +13,10 @@ export const RouteService = {
     const resp =  ApiService.get<ILocations>('routes/locations');
     console.log(resp);
     return resp;
-  }
+  },
+
+  getTitles: (): Promise<string[]> => {
+    return ApiService.get<string[]>('routes/titles');
+  },
+
 };

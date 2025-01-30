@@ -1,8 +1,9 @@
 'use client';
 import { ISearchFiltersProps } from '@/interfaces/components/searchers/SearchFilters.interface';
 import useSearchFilters from '@/hooks/components/searchers/SearchFilters/useSearchFilters.hook';
+import { useEffect } from 'react';
 
-const SearchFilters = ({ options, onSelect }: ISearchFiltersProps) =>{
+const SearchFilters = ({ options, value, onSelect }: ISearchFiltersProps) =>{
 
   const {
     isOpen,
@@ -12,6 +13,13 @@ const SearchFilters = ({ options, onSelect }: ISearchFiltersProps) =>{
     setIsOpen,
     handleOptionClick,
   } = useSearchFilters(options, onSelect);
+
+
+
+  useEffect(() => {
+    const label = options.find(option => option.value === value)?.label || '';
+    setSearchQuery(label);
+  }, [value, options]);
 
   return (
     <div className="relative w-fullmax-w-lg">
