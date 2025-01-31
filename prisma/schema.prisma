@@ -174,13 +174,12 @@ model Routes {
   positiveGradient   Decimal?        @map("positive_gradient") @db.Decimal
   negativeGradient   Decimal?        @map("negative_gradient") @db.Decimal
   cumulativeGradient Decimal?        @map("cumulative_gradient") @db.Decimal
-  location           Json?
   idLocation         String?         @map("id_location") @db.Uuid
   comments           Comments[]
   favorites          Favorites[]
   imagesRoutes       ImagesRoutes[]
   category           Categories?     @relation(fields: [idCategory], references: [idCategory], onUpdate: NoAction)
-  locationInfo       Locations?      @relation(fields: [idLocation], references: [idLocation], onUpdate: NoAction)
+  location           Locations?      @relation(fields: [idLocation], references: [idLocation], onUpdate: NoAction)
   user               Users           @relation(fields: [idUser], references: [idUser], onDelete: Cascade, onUpdate: NoAction)
   usersRatings       UsersRatings[]
 

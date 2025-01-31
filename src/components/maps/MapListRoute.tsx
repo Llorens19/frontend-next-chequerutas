@@ -11,10 +11,6 @@ import { usePointsQuery } from '@/queries/points.query';
 import { useLocationsQuery } from '@/queries/location.query';
 import { ILocation } from '@/interfaces/entities/location.interface';
 
-interface MapListRoutesProps {
-  center?: [number, number];
-  zoom?: number;
-}
 
 const ChangeView = ({
   center,
