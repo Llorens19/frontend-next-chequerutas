@@ -2,8 +2,8 @@ import axios, { AxiosInstance, AxiosRequestConfig } from 'axios';
 
 
 export const axiosAdmin: AxiosInstance = axios.create({
-    baseURL: 'http://192.168.1.68:4001/',
-    // baseURL: 'http://localhost:4001/',
+    // baseURL: 'http://192.168.1.68:4001/',
+    baseURL: 'http://localhost:4001/',
     // baseURL: 'http://192.168.241.47:4001/',
 
 });
@@ -21,12 +21,6 @@ axiosAdmin.interceptors.request.use(
         return Promise.reject(error);
     }
 );
-
-
-
-
-
-
 
 
 const ApiService = {

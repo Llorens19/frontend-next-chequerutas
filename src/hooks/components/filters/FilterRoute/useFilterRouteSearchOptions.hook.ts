@@ -1,12 +1,12 @@
 import { ILocation } from '@/interfaces/entities/location.interface';
 import { useCateogryFilterQuery } from '@/queries/category.query';
-import { useLocationQuery } from '@/queries/location.query';
+import { useLocationsQuery } from '@/queries/location.query';
 import { useRouteTitlesQuery } from '@/queries/titles.query';
 
 const useFilterRouteSearchOptions = () => {
     const { data: categoryOptions } = useCateogryFilterQuery();
 
-    const { data: locationOptions } = useLocationQuery();
+    const { data: locationOptions } = useLocationsQuery();
 
     const {data: titleOptions} = useRouteTitlesQuery();
 

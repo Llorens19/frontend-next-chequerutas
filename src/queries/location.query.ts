@@ -1,7 +1,7 @@
 import { RouteService } from '@/services/route.service';
 import { useQuery } from '@tanstack/react-query';
 
-export const useLocationQuery = () =>
+export const useLocationsQuery = () =>
   useQuery({
     queryKey: ['locations'],
     queryFn: async () => await RouteService.getLocations(),

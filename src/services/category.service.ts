@@ -3,7 +3,7 @@ import { ICategories } from '@/interfaces/entities/category.interface';
 
 
 export const CategoryService = {
-  getCategories : async (): Promise<ICategories> => {
-    return await ApiService.get<ICategories>('categories');
+  getCategories : (): Promise<ICategories> => {
+    return ApiService.get<ICategories>('categories');
   }
   };
