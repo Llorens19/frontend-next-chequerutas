@@ -1,6 +1,6 @@
 'use client';
 
-import { ICategories } from '@/interfaces/entities/category.interface';
+import { ICategories } from '@/shared/interfaces/entities/category.interface';
 import CardCategory from '../cards/CardCategory';
 import { useState } from 'react';
 

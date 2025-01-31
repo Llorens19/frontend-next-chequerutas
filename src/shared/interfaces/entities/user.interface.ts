@@ -1,5 +1,5 @@
-import { IAdminFields } from '@/interfaces/entities/admin.interface';
-import { IClientFields } from '@/interfaces/entities/client.interface';
+import { IAdminFields } from '@/shared/interfaces/entities/admin.interface';
+import { IClientFields } from '@/shared/interfaces/entities/client.interface';
 import { Users } from '@prisma/client';
 
 export type IUser = Users;

@@ -1,5 +1,5 @@
 'use client';
-import { ISearchFiltersProps } from '@/interfaces/components/searchers/SearchFilters.interface';
+import { ISearchFiltersProps } from '@/shared/interfaces/components/searchers/SearchFilters.interface';
 import useSearchFilters from '@/hooks/components/searchers/SearchFilters/useSearchFilters.hook';
 import { useEffect } from 'react';
 

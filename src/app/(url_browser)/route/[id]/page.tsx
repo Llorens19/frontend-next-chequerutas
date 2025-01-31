@@ -1,4 +1,5 @@
 import getRoute from '@/actions/getRoute';
+import DetailsRoute from '@/components/details/DetailsRoute';
 import { uuidRegex } from '@/utils/regex/uuidRegex.util';
 import { Metadata } from 'next';
 
@@ -25,10 +26,10 @@ const Route = async ({ params }: { params: { id: string } }) => {
   }
   const route = await getRoute(params.id);
 
-  console.log('Route:', route);
 
   return (
     <>
+      <DetailsRoute route={route}/>
     </>
   );
 };

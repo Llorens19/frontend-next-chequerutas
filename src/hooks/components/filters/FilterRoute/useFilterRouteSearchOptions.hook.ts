@@ -1,4 +1,4 @@
-import { ILocation } from '@/interfaces/entities/location.interface';
+import { ILocation } from '@/shared/interfaces/entities/location.interface';
 import { useCateogryFilterQuery } from '@/queries/category.query';
 import { useLocationsQuery } from '@/queries/location.query';
 import { useRouteTitlesQuery } from '@/queries/titles.query';

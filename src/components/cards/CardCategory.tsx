@@ -1,5 +1,5 @@
 import Image from 'next/image';
-import { ICategory } from '@/interfaces/entities/category.interface';
+import { ICategory } from '@/shared/interfaces/entities/category.interface';
 
 const CardCategory = ({ category }: { category: ICategory }) => {
   return (

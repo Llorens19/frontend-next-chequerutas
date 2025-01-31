@@ -1,5 +1,5 @@
 import ApiService from '@/core/api.service';
-import { IUserGeneric } from '@/interfaces/entities/user.interface';
+import { IUserGeneric } from '@/shared/interfaces/entities/user.interface';
 
 
 export const UserService = {

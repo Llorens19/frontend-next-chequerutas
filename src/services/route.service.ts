@@ -1,9 +1,9 @@
 import ApiService from '@/core/api.service';
-import { ILocations } from '@/interfaces/entities/location.interface';
-import { IRoutePoints } from '@/interfaces/entities/point.interface';
-import { IRoutes } from '@/interfaces/entities/route.interface';
-import { IRoutePointsFilters } from '@/interfaces/services/route/getRoutePoints.interface';
-import { IRouteFilters } from '@/interfaces/services/route/getRoutes.interface';
+import { ILocations } from '@/shared/interfaces/entities/location.interface';
+import { IRoutePoints } from '@/shared/interfaces/entities/point.interface';
+import { IRoutes } from '@/shared/interfaces/entities/route.interface';
+import { IRoutePointsFilters } from '@/shared/interfaces/services/route/getRoutePoints.interface';
+import { IRouteFilters } from '@/shared/interfaces/services/route/getRoutes.interface';
 
 
 export const RouteService = {
