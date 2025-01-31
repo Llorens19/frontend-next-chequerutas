@@ -1,4 +1,4 @@
-import { RouteService } from '@/services/route.service';
+import { RouteService } from '@/core/services/route.service';
 import { useQuery } from '@tanstack/react-query';
 
 export const useRouteTitlesQuery = () =>

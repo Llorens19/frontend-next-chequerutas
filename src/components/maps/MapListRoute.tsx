@@ -6,10 +6,10 @@ import { useEffect, useState } from 'react';
 import { useSearchParams } from 'next/navigation';
 import L from 'leaflet';
 import markerIconUrl from 'leaflet/dist/images/marker-icon.png';
-import { IRoutePointsFilters } from '@/interfaces/services/route/getRoutePoints.interface';
+import { IRoutePointsFilters } from '@/shared/interfaces/services/route/getRoutePoints.interface';
 import { usePointsQuery } from '@/queries/points.query';
 import { useLocationsQuery } from '@/queries/location.query';
-import { ILocation } from '@/interfaces/entities/location.interface';
+import { ILocation } from '@/shared/interfaces/entities/location.interface';
 
 
 const ChangeView = ({

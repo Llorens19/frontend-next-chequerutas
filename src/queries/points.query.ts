@@ -1,5 +1,5 @@
 import { IRoutePointsFilters } from '@/shared/interfaces/services/route/getRoutePoints.interface';
-import { RouteService } from '@/services/route.service';
+import { RouteService } from '@/core/services/route.service';
 import { useQuery } from '@tanstack/react-query';
 
 export const usePointsQuery = (filters: IRoutePointsFilters) =>
