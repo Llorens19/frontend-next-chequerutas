@@ -1,5 +1,5 @@
 import LevelRating from '@/components/ratings/LevelRating';
-import { ICardRouteInput } from '@/shared/interfaces/components/cards/CardRoute.interface';
+import { ICardRouteInput } from '@/shared/CardRoute.interface';
 import Image from 'next/image';
 
 const CardRoute = ({ route }: ICardRouteInput) => {

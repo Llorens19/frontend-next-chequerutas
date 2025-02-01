@@ -9,6 +9,7 @@ const getRoute = async (idRoute: string): Promise<IRoute | null> => {
         category: true,
         user: true,
         location: true,
+        imagesRoutes: true,
       },
     });
 
