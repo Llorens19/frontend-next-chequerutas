@@ -17,7 +17,7 @@ const GalleryDetails = ({ route }: IGalleryDetailsParams) => {
 
   return (
     <>
-      <div className=" flex shadow-lg rounded-lg overflow-hidden w-full">
+      <div className=" flex rounded-lg overflow-hidden w-full">
         <div className="w-5/6 bg-color4 rounded-lg">
           <Image
             className="rounded-lg object-cover w-full h-full"
