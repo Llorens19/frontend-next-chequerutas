@@ -1,5 +1,5 @@
 import ApiService from '@/core/api.service';
-import { ICategories } from '@/interfaces/entities/category.interface';
+import { ICategories } from '@/shared/interfaces/entities/category.interface';
 
 
 export const CategoryService = {

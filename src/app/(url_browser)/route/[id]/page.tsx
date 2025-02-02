@@ -1,34 +1,42 @@
 import getRoute from '@/actions/getRoute';
-import { uuidRegex } from '@/utils/regex/uuidRegex.util';
+import CommentsRoute from '@/components/comments/CommentsRoute';
+import DetailsRoute from '@/components/details/DetailsRoute';
+import { uuidRegex } from '@/shared/utils/regex/uuidRegex.util';
 import { Metadata } from 'next';
 
-export const generateMetadata = async ({params}: { params: { id: string } }): Promise<Metadata> => {
+export const generateMetadata = async ({
+  params,
+}: {
+  params: { id: string };
+}): Promise<Metadata> => {
+  const { id } = await Promise.resolve(params);
 
-  let data;
-  if (!params.id || !uuidRegex(params.id)) {
-    data =  null;
-  }else{
-    console.log('Route ID:', params.id);
-  data = await getRoute(params.id);
+  if (!id || !uuidRegex(id)) {
+    return {};
   }
 
-
+  console.log('Route ID:', id);
+  const data = await getRoute(id);
 
   return data ? { title: data.title } : {};
 };
 
 const Route = async ({ params }: { params: { id: string } }) => {
-  console.log('Route ID:', params.id);
+  const { id } = await Promise.resolve(params);
 
-  if (!params.id || !uuidRegex(params.id)) {
+  if (!id || !uuidRegex(id)) {
     return <p>Error</p>;
   }
-  const route = await getRoute(params.id);
 
-  console.log('Route:', route);
+  const route = await getRoute(id);
+  if (!route || !uuidRegex(id)) {
+    return <p>Error</p>;
+  }
 
   return (
     <>
+      <DetailsRoute route={route} />
+      <CommentsRoute route={route} />
     </>
   );
 };

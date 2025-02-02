@@ -1,5 +1,5 @@
-import { IOptionSelect } from '@/interfaces/components/selects/Select.interface';
-import { ICategories, ICategory } from '@/interfaces/entities/category.interface';
+import { IOptionSelect } from '@/shared/interfaces/components/selects/Select.interface';
+import { ICategories, ICategory } from '@/shared/interfaces/entities/category.interface';
 
 export const categoryFilterDto = (data: ICategories): IOptionSelect[] => {
 

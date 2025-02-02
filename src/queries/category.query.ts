@@ -1,4 +1,4 @@
-import { CategoryService } from '@/services/category.service';
+import { CategoryService } from '@/core/services/category.service';
 import { categoryFilterDto } from '@/shared/dto/categoryFilter.dto';
 import { useQuery } from '@tanstack/react-query';
 

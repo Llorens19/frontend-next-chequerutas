@@ -1,4 +1,4 @@
-import { ISelectProps } from '@/interfaces/components/selects/Select.interface';
+import { ISelectProps } from '@/shared/interfaces/components/selects/Select.interface';
 import React from 'react';
 
 

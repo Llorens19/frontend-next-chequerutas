@@ -1,4 +1,4 @@
-import { ISearchOption } from '@/interfaces/components/searchers/SearchFilters.interface';
+import { ISearchOption } from '@/shared/interfaces/components/searchers/SearchFilters.interface';
 import { useState, useMemo } from 'react';
 
 const useSearchFilters = (options: ISearchOption[], onSelect: (value: string) => void) => {

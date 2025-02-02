@@ -1,4 +1,4 @@
-import { IUser } from '@/interfaces/entities/user.interface';
+import { IUser } from '@/shared/interfaces/entities/user.interface';
 import { Clients } from '@prisma/client';
 
 

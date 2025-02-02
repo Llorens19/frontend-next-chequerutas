@@ -3,9 +3,9 @@
 import { useEffect, useState } from 'react';
 import { useSearchParams } from 'next/navigation';
 import CardRoute from '@/components/cards/CardRoute';
-import { IRoute } from '@/interfaces/entities/route.interface';
+import { IRoute } from '@/shared/interfaces/entities/route.interface';
 import { useRoutesQuery } from '@/queries/routes.query';
-import { IRouteFilters } from '@/interfaces/services/route/getRoutes.interface';
+import { IRouteFilters } from '@/shared/interfaces/services/route/getRoutes.interface';
 import InfiniteScroll from 'react-infinite-scroll-component';
 
 const ListRoute = () => {
@@ -43,12 +43,17 @@ const ListRoute = () => {
 
 
 
-  useEffect(() => {
-    if (routes?.routes) {
-      setRoutesList((prevRoutes) => [...prevRoutes, ...routes.routes]);
-      setIsFetching(false);
-    }
-  }, [routes]);
+useEffect(() => {
+  if (routes?.routes) {
+    setRoutesList((prevRoutes) => {
+      const newRoutes = [...prevRoutes, ...routes.routes];
+      const uniqueRoutes = Array.from(new Map(newRoutes.map(route => [route.idRoute, route])).values());
+      return uniqueRoutes;
+    });
+    setIsFetching(false);
+  }
+}, [routes]);
+
 
 
 

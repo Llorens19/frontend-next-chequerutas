@@ -1,5 +1,5 @@
-import { IRouteFilters } from '@/interfaces/services/route/getRoutes.interface';
-import { RouteService } from '@/services/route.service';
+import { IRouteFilters } from '@/shared/interfaces/services/route/getRoutes.interface';
+import { RouteService } from '@/core/services/route.service';
 import { useQuery } from '@tanstack/react-query';
 
 export const useRoutesQuery = (filters:IRouteFilters) =>

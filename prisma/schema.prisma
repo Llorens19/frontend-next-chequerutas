@@ -161,7 +161,7 @@ model Routes {
   title              String          @db.VarChar(255)
   description        String?
   coordinates        Json
-  level              Decimal?        @db.Decimal(5, 2)
+  level              Float?
   distance           Float?
   duration           Int?
   averageRating      Float?          @default(0) @map("average_rating")
@@ -171,9 +171,9 @@ model Routes {
   isPublic           Boolean?        @default(true) @map("is_public")
   createdAt          DateTime?       @default(now()) @map("created_at") @db.Timestamp(6)
   updatedAt          DateTime?       @default(now()) @map("updated_at") @db.Timestamp(6)
-  positiveGradient   Decimal?        @map("positive_gradient") @db.Decimal
-  negativeGradient   Decimal?        @map("negative_gradient") @db.Decimal
-  cumulativeGradient Decimal?        @map("cumulative_gradient") @db.Decimal
+  positiveGradient   Float?        @map("positive_gradient")
+  negativeGradient   Float?        @map("negative_gradient")
+  cumulativeGradient Float?        @map("cumulative_gradient")
   idLocation         String?         @map("id_location") @db.Uuid
   comments           Comments[]
   favorites          Favorites[]

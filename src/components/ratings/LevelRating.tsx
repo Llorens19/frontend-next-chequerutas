@@ -1,7 +1,7 @@
 import Rating from '@mui/material/Rating';
 import TerrainIcon from '@mui/icons-material/Terrain';
 import TerrainOutlinedIcon from '@mui/icons-material/TerrainOutlined';
-import { ILevelRatingProps } from '@/interfaces/components/ratings/LevelRating.interface';
+import { ILevelRatingProps } from '@/shared/interfaces/components/ratings/LevelRating.interface';
 
 const LevelRating = ({ level }: ILevelRatingProps) => {
 
