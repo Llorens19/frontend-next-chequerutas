@@ -1,8 +1,20 @@
+'use client';
+
 import LevelRating from '@/components/ratings/LevelRating';
 import { ICardRouteInput } from '@/shared/CardRoute.interface';
 import Image from 'next/image';
+import { useRouter } from 'next/navigation';
 
 const CardRoute = ({ route }: ICardRouteInput) => {
+    const router = useRouter();
+
+    const detailRouteRedirect = () => {
+      router.push(`/route/${route.idRoute}`);
+    };
+
+
+
+
   return (
     <div className="flex bg-color2 shadow-lg rounded-lg overflow-hidden p-8 mb-8">
       <div className="w-1/2">
@@ -15,7 +27,7 @@ const CardRoute = ({ route }: ICardRouteInput) => {
         />
       </div>
 
-      <div className="w-1/2 ml-8 flex flex-col justify-between">
+      <div className="w-1/2 ml-8 flex flex-col justify-between" onClick={detailRouteRedirect}>
         <div>
           <h3 className="text-2xl font-bold text-center">{route.title}</h3>
           <p className="text-sm text-center text-text4">{route.description}</p>

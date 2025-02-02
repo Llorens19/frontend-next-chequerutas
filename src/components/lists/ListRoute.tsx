@@ -43,12 +43,17 @@ const ListRoute = () => {
 
 
 
-  useEffect(() => {
-    if (routes?.routes) {
-      setRoutesList((prevRoutes) => [...prevRoutes, ...routes.routes]);
-      setIsFetching(false);
-    }
-  }, [routes]);
+useEffect(() => {
+  if (routes?.routes) {
+    setRoutesList((prevRoutes) => {
+      const newRoutes = [...prevRoutes, ...routes.routes];
+      const uniqueRoutes = Array.from(new Map(newRoutes.map(route => [route.idRoute, route])).values());
+      return uniqueRoutes;
+    });
+    setIsFetching(false);
+  }
+}, [routes]);
+
 
 
 
