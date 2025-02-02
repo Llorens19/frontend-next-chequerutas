@@ -5,36 +5,8 @@ import L from 'leaflet';
 import 'leaflet/dist/leaflet.css';
 import GraficaPuntos from '@/components/graphics/GraphicAltitude';
 import MapDetailsRoute from '@/components/maps/MapDetailsRoute';
-
-const UpArrow = () => (
-  <svg
-    width="16"
-    height="16"
-    viewBox="0 0 24 24"
-    fill="none"
-    stroke="currentColor"
-    strokeWidth="2"
-    strokeLinecap="round"
-    strokeLinejoin="round"
-  >
-    <path d="M12 19V5M5 12l7-7 7 7" />
-  </svg>
-);
-
-const DownArrow = () => (
-  <svg
-    width="16"
-    height="16"
-    viewBox="0 0 24 24"
-    fill="none"
-    stroke="currentColor"
-    strokeWidth="2"
-    strokeLinecap="round"
-    strokeLinejoin="round"
-  >
-    <path d="M12 5v14M5 12l7 7 7-7" />
-  </svg>
-);
+import UpArrow from '@/components/SVGs/UpArrow';
+import DownArrow from '@/components/SVGs/DownArrow';
 
 const CardDetailRoute = ({ route }: ICardDetailRouteParams) => {
 
