@@ -1,6 +1,7 @@
 'use client';
 
 import Login from '@/components/auth/Login';
+import Register from '@/components/auth/Register';
 import ImgAuth from '@/components/SVGs/ImgAuth';
 import { useState } from 'react';
 
@@ -34,7 +35,7 @@ const AuthContent = () => {
                     {/* <Register />
                     no
                 </div> */}
-            <div>{isLogin ? <Login /> : 'no'}</div>
+            <div>{isLogin ? <Login /> : <Register/>}</div>
 
             <p className="text-center text-text3">
               {isLogin
