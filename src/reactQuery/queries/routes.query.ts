@@ -1,10 +1,10 @@
+import { RouteQueryService } from '@/services/queries/route.queryService';
 import { IRouteFilters } from '@/shared/interfaces/services/route/getRoutes.interface';
-import { RouteService } from '@/core/services/route.service';
 import { useQuery } from '@tanstack/react-query';
 
 export const useRoutesQuery = (filters:IRouteFilters) =>
   useQuery({
     queryKey: ['routes', 'filters', filters],
-    queryFn: async () => await RouteService.getRoutes(filters),
+    queryFn: async () => await RouteQueryService.getRoutes(filters),
     staleTime: 20000,
   });

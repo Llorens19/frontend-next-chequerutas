@@ -1,5 +1,5 @@
-import { ICategory } from '@/shared/interfaces/entities/category.interface';
 import {prisma} from '@/libs/prisma';
+import { ICategory } from '@/shared/interfaces/entities/category.interface';
 
 
 const getCategories = ():Promise<ICategory[]> => {

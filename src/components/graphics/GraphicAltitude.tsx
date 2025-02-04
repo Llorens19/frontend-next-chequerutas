@@ -53,7 +53,7 @@ const GraphicAltitude = ({ coordinates }: IGraphicAltitudeProps) => {
       {
         data: points.map((punto) => ({ x: punto.distance.toFixed(2), y: punto.altitude })),
         fill: false,
-        borderColor: 'rgba(75,192,192,1)',
+        borderColor: 'rgba(255,255,255,1)',
         tension: 0.3
       }
     ]

@@ -1,5 +1,6 @@
-import { IRoute } from '@/shared/interfaces/entities/route.interface';
 import { prisma } from '@/libs/prisma';
+import { IRoute } from '@/shared/interfaces/entities/route.interface';
+
 
 const getRoute = async (idRoute: string): Promise<IRoute | null> => {
   try {
@@ -13,7 +14,7 @@ const getRoute = async (idRoute: string): Promise<IRoute | null> => {
       },
     });
 
-    return route;
+    return route as IRoute;
   } catch (error) {
     console.error('Error fetching route:', error);
     return null;

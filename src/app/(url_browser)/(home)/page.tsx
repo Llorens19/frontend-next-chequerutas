@@ -1,6 +1,7 @@
-import getCategories from '@/actions/getCategories';
+import getCategories from '@/actions/getCategories.action';
 import CarouselCategory from '@/components/carousels/CarouselCategory';
 import SearchHome from '@/components/searches/SearchHome';
+import { CategoryQueryService } from '@/services/queries/category.queryService';
 import { Metadata } from 'next';
 
 export const metadata: Metadata = {
@@ -16,7 +17,10 @@ const Home = async () => {
     backgroundSize: 'cover',
     backgroundPosition: 'top center',
   };
-  const categories = await getCategories();
+
+  // const categories = await getCategories();
+
+  const {categories}= await CategoryQueryService.getCategories();
 
   console.log(categories);
 

@@ -1,4 +1,5 @@
-import getRoute from '@/actions/getRoute';
+
+import getRoute from '@/actions/getRoute.action';
 import CommentsRoute from '@/components/comments/CommentsRoute';
 import DetailsRoute from '@/components/details/DetailsRoute';
 import { uuidRegex } from '@/shared/utils/regex/uuidRegex.util';
