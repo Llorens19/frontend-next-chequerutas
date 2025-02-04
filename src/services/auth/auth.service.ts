@@ -6,7 +6,7 @@ import { IRegister } from '@/shared/interfaces/services/user/register.interface'
 
 export const AuthService = {
     getCurrentUser: (): Promise<IUserGeneric> => {
-        return ApiService.get<IUserGeneric>('user/currentUser');
+        return ApiService.get<IUserGeneric>('current_user');
     },
     login: async (data:ILogin): Promise<ILoginResponse> => {
         const resp = await ApiService.post<ILoginResponse>('login', data);

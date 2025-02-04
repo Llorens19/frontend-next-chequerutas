@@ -1,4 +1,5 @@
 import AuthContent from '@/components/auth/authContent';
+import AuthGuard from '@/guards/logged.guard';
 import { Metadata } from 'next';
 
 export const metadata: Metadata = {
@@ -6,10 +7,12 @@ export const metadata: Metadata = {
   description: 'Página de autenticación de la aplicación',
 };
 
-const Auth = async () => {
+const Auth = () => {
   return (
     <>
+    <AuthGuard >
       <AuthContent />
+    </AuthGuard>
     </>
   );
 };

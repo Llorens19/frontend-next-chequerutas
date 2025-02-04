@@ -3,7 +3,7 @@ import GalleryDetails from '@/components/galleries/GalleryDatails';
 import { ICardDetailRouteParams } from '@/shared/interfaces/components/cards/CardDetailsRoute.interface';
 import L from 'leaflet';
 import 'leaflet/dist/leaflet.css';
-import GraficaPuntos from '@/components/graphics/GraphicAltitude';
+import GraphicAltitude from '@/components/graphics/GraphicAltitude';
 import MapDetailsRoute from '@/components/maps/MapDetailsRoute';
 import UpArrow from '@/components/SVGs/UpArrow';
 import DownArrow from '@/components/SVGs/DownArrow';
@@ -85,7 +85,7 @@ const CardDetailRoute = ({ route }: ICardDetailRouteParams) => {
             </div>
           </div>
           <div className="mt-8 w-full xl:w-1/2 mb-8 xl:mt-0">
-            <GraficaPuntos coordinates={route.coordinates!} />
+            <GraphicAltitude coordinates={route.coordinates!} />
           </div>
         </div>
 

@@ -1,6 +1,7 @@
 import { ErrorResp } from '@/shared/utils/error.util';
 import axios, { AxiosInstance, AxiosRequestConfig } from 'axios';
 
+const isBrowser = typeof window !== 'undefined';
 
 export const axiosClient: AxiosInstance = axios.create({
   // baseURL: 'http://192.168.1.68:4001/',
@@ -12,10 +13,13 @@ export const axiosClient: AxiosInstance = axios.create({
 
 axiosClient.interceptors.request.use(
   (config) => {
-    const token = localStorage.getItem('token');
-    if (token) {
-      config.headers.Authorization = `Bearer ${token}`;
+    if (isBrowser) {
+      const token = localStorage.getItem('accessToken');
+      if (token) {
+        config.headers.Authorization = `Bearer ${token}`;
+      }
     }
+
     return config;
   },
   (error) => {

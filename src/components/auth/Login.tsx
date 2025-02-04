@@ -1,6 +1,6 @@
 'use client';
 import InputTextForm from '@/components/inputs/InputTextForm';
-import { useLoginMutation } from '@/reactQuery/queries/user.query';
+import { useLoginMutation } from '@/reactQuery/mutations/user.mutations';
 import { emailRegex } from '@/shared/utils/regex/emailRegex.util';
 import { passwordRegex } from '@/shared/utils/regex/passwordRegex.util';
 import React, { useState } from 'react';
@@ -49,7 +49,7 @@ const Login = () => {
   };
 
   return (
-    <div className="flex flex-col gap-6 w-1/2 mx-auto">
+    <div className="flex flex-col gap-6">
       <InputTextForm
         label="Email"
         type="email"

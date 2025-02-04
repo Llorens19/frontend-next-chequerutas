@@ -14,7 +14,7 @@ const getRoute = async (idRoute: string): Promise<IRoute | null> => {
       },
     });
 
-    return route;
+    return route as IRoute;
   } catch (error) {
     console.error('Error fetching route:', error);
     return null;

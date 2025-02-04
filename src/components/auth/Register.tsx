@@ -94,7 +94,7 @@ const Register = () => {
   };
 
   return (
-    <div className="flex flex-col gap-4 w-1/2 mx-auto">
+    <div className="flex flex-col gap-4 mx-auto">
       <div className="flex gap-4">
         <div className="w-2/5">
           <InputTextForm

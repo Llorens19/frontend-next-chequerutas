@@ -2,7 +2,6 @@ import getCategories from '@/actions/getCategories.action';
 import CarouselCategory from '@/components/carousels/CarouselCategory';
 import SearchHome from '@/components/searches/SearchHome';
 import { CategoryQueryService } from '@/services/queries/category.queryService';
-import { ICategory } from '@/shared/interfaces/entities/category.interface';
 import { Metadata } from 'next';
 
 export const metadata: Metadata = {
@@ -19,7 +18,9 @@ const Home = async () => {
     backgroundPosition: 'top center',
   };
 
-  const categories = await getCategories();
+  // const categories = await getCategories();
+
+  const {categories}= await CategoryQueryService.getCategories();
 
   console.log(categories);
 
@@ -39,7 +40,7 @@ const Home = async () => {
         <h2 className="flex justify-center text-2xl font-bold text-white mb-4">
           Categorias
         </h2>
-        <CarouselCategory categories={categories as ICategory[]} />
+        <CarouselCategory categories={categories} />
       </section>
     </>
   );

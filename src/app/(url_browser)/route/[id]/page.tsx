@@ -2,7 +2,6 @@
 import getRoute from '@/actions/getRoute.action';
 import CommentsRoute from '@/components/comments/CommentsRoute';
 import DetailsRoute from '@/components/details/DetailsRoute';
-import { IRoute } from '@/shared/interfaces/entities/route.interface';
 import { uuidRegex } from '@/shared/utils/regex/uuidRegex.util';
 import { Metadata } from 'next';
 
