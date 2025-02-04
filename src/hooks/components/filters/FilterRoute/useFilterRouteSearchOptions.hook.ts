@@ -1,7 +1,7 @@
 import { ILocation } from '@/shared/interfaces/entities/location.interface';
-import { useCateogryFilterQuery } from '@/queries/category.query';
-import { useLocationsQuery } from '@/queries/location.query';
-import { useRouteTitlesQuery } from '@/queries/titles.query';
+import { useCateogryFilterQuery } from '@/reactQuery/queries/category.query';
+import { useLocationsQuery } from '@/reactQuery/queries/location.query';
+import { useRouteTitlesQuery } from '@/reactQuery/queries/titles.query';
 
 const useFilterRouteSearchOptions = () => {
     const { data: categoryOptions } = useCateogryFilterQuery();

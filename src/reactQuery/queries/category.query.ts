@@ -1,4 +1,5 @@
-import { CategoryService } from '@/core/services/category.service';
+
+import { CategoryQueryService } from '@/services/queries/category.queryService';
 import { categoryFilterDto } from '@/shared/dto/categoryFilter.dto';
 import { useQuery } from '@tanstack/react-query';
 
@@ -22,7 +23,7 @@ import { useQuery } from '@tanstack/react-query';
 export const useCategoryQuery = () =>
   useQuery({
     queryKey: ['category', 'all'],
-    queryFn: CategoryService.getCategories,
+    queryFn: CategoryQueryService.getCategories,
     staleTime: 20000,
   });
 
@@ -30,6 +31,6 @@ export const useCategoryQuery = () =>
 export const useCateogryFilterQuery = () =>
   useQuery({
     queryKey: ['category', 'filters'],
-    queryFn: async () => categoryFilterDto(await CategoryService.getCategories()),
+    queryFn: async () => categoryFilterDto(await CategoryQueryService.getCategories()),
     staleTime: 20000,
   });

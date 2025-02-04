@@ -1,8 +1,8 @@
-import ApiService from '@/core/api.service';
+import ApiService from '@/services/apiService/api.service';
 import { ICategories } from '@/shared/interfaces/entities/category.interface';
 
 
-export const CategoryService = {
+export const CategoryQueryService = {
   getCategories : (): Promise<ICategories> => {
     return ApiService.get<ICategories>('categories');
   }

@@ -26,16 +26,9 @@ const AuthContent = () => {
               {isLogin ? 'Login' : 'Register'}
             </h2>
 
-            {/* <div v-if="isLogin">
-                    {/* <Login />
-                    si
-                </div>
-
-                <div v-else>
-                    {/* <Register />
-                    no
-                </div> */}
-            <div>{isLogin ? <Login /> : <Register/>}</div>
+            <div>
+              {isLogin ? <Login /> : <Register/>}
+            </div>
 
             <p className="text-center text-text3">
               {isLogin

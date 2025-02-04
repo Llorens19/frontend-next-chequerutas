@@ -1,9 +1,9 @@
-import { UserService } from '@/core/services/user.service';
+
+import { AuthService } from '@/services/auth/auth.service';
 import { useQuery } from '@tanstack/react-query';
 
 export const useGetUserQuery = () =>
   useQuery({
     queryKey: ['user'],
-    queryFn: UserService.getCurrentUser,
-    staleTime: 20000,
+    queryFn: AuthService.getCurrentUser
   });

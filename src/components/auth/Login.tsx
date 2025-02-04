@@ -1,4 +1,6 @@
+'use client';
 import InputTextForm from '@/components/inputs/InputTextForm';
+import { useLoginMutation } from '@/reactQuery/queries/user.query';
 import { emailRegex } from '@/shared/utils/regex/emailRegex.util';
 import { passwordRegex } from '@/shared/utils/regex/passwordRegex.util';
 import React, { useState } from 'react';
@@ -6,6 +8,12 @@ import React, { useState } from 'react';
 
 
 const Login = () => {
+  const loginMutation = useLoginMutation();
+
+
+
+
+
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
   const [errorEmail, setErrorEmail] = useState('');
@@ -27,7 +35,16 @@ const Login = () => {
 
   const handleLogin = () => {
     if (validateLogin()) {
-      console.log('Logeando');
+
+      loginMutation.mutate(
+        { email, password },
+        {
+          onError: (error) => {
+        console.error('Login error:', error);
+          },
+        }
+      );
+
     }
   };
 

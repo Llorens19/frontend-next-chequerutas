@@ -1,5 +1,6 @@
-import { IRoute } from '@/shared/interfaces/entities/route.interface';
 import { prisma } from '@/libs/prisma';
+import { IRoute } from '@/shared/interfaces/entities/route.interface';
+
 
 const getRoute = async (idRoute: string): Promise<IRoute | null> => {
   try {
