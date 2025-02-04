@@ -21,21 +21,28 @@ const Header = () => {
               <li>
                 <Link href="/list-routes">Rutas</Link>
               </li>
-              <li>
-                <Link href="/auth">Login/Register</Link>
-              </li>
-              {user && <li>
-                <div className="flex items-center  bg-color5 rounded-lg" onClick={() => console.log('logout')}>
-                  <Image
-                    src={user?.imgUser || '/images/profile/perfil.jpg'}
-                    alt="avatar"
-                    className="w-8 h-8 rounded-lg"
-                    width={32}
-                    height={32}
-                  />
-                  <p className='px-4'>{user?.username}</p>
-                </div>
-              </li> }
+
+              {user ? (
+                <li>
+                  <div
+                    className="flex items-center  bg-color5 rounded-lg"
+                    onClick={() => console.log('logout')}
+                  >
+                    <Image
+                      src={user?.imgUser || '/images/profile/perfil.jpg'}
+                      alt="avatar"
+                      className="w-8 h-8 rounded-lg"
+                      width={32}
+                      height={32}
+                    />
+                    <p className="px-4">{user?.username}</p>
+                  </div>
+                </li>
+              ) : (
+                <li>
+                  <Link href="/auth">Login/Register</Link>
+                </li>
+              )}
             </ul>
           </nav>
         </div>
