@@ -2,9 +2,15 @@
 import { useGetUserQuery } from '@/reactQuery/queries/user.query';
 import Image from 'next/image';
 import Link from 'next/link';
+import { useRouter } from 'next/navigation';
 
 const Header = () => {
+  const router = useRouter();
   const { data: user } = useGetUserQuery();
+
+  const onClickProfile = (username: string) => {
+    router.push(`/profile/${username}`);
+  };
 
   console.log('user', user);
 
@@ -26,7 +32,7 @@ const Header = () => {
                 <li>
                   <div
                     className="flex items-center  bg-color5 rounded-lg"
-                    onClick={() => console.log('logout')}
+                    onClick={() => onClickProfile(user?.username)}
                   >
                     <Image
                       src={user?.imgUser || '/images/profile/perfil.jpg'}

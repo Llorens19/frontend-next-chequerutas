@@ -1,7 +1,6 @@
-
-import getRoute from '@/actions/getRoute.action';
 import CommentsRoute from '@/components/comments/CommentsRoute';
 import DetailsRoute from '@/components/details/DetailsRoute';
+import { RouteQueryService } from '@/services/queries/route.queryService';
 import { uuidRegex } from '@/shared/utils/regex/uuidRegex.util';
 import { Metadata } from 'next';
 
@@ -17,9 +16,9 @@ export const generateMetadata = async ({
   }
 
   console.log('Route ID:', id);
-  const data = await getRoute(id);
+  const route = await RouteQueryService.getRouteById(id);
 
-  return data ? { title: data.title } : {};
+  return route ? { title: route.title } : {};
 };
 
 const Route = async ({ params }: { params: { id: string } }) => {
@@ -29,7 +28,7 @@ const Route = async ({ params }: { params: { id: string } }) => {
     return <p>Error</p>;
   }
 
-  const route = await getRoute(id);
+  const route = await RouteQueryService.getRouteById(id);
   if (!route || !uuidRegex(id)) {
     return <p>Error</p>;
   }

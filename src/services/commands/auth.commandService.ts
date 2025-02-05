@@ -4,10 +4,7 @@ import { ILogin, ILoginResponse } from '@/shared/interfaces/services/user/login.
 import { IRegister } from '@/shared/interfaces/services/user/register.interface';
 
 
-export const AuthService = {
-    getCurrentUser: (): Promise<IUserGeneric> => {
-        return ApiService.get<IUserGeneric>('current_user');
-    },
+export const AuthCommandService = {
     login: async (data:ILogin): Promise<ILoginResponse> => {
         const resp = await ApiService.post<ILoginResponse>('login', data);
         localStorage.setItem('accessToken', resp.accessToken);
