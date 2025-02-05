@@ -1,21 +1,19 @@
-import { Comments } from '@prisma/client';
+import { IUserGeneric } from '@/shared/interfaces/entities/user.interface';
 
-// export interface IComment {
-//   idComment: string;
-//   idUser: string;
-//   idRoute: string;
-//   body: string;
-//   imgComment: string;
-//   idParentComment: string;
-//   createdAt?: Date;
-//   updatedAt?: Date;
-//   user : IUserGeneric;
-//   comments?: Comments[];
+export interface IComment {
+  idComment: string;
+  idUser: string;
+  idRoute: string;
+  body: string;
+  imgComment: string;
+  idParentComment: string;
+  createdAt?: Date;
+  updatedAt?: Date;
+  user : IUserGeneric;
+  comments?: IComment[];
 
-// }
+}
 
-export type IComment = Comments;
-
-export interface IComents{
-  categories:IComment[];
+export interface IComments {
+  comments: IComment[];
 };
