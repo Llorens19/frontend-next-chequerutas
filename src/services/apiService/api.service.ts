@@ -4,11 +4,10 @@ import axios, { AxiosInstance, AxiosRequestConfig } from 'axios';
 const isBrowser = typeof window !== 'undefined';
 
 export const axiosClient: AxiosInstance = axios.create({
-  // baseURL: 'http://192.168.1.68:4001/',
-  baseURL: 'http://localhost:4001/',
-  // baseURL: 'http://192.168.241.47:4001/',
-
+  baseURL: 'http://localhost:4000',
 });
+
+console.log('Backend URL:', process.env.BACKEND_URL);
 
 
 axiosClient.interceptors.request.use(
