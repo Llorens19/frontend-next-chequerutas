@@ -1,4 +1,4 @@
-import { IRoutePointsFilters } from '@/shared/interfaces/services/route/getRoutePoints.interface';
+import { IRoutePointsFilters } from '@/shared/interfaces/services/queries/route/getRoutePoints.interface';
 import { useQuery } from '@tanstack/react-query';
 import { RouteQueryService } from '@/services/queries/route.queryService';
 

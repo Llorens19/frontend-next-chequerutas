@@ -5,7 +5,7 @@ import { useSearchParams } from 'next/navigation';
 import CardRoute from '@/components/cards/CardRoute';
 import { IRoute } from '@/shared/interfaces/entities/route.interface';
 import { useRoutesQuery } from '@/reactQuery/queries/routes.query';
-import { IRouteFilters } from '@/shared/interfaces/services/route/getRoutes.interface';
+import { IRouteFilters } from '@/shared/interfaces/services/queries/route/getRoutes.interface';
 import InfiniteScroll from 'react-infinite-scroll-component';
 
 const ListRoute = () => {
