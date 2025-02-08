@@ -13,9 +13,13 @@ console.log('Backend URL:', process.env.BACKEND_URL);
 axiosClient.interceptors.request.use(
   (config) => {
     if (isBrowser) {
-      const token = localStorage.getItem('accessToken');
-      if (token) {
-        config.headers.Authorization = `Bearer ${token}`;
+      const accessToken = localStorage.getItem('accessToken');
+      const refreshToken = localStorage.getItem('refreshToken');
+      if (accessToken) {
+        config.headers.Authorization = `Bearer ${accessToken}`;
+      }
+      if (refreshToken) {
+        config.headers.refresh_authorization = `Bearer ${refreshToken}`;
       }
     }
 

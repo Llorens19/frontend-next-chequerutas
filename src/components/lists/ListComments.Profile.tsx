@@ -8,12 +8,8 @@ const ListCommentsProfile = ({ username }: IListCommentsProfileProps) => {
   const { data: comments, isLoading } = useUserCommentsQuery(username);
 
 
-  console.log('pppppppppppppppppppppppp', comments?.comments);
+  if (isLoading === undefined) return <div>Loading...</div>;
 
-
-  if (isLoading === undefined) {
-    return <div>Loading...</div>;
-  }
 
   return (
     <div className="w-full flex flex-col gap-4 mx-auto  ">
