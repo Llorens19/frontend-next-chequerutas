@@ -4,7 +4,10 @@ import { IUserGeneric } from '@/shared/interfaces/entities/user.interface';
 
 
 export const AuthQueryService = {
-    getCurrentUser: (): Promise<IUserGeneric> => {
-        return ApiService.get<IUserGeneric>(`${SERVER_AUTH}current_user`);
+    getCurrentUser: (): Promise<IUserGeneric | null > => {
+        if (localStorage.accessToken) {
+          return ApiService.get<IUserGeneric>(`${SERVER_AUTH}current_user`);
+        }
+        return Promise.resolve(null);
     }
 };

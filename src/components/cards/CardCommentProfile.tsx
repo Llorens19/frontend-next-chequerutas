@@ -5,7 +5,7 @@ import { IComment } from '@/shared/interfaces/entities/comment.interface';
 import Image from 'next/image';
 import { useState, useRef, useEffect } from 'react';
 
-const CommentCard = ({ comment }: { comment: IComment }) => {
+const CardCommentProfile = ({ comment }: { comment: IComment }) => {
 
 
   const [isReplying, setIsReplying] = useState(false);
@@ -117,7 +117,7 @@ const CommentCard = ({ comment }: { comment: IComment }) => {
       {(comment.comments && comment.comments.length > 0 ) && (
         <div className="ml-12 flex flex-col gap-4">
           {comment.comments.map((comment: IComment) => (
-            <CommentCard comment={comment} key={comment.idComment} />
+            <CardCommentProfile comment={comment} key={comment.idComment} />
           ))}
         </div>
       )}
@@ -125,4 +125,4 @@ const CommentCard = ({ comment }: { comment: IComment }) => {
   );
 };
 
-export default CommentCard;
+export default CardCommentProfile;
