@@ -116,34 +116,23 @@ const ProfileUser = ({ username }: { username: string }) => {
               <p className="text-text3">Siguiendo</p>
             </div>
           </div>
-          <div className="flex gap-4 justify-center mt-4 w-4/5">
+          <div className="flex flex-wrap gap-4 justify-center mt-4 w-full">
             {isOwner && (
-              <>
-                <button
-                  className="text-contrast2 px-4 py-2 rounded-lg w-1/2 hover:underline font-bold hover:text-contrast2_hover"
-                  onClick={onClickRoutesPrivate}
-                >
-                  Rutas Privadas
-                </button>
-              </>
+              <button
+                className="text-contrast2 px-4 py-2 rounded-lg flex-1 min-w-[120px] hover:underline font-bold hover:text-contrast2_hover"
+                onClick={onClickRoutesPrivate}
+              >
+                Rutas Privadas
+              </button>
             )}
-
             <button
-              className="text-contrast2 px-4 py-2 rounded-lg w-1/2 hover:underline font-bold hover:text-contrast2_hover"
-              onClick={onClickComments}
-            >
-              Comentarios
-            </button>
-
-            <button
-              className="text-contrast2 px-4 py-2 rounded-lg w-1/2 hover:underline font-bold hover:text-contrast2_hover"
+              className="text-contrast2 px-4 py-2 rounded-lg flex-1 min-w-[120px] hover:underline font-bold hover:text-contrast2_hover"
               onClick={onClickRoutesPublic}
             >
-              Rutas
+              Rutas Públicas
             </button>
-
             <button
-              className="text-contrast2 px-4 py-2 rounded-lg w-1/2 hover:underline font-bold hover:text-contrast2_hover"
+              className="text-contrast2 px-4 py-2 rounded-lg flex-1 min-w-[120px] hover:underline font-bold hover:text-contrast2_hover"
               onClick={onClickPosts}
             >
               Publicaciones
@@ -162,7 +151,6 @@ const ProfileUser = ({ username }: { username: string }) => {
             )}
 
             {listSelected === 'posts' && <ListCommentsProfile username={user.username}/>}
-            {listSelected === 'comments' && <p>Comments</p>}
 
           </div>
         </div>
