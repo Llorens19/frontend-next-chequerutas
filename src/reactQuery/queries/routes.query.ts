@@ -25,3 +25,10 @@ export const useRoutesQuery = (filters:IRouteFilters) =>
       queryFn:async () => await ProfileQueryService.getRoutesUserPrivate(username),
       staleTime: 20000,
     });
+
+  export const useRouteQuery = (idRoute: string) =>
+    useQuery({
+      queryKey: ['route', idRoute],
+      queryFn:async () => await RouteQueryService.getRouteById(idRoute),
+      staleTime: 20000,
+    });

@@ -1,11 +1,11 @@
 'use client';
 import CardDetailRoute from '@/components/cards/CardDetailRoute';
+import { useRouteQuery } from '@/reactQuery/queries/routes.query';
 import { IDetailsRouteParams } from '@/shared/interfaces/components/details/DetailsRoute.interface';
 
-const DetailsRoute = ({route}:IDetailsRouteParams) => {
+const DetailsRoute = ({idRoute}:IDetailsRouteParams) => {
 
-
-  console.log('Route:');
+  const {data: route} = useRouteQuery(idRoute);
 
 
 

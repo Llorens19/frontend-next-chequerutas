@@ -9,5 +9,6 @@ export const ProfileCommandService = {
   },
   unfollow: (idUnFollowed: string): Promise<IFollow> => {
     return ApiService.delete<IFollow>(`${SERVER_PROFILE}profile/unfollow/${idUnFollowed}`);
-  },
+  }
+
 };

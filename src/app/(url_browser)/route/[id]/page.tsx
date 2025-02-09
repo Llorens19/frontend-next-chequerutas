@@ -35,8 +35,8 @@ const Route = async ({ params }: { params: { id: string } }) => {
 
   return (
     <>
-      <DetailsRoute route={route} />
-      <CommentsRoute route={route} />
+      <DetailsRoute idRoute={id} />
+      <CommentsRoute idRoute={id} />
     </>
   );
 };

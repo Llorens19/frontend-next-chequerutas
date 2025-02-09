@@ -1,6 +1,7 @@
 import { IAdminFields } from '@/shared/interfaces/entities/admin.interface';
 import { IClientFields } from '@/shared/interfaces/entities/client.interface';
 import { IComment } from '@/shared/interfaces/entities/comment.interface';
+import { IFavorite } from '@/shared/interfaces/entities/favorite.interface';
 import { IFollow } from '@/shared/interfaces/entities/follow.interface';
 import { IRoute } from '@/shared/interfaces/entities/route.interface';
 
@@ -29,6 +30,7 @@ export interface IUser {
   followings?: IFollow[];
   comments?: IComment[];
   routes?: IRoute[];
+  favorites?: IFavorite[];
 }
 
 export interface IUserGeneric extends IUser {

@@ -5,8 +5,7 @@ import { useRuteCommentsQuery } from '@/reactQuery/queries/comments.query';
 import { ICommentsRouteProps } from '@/shared/interfaces/components/comments/CommentsRoute.interface';
 import { IComment } from '@/shared/interfaces/entities/comment.interface';
 
-const CommentsRoute = ({ route }: ICommentsRouteProps) => {
-  const { idRoute } = route;
+const CommentsRoute = ({ idRoute }: ICommentsRouteProps) => {
 
   const { data, isLoading } = useRuteCommentsQuery(idRoute);
 
