@@ -13,5 +13,5 @@ export const ProfileQueryService = {
   },
   getRoutesUserPrivate: (username: string): Promise<IRoutes> => {
     return ApiService.get<IRoutes>(`${SERVER_PROFILE}routes/${username}/private`);
-  },
+  }
 };

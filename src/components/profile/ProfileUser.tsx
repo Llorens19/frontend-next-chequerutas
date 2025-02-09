@@ -1,37 +1,51 @@
 'use client';
 import ListCommentsProfile from '@/components/lists/ListCommentsProfile';
 import ListRouteProfile from '@/components/lists/ListRoteProfile';
-import ListUsersProfile from '@/components/lists/ListFollowersProfile';
 import SpinnerLoading from '@/components/spinners/SpinnerLoading';
-import {
-  useProfileQuery,
-  useRoutesUserPrivate,
-  useRoutesUserPublic,
-} from '@/reactQuery/queries/profile.query';
+import { useProfileQuery } from '@/reactQuery/queries/profile.query';
 import { useGetUserQuery } from '@/reactQuery/queries/user.query';
 import Image from 'next/image';
 import { useEffect, useState } from 'react';
 import ListFollowersProfile from '@/components/lists/ListFollowersProfile';
 import ListFollowingsProfile from '@/components/lists/ListFollowingsProfile';
+import { useRoutesUserPrivate, useRoutesUserPublic } from '@/reactQuery/queries/routes.query';
+import { useProfileFollowMutation } from '@/reactQuery/mutations/profile.mutation';
 
 const ProfileUser = ({ username }: { username: string }) => {
   const { data: user, isLoading: isLoadingProfile } = useProfileQuery(username);
-
-
-console.log('userProfile', user);
-
-
-
-
-  const { data: userLogged, isLoading: isLoadingUserLogged } =
-    useGetUserQuery();
+  const { data: userLogged, isLoading: isLoadingUserLogged } = useGetUserQuery();
   const { data: routesPublic } = useRoutesUserPublic(username);
   const { data: routesPrivate } = useRoutesUserPrivate(username);
 
-  const [isOwner, setIsOwner] = useState(false);
+  const follow = useProfileFollowMutation( username );
 
+  const unfollow = useProfileFollowMutation( username );
+
+
+
+
+
+  const [isOwner, setIsOwner] = useState(false);
   const [listSelected, setListSelected] = useState('routes-public');
   const [title, setTitle] = useState('Rutas Públicas');
+
+
+
+
+
+  useEffect(() => {
+    if (userLogged && user) {
+      setIsOwner(userLogged.username === user.username);
+    }
+  }, [userLogged, user]);
+
+  if (isLoadingProfile || isLoadingUserLogged) return <SpinnerLoading />;
+
+  if (!user) return <p>Error</p>;
+
+  if (!user) return <p>Error</p>;
+  const { followers, followings } = user;
+
 
   const onClickPosts = () => {
     setListSelected('posts');
@@ -58,18 +72,23 @@ console.log('userProfile', user);
     setTitle('Siguiendo');
   };
 
-  useEffect(() => {
-    if (userLogged && user) {
-      setIsOwner(userLogged.username === user.username);
-    }
-  }, [userLogged, user]);
 
-  if (isLoadingProfile || isLoadingUserLogged) return <SpinnerLoading />;
 
-  if (!user) return <p>Error</p>;
 
-  if (!user) return <p>Error</p>;
-  const { followers, followings } = user;
+
+  const onFollow = () => {
+    follow.mutate( user.idUser);
+  };
+
+  const onUnfollow = () => {
+    unfollow.mutate( user.idUser);
+  };
+
+
+
+
+
+
 
   return (
     <>
@@ -100,7 +119,7 @@ console.log('userProfile', user);
             </p>
           </div>
           <div className="flex gap-4 justify-center mt-4 mx-4 w-4/5">
-            {isOwner ? (
+            {isOwner && (
               <>
                 <button className="bg-contrast1 text-color1 px-4 py-2 rounded-lg w-1/2">
                   <p>Editar Perfil</p>
@@ -110,11 +129,20 @@ console.log('userProfile', user);
                   <p>Cerrar Sesión</p>
                 </button>
               </>
-            ) : (
-              <button className="bg-contrast1 text-color1 px-4 py-2 rounded-lg w-1/2">
-                <p>Seguir</p>
-              </button>
             )}
+
+            { (!isOwner && userLogged) &&
+            (
+              (
+                <button className="bg-contrast1 text-color1 px-4 py-2 rounded-lg w-1/2">
+                  <p>Seguir</p>
+                </button>
+              )
+            )}
+
+
+
+
           </div>
 
           <div className="flex mt-4 w-full mx-8 border-t-2 border-b-2 border-gray-300 p-4">
