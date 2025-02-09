@@ -12,14 +12,15 @@ import { useRoutesUserPrivate, useRoutesUserPublic } from '@/reactQuery/queries/
 import { useProfileFollowMutation, useProfileUnfollowMutation } from '@/reactQuery/mutations/profile.mutation';
 
 const ProfileUser = ({ username }: { username: string }) => {
+
   const { data: user, isLoading: isLoadingProfile } = useProfileQuery(username);
   const { data: userLogged, isLoading: isLoadingUserLogged } = useGetUserQuery();
   const { data: routesPublic } = useRoutesUserPublic(username);
   const { data: routesPrivate } = useRoutesUserPrivate(username);
 
-  const follow = useProfileFollowMutation( username );
+  const follow = useProfileFollowMutation( );
 
-  const unfollow = useProfileUnfollowMutation( username );
+  const unfollow = useProfileUnfollowMutation( );
 
 
 
@@ -122,11 +123,11 @@ const ProfileUser = ({ username }: { username: string }) => {
           <div className="flex gap-4 justify-center mt-4 mx-4 w-4/5">
             {isOwner && (
               <>
-                <button className="bg-contrast1 text-color1 px-4 py-2 rounded-lg w-1/2">
+                <button className="bg-white text-color2 px-4 py-2 rounded-lg w-1/2 border-2 border-white hover:text-white hover:bg-color2 hover:border-white transition">
                   <p>Editar Perfil</p>
                 </button>
 
-                <button className="bg-contrast1 text-color1 px-4 py-2 rounded-lg w-1/2">
+                <button className="bg-color2 text-white border-2 border-white px-4 py-2 rounded-lg w-1/2 hover:bg-white hover:text-color2 transition">
                   <p>Cerrar Sesión</p>
                 </button>
               </>
@@ -136,21 +137,15 @@ const ProfileUser = ({ username }: { username: string }) => {
 
               {!isOwner && userLogged && (
                 userLogged?.followings?.some(following => following.userFollowed === user.idUser) ? (
-                  <button className="bg-contrast1 text-color1 px-4 py-2 rounded-lg w-1/2" onClick={onUnfollow}>
+                  <button className="bg-color2 text-white border-2 border-white px-4 py-2 rounded-lg w-1/2 hover:bg-white hover:text-color2 transition" onClick={onUnfollow}>
                     <p>Dejar de Seguir</p>
                   </button>
                 ) : (
-                  <button className="bg-contrast1 text-color1 px-4 py-2 rounded-lg w-1/2" onClick={onFollow}>
+                  <button className="bg-white text-color2 px-4 py-2 rounded-lg w-1/2 border-2 border-white hover:text-white hover:bg-color2 hover:border-white transition" onClick={onFollow}>
                     <p>Seguir</p>
                   </button>
                 )
               )}
-
-
-
-
-
-
 
           </div>
 

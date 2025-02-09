@@ -1,6 +1,8 @@
+import { useProfileFollowMutation, useProfileUnfollowMutation } from '@/reactQuery/mutations/profile.mutation';
+import { useGetUserQuery } from '@/reactQuery/queries/user.query';
 import { IUserGeneric } from '@/shared/interfaces/entities/user.interface';
 import Image from 'next/image';
-import { useRouter } from 'next/navigation';
+import { useRouter, useSearchParams } from 'next/navigation';
 
 const CardUser = ({ user }: { user: IUserGeneric }) => {
   const router = useRouter();
@@ -8,6 +10,31 @@ const CardUser = ({ user }: { user: IUserGeneric }) => {
   const onClickUser = () => {
     router.push(`/profile/${user.username}`);
   };
+
+
+
+  const follow = useProfileFollowMutation( );
+
+  const unfollow = useProfileUnfollowMutation( );
+
+
+  const userLogged = useGetUserQuery().data;
+
+
+  const onFollow = () => {
+    follow.mutate( user.idUser);
+  };
+
+  const onUnfollow = () => {
+    unfollow.mutate( user.idUser);
+  };
+
+
+
+
+
+
+
 
   return (
     <>
@@ -31,13 +58,24 @@ const CardUser = ({ user }: { user: IUserGeneric }) => {
           <p className="text-sm text-white">{user.surname}</p>
         </div>
 
-        <div
-          v-if="isFollowing && userLogged.username === usernameUrl"
-        >
-          <button className="px-4 py-2 text-white bg-red-500 hover:bg-red-600 rounded-lg">
-            Dejar de seguir
-          </button>
-        </div>
+        { (user.username !== userLogged?.username) && userLogged && (
+          userLogged?.followings?.some(following => following.userFollowed === user.idUser) ? (
+            <button
+              className="bg-color2 text-white border-2 border-white px-4 py-2 rounded-lg hover:bg-white hover:text-color2 transition"
+              onClick={(e) => { e.stopPropagation(); onUnfollow(); }}
+            >
+              <p>Dejar de Seguir</p>
+            </button>
+          ) : (
+            <button
+              className="bg-white text-color2 px-4 py-2 rounded-lg border-2 border-white hover:text-white hover:bg-color2 hover:border-white transition"
+              onClick={(e) => { e.stopPropagation(); onFollow(); }}
+            >
+              <p>Seguir</p>
+            </button>
+          )
+        )}
+
       </div>
     </>
   );
