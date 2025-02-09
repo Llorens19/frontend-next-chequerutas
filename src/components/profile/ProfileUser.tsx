@@ -9,7 +9,7 @@ import { useEffect, useState } from 'react';
 import ListFollowersProfile from '@/components/lists/ListFollowersProfile';
 import ListFollowingsProfile from '@/components/lists/ListFollowingsProfile';
 import { useRoutesUserPrivate, useRoutesUserPublic } from '@/reactQuery/queries/routes.query';
-import { useProfileFollowMutation } from '@/reactQuery/mutations/profile.mutation';
+import { useProfileFollowMutation, useProfileUnfollowMutation } from '@/reactQuery/mutations/profile.mutation';
 
 const ProfileUser = ({ username }: { username: string }) => {
   const { data: user, isLoading: isLoadingProfile } = useProfileQuery(username);
@@ -19,7 +19,7 @@ const ProfileUser = ({ username }: { username: string }) => {
 
   const follow = useProfileFollowMutation( username );
 
-  const unfollow = useProfileFollowMutation( username );
+  const unfollow = useProfileUnfollowMutation( username );
 
 
 
@@ -87,6 +87,7 @@ const ProfileUser = ({ username }: { username: string }) => {
 
 
 
+  console.log({isOwner, userLogged: !!userLogged,  isFollower: !userLogged?.followings?.some(following => following.userFollowed === user.username) });
 
 
 
@@ -131,14 +132,22 @@ const ProfileUser = ({ username }: { username: string }) => {
               </>
             )}
 
-            { (!isOwner && userLogged) &&
-            (
-              (
-                <button className="bg-contrast1 text-color1 px-4 py-2 rounded-lg w-1/2">
-                  <p>Seguir</p>
-                </button>
-              )
-            )}
+
+
+              {!isOwner && userLogged && (
+                userLogged?.followings?.some(following => following.userFollowed === user.idUser) ? (
+                  <button className="bg-contrast1 text-color1 px-4 py-2 rounded-lg w-1/2" onClick={onUnfollow}>
+                    <p>Dejar de Seguir</p>
+                  </button>
+                ) : (
+                  <button className="bg-contrast1 text-color1 px-4 py-2 rounded-lg w-1/2" onClick={onFollow}>
+                    <p>Seguir</p>
+                  </button>
+                )
+              )}
+
+
+
 
 
 

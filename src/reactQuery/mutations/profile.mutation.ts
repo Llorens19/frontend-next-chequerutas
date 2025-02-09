@@ -8,6 +8,7 @@ export const useProfileFollowMutation = (username: string) => {
     mutationFn:  (idFollowed: string) => ProfileCommandService.follow(idFollowed),
     onSuccess: () => {
       queryClient.invalidateQueries({ queryKey: ['profile', username] });
+      queryClient.invalidateQueries({ queryKey: ['user'] });
     },
   });
 };
@@ -19,6 +20,7 @@ export const useProfileUnfollowMutation = (username: string) => {
     mutationFn:  (idUnFollowed: string) => ProfileCommandService.unfollow(idUnFollowed),
     onSuccess: () => {
       queryClient.invalidateQueries({ queryKey: ['profile', username] });
+      queryClient.invalidateQueries({ queryKey: ['user'] });
     },
   });
 };

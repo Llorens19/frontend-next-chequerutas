@@ -41,5 +41,4 @@ export const AuthQueryService = {
     }
     return null;
   },
-
 };
