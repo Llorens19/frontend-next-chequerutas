@@ -36,8 +36,7 @@ const Login = () => {
   const handleLogin = () => {
     if (validateLogin()) {
 
-      loginMutation.mutate(
-        { email, password },
+      loginMutation.mutate({ email, password },
         {
           onError: (error) => {
         console.error('Login error:', error);

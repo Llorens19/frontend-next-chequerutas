@@ -3,7 +3,6 @@ export interface IRegister {
   password: string;
   name: string;
   surname: string;
-  phone: string;
   birthdate: string;
   role: string;
   client?: {

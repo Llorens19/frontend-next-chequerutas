@@ -1,6 +1,8 @@
 'use client';
 import InputSelectForm from '@/components/inputs/InputSelectForm';
 import InputTextForm from '@/components/inputs/InputTextForm';
+import { AuthCommandService } from '@/services/commands/auth.commandService';
+import { ErrorResp } from '@/shared/utils/error.util';
 import {
   emailRegex,
   nameRegex,
@@ -9,6 +11,7 @@ import {
   usernameRegex,
 } from '@/shared/utils/regex';
 import { useState } from 'react';
+import { useRouter } from 'next/navigation';
 
 const Register = () => {
 
@@ -17,6 +20,7 @@ const Register = () => {
     { value: 'client', label: 'Cliente' },
     { value: 'admin', label: 'Admin' },
   ];
+  const router = useRouter();
 
 
 
@@ -65,6 +69,8 @@ const Register = () => {
     setErrorRole(errorRole);
 
 
+
+
     if (role === 'client') {
       const errorPhone = phoneRegex(phone);
       setErrorPhone(errorPhone);
@@ -87,9 +93,40 @@ const Register = () => {
     return true;
   };
 
-  const handleRegister = () => {
+  const handleRegister = async () => {
     if (validateRegister()) {
-      console.log('Registrando');
+
+      const userData = {
+        name,
+        surname,
+        username,
+        email,
+        birthdate,
+        password,
+        role,
+        ...(role === 'client' ? { client: { phone } } : {}),
+      };
+
+      try {
+        await AuthCommandService.register(userData);
+        router.push('/');
+      } catch (error : unknown) {
+
+        if (error instanceof ErrorResp) {
+          if (error.code === 'EmailAlreadyInUse') {
+            setErrorEmail('El email ya está en uso');
+          }
+          if (error.code === 'UsernameAlreadyInUse') {
+            setErrorUsername('El nombre de usuario ya está en uso');
+          }
+        }
+
+
+        console.error(error);
+      }
+
+      // console.log(userData);
+
     }
   };
 

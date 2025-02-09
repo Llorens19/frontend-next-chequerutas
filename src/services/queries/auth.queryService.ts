@@ -1,7 +1,7 @@
 import ApiService from '@/services/apiService/api.service';
 import { SERVER_AUTH } from '@/shared/constants/serverServices.constants';
 import { IUserGeneric } from '@/shared/interfaces/entities/user.interface';
-import { ILoginResponse } from '@/shared/interfaces/services/commands/user/login.interface';
+import { ILoginResponse } from '@/shared/interfaces/services/commands/auth/login.interface';
 
 
 export const AuthQueryService = {

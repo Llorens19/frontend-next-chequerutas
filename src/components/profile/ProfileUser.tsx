@@ -29,10 +29,6 @@ const ProfileUser = ({ username }: { username: string }) => {
     setTitle('Publicaciones');
   };
 
-  const onClickComments = () => {
-    setListSelected('comments');
-    setTitle('Comentarios');
-  };
 
   const onClickRoutesPublic = () => {
     setListSelected('routes-public');
