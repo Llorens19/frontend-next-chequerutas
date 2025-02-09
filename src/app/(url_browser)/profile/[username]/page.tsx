@@ -5,11 +5,8 @@ import { Metadata } from 'next';
 export const generateMetadata = async ({params}: { params: { username: string }}): Promise<Metadata> => {
   const { username } = await Promise.resolve(params);
 
-  if (!username ) {
-    return {};
-  }
+  if (!username ) return {};
 
-  console.log('UserId:', username);
   const profile = await ProfileQueryService.getProfileByUsername(username);
 
   return profile ? { title: profile.username } : {};

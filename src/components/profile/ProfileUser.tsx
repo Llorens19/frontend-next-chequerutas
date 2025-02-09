@@ -1,6 +1,7 @@
 'use client';
-import ListCommentsProfile from '@/components/lists/ListComments.Profile';
+import ListCommentsProfile from '@/components/lists/ListCommentsProfile';
 import ListRouteProfile from '@/components/lists/ListRoteProfile';
+import ListUsersProfile from '@/components/lists/ListFollowersProfile';
 import SpinnerLoading from '@/components/spinners/SpinnerLoading';
 import {
   useProfileQuery,
@@ -10,9 +11,18 @@ import {
 import { useGetUserQuery } from '@/reactQuery/queries/user.query';
 import Image from 'next/image';
 import { useEffect, useState } from 'react';
+import ListFollowersProfile from '@/components/lists/ListFollowersProfile';
+import ListFollowingsProfile from '@/components/lists/ListFollowingsProfile';
 
 const ProfileUser = ({ username }: { username: string }) => {
   const { data: user, isLoading: isLoadingProfile } = useProfileQuery(username);
+
+
+console.log('userProfile', user);
+
+
+
+
   const { data: userLogged, isLoading: isLoadingUserLogged } =
     useGetUserQuery();
   const { data: routesPublic } = useRoutesUserPublic(username);
@@ -23,12 +33,10 @@ const ProfileUser = ({ username }: { username: string }) => {
   const [listSelected, setListSelected] = useState('routes-public');
   const [title, setTitle] = useState('Rutas Públicas');
 
-
   const onClickPosts = () => {
     setListSelected('posts');
     setTitle('Publicaciones');
   };
-
 
   const onClickRoutesPublic = () => {
     setListSelected('routes-public');
@@ -40,7 +48,15 @@ const ProfileUser = ({ username }: { username: string }) => {
     setTitle('Rutas Privadas');
   };
 
+  const onClickFollowers = () => {
+    setListSelected('followers');
+    setTitle('Seguidores');
+  };
 
+  const onClickFollowings = () => {
+    setListSelected('followings');
+    setTitle('Siguiendo');
+  };
 
   useEffect(() => {
     if (userLogged && user) {
@@ -51,6 +67,9 @@ const ProfileUser = ({ username }: { username: string }) => {
   if (isLoadingProfile || isLoadingUserLogged) return <SpinnerLoading />;
 
   if (!user) return <p>Error</p>;
+
+  if (!user) return <p>Error</p>;
+  const { followers, followings } = user;
 
   return (
     <>
@@ -99,16 +118,20 @@ const ProfileUser = ({ username }: { username: string }) => {
           </div>
 
           <div className="flex mt-4 w-full mx-8 border-t-2 border-b-2 border-gray-300 p-4">
-            <div className="flex flex-col items-center w-1/3 hover:bg-color2 transition rounded-lg">
-              <p className="text-2xl font-bold">{routesPublic?.routes.length ?? 0}</p>
+            <div className="flex flex-col items-center w-1/3 hover:bg-color3 transition rounded-lg">
+              <p className="text-2xl font-bold">
+                {routesPublic?.routes.length ?? 0}
+              </p>
               <p className="text-text3">Rutas</p>
             </div>
-            <div className="flex flex-col items-center w-1/3 hover:bg-color2 transition rounded-lg">
-              <p className="text-2xl font-bold">0</p>
+            <div className="flex flex-col items-center w-1/3 hover:bg-color3 transition rounded-lg"
+              onClick={onClickFollowers}>
+              <p className="text-2xl font-bold">{followers?.length ?? 0}</p>
               <p className="text-text3">Seguidores</p>
             </div>
-            <div className="flex flex-col items-center w-1/3 hover:bg-color2 transition rounded-lg">
-              <p className="text-2xl font-bold">0</p>
+            <div className="flex flex-col items-center w-1/3 hover:bg-color3 transition rounded-lg"
+              onClick={onClickFollowings}>
+              <p className="text-2xl font-bold">{followings?.length ?? 0}</p>
               <p className="text-text3">Siguiendo</p>
             </div>
           </div>
@@ -146,8 +169,17 @@ const ProfileUser = ({ username }: { username: string }) => {
               <ListRouteProfile routes={routesPrivate?.routes ?? []} />
             )}
 
-            {listSelected === 'posts' && <ListCommentsProfile username={user.username}/>}
+            {listSelected === 'posts' && (
+              <ListCommentsProfile username={user.username} />
+            )}
 
+            {listSelected === 'followers' && (
+              <ListFollowersProfile followers={followers ?? []} />
+            )}
+
+            {listSelected === 'followings' && (
+              <ListFollowingsProfile followings={followings ?? []} />
+            )}
           </div>
         </div>
       </div>
