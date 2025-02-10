@@ -17,7 +17,7 @@ const CommentsRoute = ({ idRoute }: ICommentsRouteProps) => {
   console.log('Comments:', comments);
 
   return (
-    <div className="flex flex-col gap-4 w-1/2 mx-auto my-8">
+    <div className="flex flex-col gap-4 w-3/5 mx-auto my-8">
 
       <CommentCreate idRoute={idRoute}/>
 

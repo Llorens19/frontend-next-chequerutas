@@ -13,7 +13,7 @@ const CardRouteMobile = () => {
           </h3>
 
           <div className="w-1/3 flex justify-center align-center gap-4">
-            <button className="bg-color4 text-white rounded-lg p-2">
+            <button className="bg-color4 text-text1 rounded-lg p-2">
               guardar
             </button>
           </div>

@@ -31,12 +31,12 @@ const Home = async () => {
         className="flex flex-col items-center justify-center bg-cover bg-center mt-16 z-10"
         style={styles}
       >
-        <h1 className="text-white text-4xl font-bold">ViaSana</h1>
-        <p className="text-white mt-4">Este es un fondo en blanco y negro</p>
+        <h1 className="text-text1 text-4xl font-bold">ViaSana</h1>
+        <p className="text-text1 mt-4">Este es un fondo en blanco y negro</p>
         <SearchHome />
       </section>
       <section className="sport-carousel p-4">
-        <h2 className="flex justify-center text-2xl font-bold text-white mb-4">
+        <h2 className="flex justify-center text-2xl font-bold text-text1 mb-4">
           Categorias
         </h2>
         <CarouselCategory categories={categories} />

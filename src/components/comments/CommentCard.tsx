@@ -43,7 +43,7 @@ const CommentCard = ({ comment }: { comment: IComment }) => {
 
   return (
     <>
-      <div className="w-full p-4 flex gap-8 bg-color2 rounded-lg">
+      <div className="w-full p-4 flex gap-8 bg-color2 rounded-lg shadow-lg">
         <div className=" w-1/12">
           <Image
             className="rounded-full h-auto"
@@ -71,7 +71,7 @@ const CommentCard = ({ comment }: { comment: IComment }) => {
               />
             </div>
           )}
-          <p className="text-sm">{comment.body}</p>
+          <p className="text-sm text-text1">{comment.body}</p>
 
           <div className="flex gap-4 w-full justify-end ">
             {userLogged && comment.idUser === userLogged.idUser && (
@@ -84,7 +84,7 @@ const CommentCard = ({ comment }: { comment: IComment }) => {
             )}
             {!comment.idParentComment && userLogged && (
               <a
-                className="text-xs text-text4 hover:text-white transition"
+                className="text-xs text-text4 hover:text-text1 transition"
                 onClick={replyComment}
               >
                 Responder
@@ -94,7 +94,7 @@ const CommentCard = ({ comment }: { comment: IComment }) => {
         </div>
       </div>
       {isReplying && (
-        <div className="ml-12 p-4 flex bg-color2 rounded-lg">
+        <div className="ml-12 p-4 flex bg-color2 rounded-lg shadow-lg">
           <input
             ref={inputRef}
             type="text"

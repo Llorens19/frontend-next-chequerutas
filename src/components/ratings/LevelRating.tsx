@@ -24,7 +24,7 @@ const LevelRating = ({ level }: ILevelRatingProps) => {
           fontSize: '1.5rem',
         },
         '& .MuiRating-iconEmpty': {
-          color: '#ffffff',
+          color: '#000000',
         },
         '& .MuiRating-iconFilled': {
           color:

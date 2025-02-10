@@ -94,26 +94,26 @@ const ProfileUser = ({ username }: { username: string }) => {
 
   return (
     <>
-      <div className="bg-color1 w-4/5 mx-auto text-center flex justify-center items-center pt-16 h-36 fixed text-3xl right-0 z-10">
-        <h1 className="mt-[-8px] w-8/12">{title}</h1>
+      <div className="bg-color1 w-4/5 mx-auto text-center flex justify-center items-center pt-16 h-36 fixed text-4xl right-0 z-10">
+        <h1 className="mt-[-8px] w-8/12 text-text1 font-bold">{title}</h1>
       </div>
 
       <div className="mt-36 w-4/5 mx-auto flex">
-        <div className="flex flex-col self-start items-center w-1/5 bg-color2 rounded-lg py-8 fixed">
+        <div className="flex flex-col self-start items-center w-1/5 bg-color2 rounded-lg py-8 fixed shadow-lg">
           <div className="w-1/2">
             <Image
               src={user.imgUser || '/images/profile/perfil.jpg'}
               alt="avatar"
               width={800}
               height={800}
-              className="rounded-full border-2 border-white"
+              className="rounded-full border-2 border-text1"
             />
           </div>
 
-          <h1 className="text-2xl font-bold mt-2">{user.username}</h1>
+          <h1 className="text-2xl font-bold mt-2 text-text1">{user.username}</h1>
           <p className="text-lg text-text3">{user.email}</p>
           <div className="flex gap-2 mt-4">
-            <p className="text-sm text-white">{`${user.name} ${user.surname}`}</p>
+            <p className="text-sm text-text1">{`${user.name} ${user.surname}`}</p>
             <p className="text-sm text-text4 font-bold">
               {user.birthdate
                 ? new Date(user.birthdate).toLocaleDateString()
@@ -123,11 +123,11 @@ const ProfileUser = ({ username }: { username: string }) => {
           <div className="flex gap-4 justify-center mt-4 mx-4 w-4/5">
             {isOwner && (
               <>
-                <button className="bg-white text-color2 px-4 py-2 rounded-lg w-1/2 border-2 border-white hover:text-white hover:bg-color2 hover:border-white transition">
+                <button className="bg-text1 text-color2 px-4 py-2 rounded-lg w-1/2 border-2 border-text1 hover:text-text1 hover:bg-color2 hover:border-text1 transition">
                   <p>Editar Perfil</p>
                 </button>
 
-                <button className="bg-color2 text-white border-2 border-white px-4 py-2 rounded-lg w-1/2 hover:bg-white hover:text-color2 transition">
+                <button className="bg-color2 text-text1 border-2 border-text1 px-4 py-2 rounded-lg w-1/2 hover:bg-text1 hover:text-color2 transition">
                   <p>Cerrar Sesión</p>
                 </button>
               </>
@@ -139,14 +139,14 @@ const ProfileUser = ({ username }: { username: string }) => {
                 (following) => following.userFollowed === user.idUser
               ) ? (
                 <button
-                  className="bg-color2 text-white border-2 border-white px-4 py-2 rounded-lg w-1/2 hover:bg-white hover:text-color2 transition"
+                  className="bg-color2 text-text1 border-2 border-text1 px-4 py-2 rounded-lg w-1/2 hover:bg-text1 hover:text-color2 transition"
                   onClick={onUnfollow}
                 >
                   <p>Dejar de Seguir</p>
                 </button>
               ) : (
                 <button
-                  className="bg-white text-color2 px-4 py-2 rounded-lg w-1/2 border-2 border-white hover:text-white hover:bg-color2 hover:border-white transition"
+                  className="bg-text1 text-color2 px-4 py-2 rounded-lg w-1/2 border-2 border-text1 hover:text-text1 hover:bg-color2 hover:border-text1 transition"
                   onClick={onFollow}
                 >
                   <p>Seguir</p>
@@ -156,7 +156,7 @@ const ProfileUser = ({ username }: { username: string }) => {
 
           <div className="flex mt-4 w-full mx-8 border-t-2 border-b-2 border-gray-300 p-4">
             <div className="flex flex-col items-center w-1/3 hover:bg-color3 transition rounded-lg">
-              <p className="text-2xl font-bold">
+              <p className="text-2xl font-bold text-text2">
                 {routesPublic?.routes.length ?? 0}
               </p>
               <p className="text-text3">Rutas</p>
@@ -165,14 +165,14 @@ const ProfileUser = ({ username }: { username: string }) => {
               className="flex flex-col items-center w-1/3 hover:bg-color3 transition rounded-lg"
               onClick={onClickFollowers}
             >
-              <p className="text-2xl font-bold">{followers?.length ?? 0}</p>
+              <p className="text-2xl font-bold text-text2">{followers?.length ?? 0}</p>
               <p className="text-text3">Seguidores</p>
             </div>
             <div
               className="flex flex-col items-center w-1/3 hover:bg-color3 transition rounded-lg"
               onClick={onClickFollowings}
             >
-              <p className="text-2xl font-bold">{followings?.length ?? 0}</p>
+              <p className="text-2xl font-bold text-text2">{followings?.length ?? 0}</p>
               <p className="text-text3">Siguiendo</p>
             </div>
           </div>

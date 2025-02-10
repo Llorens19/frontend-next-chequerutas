@@ -10,71 +10,71 @@ const SearchHome = () => {
       <div
         className="options absolute bg-color1 border border-gray-300 rounded-xl mt-1 w-full shadow-lg max-h-[30vh] overflow-y-auto z-20"
       >
-        <div className="p-2 cursor-pointer hover:bg-color3 rounded-xl text-white" >
+        <div className="p-2 cursor-pointer hover:bg-color3 rounded-xl text-text1" >
           Opcion1
         </div>
-        <div className="p-2 cursor-pointer hover:bg-color3 rounded-xl text-white">
+        <div className="p-2 cursor-pointer hover:bg-color3 rounded-xl text-text1">
           Opcion2
         </div>
-        <div className="p-2 cursor-pointer hover:bg-color3 rounded-xl text-white">
+        <div className="p-2 cursor-pointer hover:bg-color3 rounded-xl text-text1">
           Opcion3
         </div>
-        <div className="p-2 cursor-pointer hover:bg-color3 rounded-xl text-white">
+        <div className="p-2 cursor-pointer hover:bg-color3 rounded-xl text-text1">
           Opcion4
         </div>
-        <div className="p-2 cursor-pointer hover:bg-color3 rounded-xl text-white">
+        <div className="p-2 cursor-pointer hover:bg-color3 rounded-xl text-text1">
           Opcion5
         </div>
-        <div className="p-2 cursor-pointer hover:bg-color3 rounded-xl text-white">
+        <div className="p-2 cursor-pointer hover:bg-color3 rounded-xl text-text1">
           Opcion1
         </div>
-        <div className="p-2 cursor-pointer hover:bg-color3 rounded-xl text-white">
+        <div className="p-2 cursor-pointer hover:bg-color3 rounded-xl text-text1">
           Opcion2
         </div>
-        <div className="p-2 cursor-pointer hover:bg-color3 rounded-xl text-white">
+        <div className="p-2 cursor-pointer hover:bg-color3 rounded-xl text-text1">
           Opcion3
         </div>
-        <div className="p-2 cursor-pointer hover:bg-color3 rounded-xl text-white">
+        <div className="p-2 cursor-pointer hover:bg-color3 rounded-xl text-text1">
           Opcion4
         </div>
-        <div className="p-2 cursor-pointer hover:bg-color3 rounded-xl text-white">
+        <div className="p-2 cursor-pointer hover:bg-color3 rounded-xl text-text1">
           Opcion5
         </div>
-        <div className="p-2 cursor-pointer hover:bg-color3 rounded-xl text-white">
+        <div className="p-2 cursor-pointer hover:bg-color3 rounded-xl text-text1">
           Opcion1
         </div>
-        <div className="p-2 cursor-pointer hover:bg-color3 rounded-xl text-white">
+        <div className="p-2 cursor-pointer hover:bg-color3 rounded-xl text-text1">
           Opcion2
         </div>
-        <div className="p-2 cursor-pointer hover:bg-color3 rounded-xl text-white">
+        <div className="p-2 cursor-pointer hover:bg-color3 rounded-xl text-text1">
           Opcion3
         </div>
-        <div className="p-2 cursor-pointer hover:bg-color3 rounded-xl text-white">
+        <div className="p-2 cursor-pointer hover:bg-color3 rounded-xl text-text1">
           Opcion4
         </div>
-        <div className="p-2 cursor-pointer hover:bg-color3 rounded-xl text-white">
+        <div className="p-2 cursor-pointer hover:bg-color3 rounded-xl text-text1">
           Opcion5
         </div>
-        <div className="p-2 cursor-pointer hover:bg-color3 rounded-xl text-white">
+        <div className="p-2 cursor-pointer hover:bg-color3 rounded-xl text-text1">
           Opcion1
         </div>
-        <div className="p-2 cursor-pointer hover:bg-color3 rounded-xl text-white">
+        <div className="p-2 cursor-pointer hover:bg-color3 rounded-xl text-text1">
           Opcion2
         </div>
-        <div className="p-2 cursor-pointer hover:bg-color3 rounded-xl text-white">
+        <div className="p-2 cursor-pointer hover:bg-color3 rounded-xl text-text1">
           Opcion3
         </div>
-        <div className="p-2 cursor-pointer hover:bg-color3 rounded-xl text-white">
+        <div className="p-2 cursor-pointer hover:bg-color3 rounded-xl text-text1">
           Opcion4
         </div>
-        <div className="p-2 cursor-pointer hover:bg-color3 rounded-xl text-white">
+        <div className="p-2 cursor-pointer hover:bg-color3 rounded-xl text-text1">
           Opcion5
         </div>
       </div>
 
       <button
         type="button"
-        className="absolute right-3 top-1/2 transform -translate-y-1/2 bg-color3 text-white h-8 w-8 rounded-full flex items-center justify-center hover:bg-color4 transition z-[9999]"
+        className="absolute right-3 top-1/2 transform -translate-y-1/2 bg-color3 text-text1 h-8 w-8 rounded-full flex items-center justify-center hover:bg-color4 transition z-[9999]"
         aria-label="Buscar"
       >
         <svg

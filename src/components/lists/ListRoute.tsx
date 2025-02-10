@@ -74,8 +74,8 @@ useEffect(() => {
         dataLength={routesList.length}
         next={loadMoreRoutes}
         hasMore={!isFetching && (routes?.routes?.length ?? 0) > 0}
-        loader={<div className="text-center text-white py-4">Cargando... </div>}
-        endMessage={<div className="text-center text-white py-4">No hay más rutas</div>}
+        loader={<div className="text-center text-text1 py-4">Cargando... </div>}
+        endMessage={<div className="text-center text-text1 py-4">No hay más rutas</div>}
       >
         {routesList.map((route) => (
           <CardRoute key={route.idRoute} route={route} />

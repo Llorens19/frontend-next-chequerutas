@@ -17,10 +17,10 @@ const CardCategory = ({ category }: { category: ICategory }) => {
       </h3>
 
       <div className="absolute inset-0 flex flex-col items-center justify-center bg-black bg-opacity-50 opacity-0 group-hover:opacity-100 transition-opacity duration-500">
-        <h3 className="text-base sm:text-lg md:text-xl font-bold text-white">
+        <h3 className="text-base sm:text-lg md:text-xl font-bold text-text1">
           {category.nameCategory}
         </h3>
-        <p className="text-xs sm:text-sm md:text-base text-white text-center px-4 sm:px-6">
+        <p className="text-xs sm:text-sm md:text-base text-text1 text-center px-4 sm:px-6">
           {category.descCategory}
         </p>
       </div>

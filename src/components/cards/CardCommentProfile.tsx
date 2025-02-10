@@ -84,7 +84,7 @@ const CardCommentProfile = ({ comment }: { comment: IComment }) => {
             )}
             {!comment.idParentComment && userLogged && (
               <a
-                className="text-xs text-text4 hover:text-white transition"
+                className="text-xs text-text4 hover:text-text1 transition"
                 onClick={replyComment}
               >
                 Responder
@@ -94,7 +94,7 @@ const CardCommentProfile = ({ comment }: { comment: IComment }) => {
         </div>
       </div>
       {isReplying && (
-        <div className="ml-12 p-4 flex bg-color2 rounded-lg">
+        <div className="ml-12 p-4 flex bg-color2 rounded-lg shadow-lg">
           <input
             ref={inputRef}
             type="text"

@@ -87,10 +87,10 @@ const FilterRoute = () => {
   }, [distanceMax, distanceMin, level, category, title, location]);
 
   return (
-    <section className="bg-color3 fixed w-full mt-16 z-50">
+    <section className="bg-color3 fixed w-full mt-16 z-50 shadow-lg">
       <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-6 gap-x-16 m-4 mx-20">
         <div className="flex flex-col w-full">
-          <label className="text-white">Dificultad</label>
+          <label className="text-text1">Dificultad</label>
           <Rating
             name="difficulty-rating"
             value={level}
@@ -104,9 +104,9 @@ const FilterRoute = () => {
               width: '100%',
               justifyContent: 'space-between',
               '& .MuiRating-icon': { fontSize: '2.5rem' },
-              '& .MuiRating-iconEmpty': { color: '#ffffff' },
-              '& .MuiRating-iconFilled': { color: '#ffffff' },
-              '& .MuiRating-iconHover': { color: '#ffffff' },
+              '& .MuiRating-iconEmpty': { color: '#000000' },
+              '& .MuiRating-iconFilled': { color: '#000000' },
+              '& .MuiRating-iconHover': { color: '#000000' },
             }}
           />
         </div>
@@ -123,7 +123,7 @@ const FilterRoute = () => {
         </div>
 
         <div className="flex flex-col w-full justify-end">
-          <label className="text-white">Ubicación</label>
+          <label className="text-text1">Ubicación</label>
           <SearchFilters
             value={location ?? ''}
             onSelect={onSelectLocation}
@@ -132,7 +132,7 @@ const FilterRoute = () => {
         </div>
 
         <div className="flex flex-col w-full justify-end">
-          <label className="text-white">Nombre</label>
+          <label className="text-text1">Nombre</label>
           <SearchFilters
             value={title ?? ''}
             onSelect={onSelectTitle}
@@ -141,7 +141,7 @@ const FilterRoute = () => {
         </div>
 
         <div className="flex flex-col w-full justify-end">
-          <label className="text-white">Distancia</label>
+          <label className="text-text1">Distancia</label>
           <Slider
             value={[distanceMin, distanceMax]}
             onChange={onChangeDistance}
@@ -150,9 +150,9 @@ const FilterRoute = () => {
             min={0}
             max={40}
             sx={{
-              color: '#ffffff',
-              '& .MuiSlider-thumb': { backgroundColor: '#ffffff' },
-              '& .MuiSlider-track': { backgroundColor: '#ffffff' },
+              color: '#000000',
+              '& .MuiSlider-thumb': { backgroundColor: '#000000' },
+              '& .MuiSlider-track': { backgroundColor: '#000000' },
               '& .MuiSlider-rail': { backgroundColor: '#808080' },
             }}
           />
@@ -161,7 +161,7 @@ const FilterRoute = () => {
         <div className="flex flex-col w-full justify-end">
           <button
             onClick={onClickDelete}
-            className="bg-white text-color3 p-1.5 rounded-lg border-2 border-white hover:bg-color3 hover:text-white transition duration-300 text-ms"
+            className="bg-text1 text-color3 p-1.5 rounded-lg border-2 border-text1 hover:bg-color3 hover:text-text1 transition duration-300 text-ms"
           >
             Borrar
           </button>
