@@ -8,31 +8,30 @@ import Image from 'next/image';
 import { useEffect, useState } from 'react';
 import ListFollowersProfile from '@/components/lists/ListFollowersProfile';
 import ListFollowingsProfile from '@/components/lists/ListFollowingsProfile';
-import { useRoutesUserPrivate, useRoutesUserPublic } from '@/reactQuery/queries/routes.query';
-import { useProfileFollowMutation, useProfileUnfollowMutation } from '@/reactQuery/mutations/profile.mutation';
+import {
+  useRoutesUserPrivate,
+  useRoutesUserPublic,
+} from '@/reactQuery/queries/routes.query';
+import {
+  useProfileFollowMutation,
+  useProfileUnfollowMutation,
+} from '@/reactQuery/mutations/profile.mutation';
+import ListFavoritesProfile from '@/components/lists/ListFavoritesProfile';
 
 const ProfileUser = ({ username }: { username: string }) => {
-
   const { data: user, isLoading: isLoadingProfile } = useProfileQuery(username);
-  const { data: userLogged, isLoading: isLoadingUserLogged } = useGetUserQuery();
+  const { data: userLogged, isLoading: isLoadingUserLogged } =
+    useGetUserQuery();
   const { data: routesPublic } = useRoutesUserPublic(username);
   const { data: routesPrivate } = useRoutesUserPrivate(username);
 
-  const follow = useProfileFollowMutation( );
+  const follow = useProfileFollowMutation();
 
-  const unfollow = useProfileUnfollowMutation( );
-
-
-
-
+  const unfollow = useProfileUnfollowMutation();
 
   const [isOwner, setIsOwner] = useState(false);
   const [listSelected, setListSelected] = useState('routes-public');
   const [title, setTitle] = useState('Rutas Públicas');
-
-
-
-
 
   useEffect(() => {
     if (userLogged && user) {
@@ -46,7 +45,6 @@ const ProfileUser = ({ username }: { username: string }) => {
 
   if (!user) return <p>Error</p>;
   const { followers, followings } = user;
-
 
   const onClickPosts = () => {
     setListSelected('posts');
@@ -73,24 +71,26 @@ const ProfileUser = ({ username }: { username: string }) => {
     setTitle('Siguiendo');
   };
 
-
-
-
+  const onClickFavorites = () => {
+    setListSelected('likes');
+    setTitle('Rutas Favoritas');
+  };
 
   const onFollow = () => {
-    follow.mutate( user.idUser);
+    follow.mutate(user.idUser);
   };
 
   const onUnfollow = () => {
-    unfollow.mutate( user.idUser);
+    unfollow.mutate(user.idUser);
   };
 
-
-
-
-  console.log({isOwner, userLogged: !!userLogged,  isFollower: !userLogged?.followings?.some(following => following.userFollowed === user.username) });
-
-
+  console.log({
+    isOwner,
+    userLogged: !!userLogged,
+    isFollower: !userLogged?.followings?.some(
+      (following) => following.userFollowed === user.username
+    ),
+  });
 
   return (
     <>
@@ -133,20 +133,25 @@ const ProfileUser = ({ username }: { username: string }) => {
               </>
             )}
 
-
-
-              {!isOwner && userLogged && (
-                userLogged?.followings?.some(following => following.userFollowed === user.idUser) ? (
-                  <button className="bg-color2 text-white border-2 border-white px-4 py-2 rounded-lg w-1/2 hover:bg-white hover:text-color2 transition" onClick={onUnfollow}>
-                    <p>Dejar de Seguir</p>
-                  </button>
-                ) : (
-                  <button className="bg-white text-color2 px-4 py-2 rounded-lg w-1/2 border-2 border-white hover:text-white hover:bg-color2 hover:border-white transition" onClick={onFollow}>
-                    <p>Seguir</p>
-                  </button>
-                )
-              )}
-
+            {!isOwner &&
+              userLogged &&
+              (userLogged?.followings?.some(
+                (following) => following.userFollowed === user.idUser
+              ) ? (
+                <button
+                  className="bg-color2 text-white border-2 border-white px-4 py-2 rounded-lg w-1/2 hover:bg-white hover:text-color2 transition"
+                  onClick={onUnfollow}
+                >
+                  <p>Dejar de Seguir</p>
+                </button>
+              ) : (
+                <button
+                  className="bg-white text-color2 px-4 py-2 rounded-lg w-1/2 border-2 border-white hover:text-white hover:bg-color2 hover:border-white transition"
+                  onClick={onFollow}
+                >
+                  <p>Seguir</p>
+                </button>
+              ))}
           </div>
 
           <div className="flex mt-4 w-full mx-8 border-t-2 border-b-2 border-gray-300 p-4">
@@ -156,13 +161,17 @@ const ProfileUser = ({ username }: { username: string }) => {
               </p>
               <p className="text-text3">Rutas</p>
             </div>
-            <div className="flex flex-col items-center w-1/3 hover:bg-color3 transition rounded-lg"
-              onClick={onClickFollowers}>
+            <div
+              className="flex flex-col items-center w-1/3 hover:bg-color3 transition rounded-lg"
+              onClick={onClickFollowers}
+            >
               <p className="text-2xl font-bold">{followers?.length ?? 0}</p>
               <p className="text-text3">Seguidores</p>
             </div>
-            <div className="flex flex-col items-center w-1/3 hover:bg-color3 transition rounded-lg"
-              onClick={onClickFollowings}>
+            <div
+              className="flex flex-col items-center w-1/3 hover:bg-color3 transition rounded-lg"
+              onClick={onClickFollowings}
+            >
               <p className="text-2xl font-bold">{followings?.length ?? 0}</p>
               <p className="text-text3">Siguiendo</p>
             </div>
@@ -176,6 +185,16 @@ const ProfileUser = ({ username }: { username: string }) => {
                 Rutas Privadas
               </button>
             )}
+
+            {isOwner && (
+              <button
+                className="text-contrast2 px-4 py-2 rounded-lg flex-1 min-w-[120px] hover:underline font-bold hover:text-contrast2_hover"
+                onClick={onClickFavorites}
+              >
+                Rutas Guardadas
+              </button>
+            )}
+
             <button
               className="text-contrast2 px-4 py-2 rounded-lg flex-1 min-w-[120px] hover:underline font-bold hover:text-contrast2_hover"
               onClick={onClickRoutesPublic}
@@ -212,6 +231,8 @@ const ProfileUser = ({ username }: { username: string }) => {
             {listSelected === 'followings' && (
               <ListFollowingsProfile followings={followings ?? []} />
             )}
+
+            {listSelected === 'likes' && <ListFavoritesProfile />}
           </div>
         </div>
       </div>
