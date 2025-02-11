@@ -12,7 +12,7 @@ import { PaymentQueryService } from '@/services/queries/payment.queryService';
 
 const StripeForm = ({
   amount,
-  currency = 'usd',
+  currency = 'eur',
   savings = 0,
   tax = 0.21,
 }: IStripeFormProps) => {
@@ -39,6 +39,7 @@ const StripeForm = ({
     const fetchExchangeRate = async () => {
       try {
         const res = await PaymentQueryService.changeCurrency(currency);
+        console.log({res});
         setExchangeRate(res.rates[selectedCurrency] || 1);
       } catch (error) {
         console.error('Error fetching exchange rate:', error);

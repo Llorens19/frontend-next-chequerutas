@@ -1,31 +1,12 @@
 'use client';
 import { ICardProductProps } from '@/shared/interfaces/components/cards/CardProduct.interface';
 
-const descriptionExample = [
-  { status: 1, message: '1 Año de acceso a Premium' },
-  { status: 1, message: 'Exporta las rutas a tu GPS' },
-  { status: 1, message: 'Obtén un distintivo Premium' },
-  { status: 0, message: 'Importar rutas de otras Plataformas' },
-];
 
-const CardProduct = ({ title = 'Suscripción Básica', description = descriptionExample, amountEur, savings = 0, popular = false,
-onSubscribe }: ICardProductProps) => {
-  // const [amountUsd, setAmountUsd] = useState(0);
+const CardProduct = ({ title, description, amountEur, savings = 0, popular = false, isButtonEnabled = false, onSubscribe }: ICardProductProps) => {
 
   const formattedValue = (amountEur * (1 - savings) / 100).toFixed(2).replace('.', ',');
 
-  // useEffect(() => {
-  //   const fetchExchangeRate = async () => {
-  //     try {
-  //       const res = await PaymentQueryService.changeCurrency('EUR');
-  //       setAmountUsd(amountEur * res.rates.USD);
-  //     } catch (error) {
-  //       console.error('Error fetching exchange rate:', error);
-  //     }
-  //   };
 
-  //   fetchExchangeRate();
-  // }, []);
 
   const bgColor = popular ? 'bg-color2' : 'bg-color3';
   const textColor = popular ? 'text-text1' : 'text-text3';
@@ -95,12 +76,12 @@ onSubscribe }: ICardProductProps) => {
           </li>
         ))}
       </ul>
-      <button
+    {  isButtonEnabled && <button
         className={`mt-8 ${buttonBg} ${buttonText} py-1.5 px-4 rounded-lg border-2 ${borderButtonColor} ${buttonHoverBg} ${buttonHoverText} transition duration-300 text-ms`}
         onClick={() => onSubscribe && onSubscribe()}
       >
         Suscribirse
-      </button>
+      </button>}
     </div>
   );
 };

@@ -7,5 +7,6 @@ export interface ICardProductProps{
   amountEur: number;
   savings?: number;
   popular?: boolean;
+  isButtonEnabled?: boolean;
   onSubscribe?: () => void;
 }

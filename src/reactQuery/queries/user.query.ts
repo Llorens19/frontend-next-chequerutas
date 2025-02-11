@@ -5,4 +5,5 @@ export const useGetUserQuery = () =>
   useQuery({
     queryKey: ['user'],
     queryFn: AuthQueryService.getCurrentUser,
+    staleTime: 20000,
   });

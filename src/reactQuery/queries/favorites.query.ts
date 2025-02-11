@@ -5,4 +5,5 @@ export const useFavoriteUserQuery = () =>
   useQuery({
     queryKey: ['favorites'],
     queryFn: ProfileQueryService.getFavorites,
+    staleTime: 20000,
   });
