@@ -12,7 +12,7 @@ const CardCommentProfile = ({ comment }: { comment: IComment }) => {
   const [body, setBody] = useState('');
   const inputRef = useRef<HTMLInputElement>(null);
 
-    const commentCreate = useCreateCommentMutation( comment.idRoute );
+    const commentCreate = useCreateCommentMutation();
 
   const deteteComment = useDeleteCommentMutation();
 

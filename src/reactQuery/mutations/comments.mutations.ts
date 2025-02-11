@@ -2,13 +2,13 @@ import { CommentCommandService } from '@/services/commands/comment.commandServic
 import { ICreateComment } from '@/shared/interfaces/services/commands/comment/createComment.interface';
 import { useMutation, useQueryClient } from '@tanstack/react-query';
 
-export const useCreateCommentMutation = (idRoute: string) => {
+export const useCreateCommentMutation = () => {
   const queryClient = useQueryClient();
 
   return useMutation({
     mutationFn: (comment: ICreateComment) => CommentCommandService.createComment(comment),
     onSuccess: () => {
-      queryClient.invalidateQueries({ queryKey: ['comments', idRoute] });
+      queryClient.invalidateQueries({ queryKey: ['comments'] });
     },
   });
 };

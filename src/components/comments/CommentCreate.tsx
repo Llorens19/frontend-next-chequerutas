@@ -7,7 +7,7 @@ const CommentCreate = ({ idRoute }: { idRoute: string }) => {
 
   const [body, setBody] = useState<string>('');
 
-  const commentCreate = useCreateCommentMutation( idRoute );
+  const commentCreate = useCreateCommentMutation( );
 
 
 
