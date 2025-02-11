@@ -11,10 +11,10 @@ import { currencyOptions } from '@/shared/constants/components/payments/StripeFo
 import { PaymentQueryService } from '@/services/queries/payment.queryService';
 
 const StripeForm = ({
-  amount = 100,
+  amount,
   currency = 'usd',
-  savings = 0.1,
-  tax = 0.1,
+  savings = 0,
+  tax = 0.21,
 }: IStripeFormProps) => {
   const stripe = useStripe();
   const elements = useElements();
