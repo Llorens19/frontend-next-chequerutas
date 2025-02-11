@@ -2,65 +2,248 @@
 
 import { useState, useEffect } from 'react';
 import { useStripe, useElements, CardElement } from '@stripe/react-stripe-js';
-import axios from 'axios';
-import { StripeCardElement } from '@stripe/stripe-js';
+import { PaymentCommandService } from '@/services/commands/payment.commandService';
+import InputTextForm from '@/components/inputs/InputTextForm';
+import Image from 'next/image';
+import InputSelectForm from '@/components/inputs/InputSelectForm';
+import { IStripeFormProps } from '@/shared/interfaces/components/payments/StripeForm.interface';
+import { currencyOptions } from '@/shared/constants/components/payments/StripeForm.constants';
+import { PaymentQueryService } from '@/services/queries/payment.queryService';
 
-const StripeForm = () => {
+const StripeForm = ({
+  amount = 100,
+  currency = 'usd',
+  savings = 0.1,
+  tax = 0.1,
+}: IStripeFormProps) => {
   const stripe = useStripe();
   const elements = useElements();
+
   const [clientSecret, setClientSecret] = useState('');
+  const [name, setName] = useState('');
+  const [email, setEmail] = useState('');
+  const [selectedCurrency, setSelectedCurrency] = useState('EUR');
+  const [exchangeRate, setExchangeRate] = useState(1);
+
+  const amountInDollars = amount / 100;
+  const discount = amountInDollars * savings;
+  const taxAmount = (amountInDollars - discount) * tax;
+  const finalAmount = (amountInDollars - discount + taxAmount).toFixed(2);
+  const finalAmountInCents = Math.round(parseFloat(finalAmount) * 100);
+
+
+
+
 
   useEffect(() => {
-    axios.post(`${process.env.NEXT_PUBLIC_BACKEND_URL}/payment`, {
-      amount: 100, // $1.00 USD (Stripe usa centavos)
-      currency: 'usd',
-    })
-    .then(res => setClientSecret(res.data.clientSecret))
-    .catch(err => console.error('Error al obtener clientSecret:', err));
-  }, []);
+    const fetchExchangeRate = async () => {
+      try {
+        const res = await PaymentQueryService.changeCurrency(currency);
+        setExchangeRate(res.rates[selectedCurrency] || 1);
+      } catch (error) {
+        console.error('Error fetching exchange rate:', error);
+      }
+    };
 
-  const handleSubmit = async (event) => {
+    fetchExchangeRate();
+  }, [selectedCurrency, currency]);
+
+
+
+
+
+
+
+  useEffect(() => {
+    const fetchClientSecret = async () => {
+      try {
+        const resp = await PaymentCommandService.payment({
+          amount: finalAmountInCents,
+          currency,
+        });
+        setClientSecret(resp.clientSecret);
+      } catch (error) {
+        console.error('Error fetching clientSecret:', error);
+      }
+    };
+
+    fetchClientSecret();
+  }, [finalAmountInCents, currency]);
+
+
+
+
+
+  const convertedAmount = (parseFloat(finalAmount) * exchangeRate).toFixed(2);
+  const convertedOriginalPrice = (amountInDollars * exchangeRate).toFixed(2);
+  const convertedDiscount = (discount * exchangeRate).toFixed(2);
+  const convertedTaxAmount = (taxAmount * exchangeRate).toFixed(2);
+
+
+
+
+
+  const onPay = async (event: React.FormEvent) => {
     event.preventDefault();
+
     if (!stripe || !elements) return;
 
-    const { error, paymentIntent } = await stripe.confirmCardPayment(clientSecret, {
-      payment_method: {
-        card: elements.getElement(CardElement) as StripeCardElement,
-      },
+    const cardElement = elements.getElement(CardElement);
+    if (!cardElement) {
+      console.error('CardElement not found');
+      return;
+    }
+
+    const { error, paymentMethod } = await stripe.createPaymentMethod({
+      type: 'card',
+      card: cardElement,
+      billing_details: { name, email },
     });
 
     if (error) {
-      console.error('Error en el pago:', error);
+      console.error('Error creating payment method:', error);
+      return;
+    }
+
+    const { error: paymentError, paymentIntent } =
+      await stripe.confirmCardPayment(clientSecret, {
+        payment_method: paymentMethod.id,
+      });
+
+    if (paymentError) {
+      console.error('Payment error:', paymentError);
     } else {
-      console.log('Pago exitoso:', paymentIntent);
+      console.log('Payment successful:', paymentIntent);
     }
   };
 
+
+
+
   return (
-    <section className="bg-text1 py-8 antialiased dark:bg-gray-900 md:py-16">
-      <div className="mx-auto max-w-screen-xl px-4 2xl:px-0">
-        <div className="mx-auto max-w-5xl">
-          <h2 className="text-xl font-semibold text-gray-900 dark:text-text1 sm:text-2xl">Payment</h2>
-          <div className="mt-6 sm:mt-8 lg:flex lg:items-start lg:gap-12">
-            <form onSubmit={handleSubmit} className="w-full rounded-lg border border-gray-200 bg-text1 p-4 shadow-sm dark:border-gray-700 dark:bg-gray-800 sm:p-6 lg:max-w-xl lg:p-8">
-              <div className="mb-6">
-                <label className="mb-2 block text-sm font-medium text-gray-900 dark:text-text1">Card Details*</label>
-                <CardElement className="block w-full rounded-lg border border-gray-300 bg-gray-50 p-2.5 text-sm text-gray-900 focus:border-primary-500 focus:ring-primary-500 dark:border-gray-600 dark:bg-gray-700 dark:text-text1 dark:placeholder:text-gray-400 dark:focus:border-primary-500 dark:focus:ring-primary-500" />
-              </div>
-              <button type="submit" disabled={!stripe} className="flex w-full items-center justify-center rounded-lg bg-primary-700 px-5 py-2.5 text-sm font-medium text-text1 hover:bg-primary-800 focus:outline-none focus:ring-4 focus:ring-primary-300 dark:bg-primary-600 dark:hover:bg-primary-700 dark:focus:ring-primary-800">Pay now</button>
-            </form>
-            <div className="mt-6 grow sm:mt-8 lg:mt-0">
-              <div className="space-y-4 rounded-lg border border-gray-100 bg-gray-50 p-6 dark:border-gray-700 dark:bg-gray-800">
-                <dl className="flex items-center justify-between gap-4">
-                  <dt className="text-base font-normal text-gray-500 dark:text-gray-400">Total</dt>
-                  <dd className="text-base font-bold text-gray-900 dark:text-text1">$1.00</dd>
-                </dl>
-              </div>
+    <div className="flex justify-center items-center h-screen">
+      <div className="w-2/3 mx-auto">
+        <h1 className="text-3xl font-bold text-text2 text-center mb-6">Pago</h1>
+        <div className="w-1/2 mx-auto flex flex-col gap-6">
+          <div className="w-full flex gap-4">
+            <div className="w-2/4">
+              <InputTextForm
+                label="Email"
+                type="email"
+                id="emailInput"
+                placeholder="ejemplo123@gmail.com"
+                data={email}
+                onChange={setEmail}
+                error=""
+              />
+            </div>
+            <div className="w-2/4">
+              <InputTextForm
+                label="Titular de la tarjeta"
+                type="text"
+                id="nameInput"
+                placeholder="Nombre del titular"
+                data={name}
+                onChange={setName}
+                error=""
+              />
+            </div>
+          </div>
+
+            <div className="w-full">
+            <label className="text-text3 ">
+              Tarjeta de crédito
+            </label>
+            <CardElement
+              options={{
+              style: {
+                base: {
+                fontSize: '15px',
+                color: '#003000',
+                },
+                invalid: { color: '#9e2146' },
+              },
+              }}
+              className="text-xl border-2 p-2.5 border-text1 rounded-lg w-full text-text1"
+            />
+            </div>
+
+          <div className="w-full flex gap-4">
+            <button
+              onClick={onPay}
+              disabled={!stripe}
+              className="w-5/6 self-end bg-text1 text-color3 p-2 rounded-lg border-2 border-text1 hover:bg-color1 hover:text-text1 transition duration-300 text-ms"
+            >
+              Pagar {selectedCurrency} {convertedAmount}
+            </button>
+            <div className="w-1/6">
+              <InputSelectForm
+                label="Moneda"
+                id="currencyInput"
+                options={currencyOptions}
+                data={selectedCurrency}
+                error=""
+                placeholder="Moneda"
+                onChange={setSelectedCurrency}
+              />
             </div>
           </div>
         </div>
       </div>
-    </section>
+
+      <div className="w-2/5 h-full flex justify-center items-center bg-color4">
+        <div className="w-2/3 rounded-lg p-6">
+          <h1 className="text-text1 text-3xl font-bold text-center mb-8">
+            Datos del pago
+          </h1>
+          <div className="space-y-4 rounded-lg text-white">
+            <div className="space-y-2">
+              <div className="flex items-center justify-between gap-4">
+                <h4 className="text-base font-bold text-text3">
+                  Precio original
+                </h4>
+                <h5 className="text-base font-medium text-black">
+                  {selectedCurrency} {convertedOriginalPrice}
+                </h5>
+              </div>
+              <div className="flex items-center justify-between gap-4">
+                <h4 className="text-base font-bold text-text3">Descuento</h4>
+                <h5 className="text-base font-medium text-green-500">
+                  -{selectedCurrency} {convertedDiscount}
+                </h5>
+              </div>
+              <div className="flex items-center justify-between gap-4">
+                <h4 className="text-base font-bold text-text3">Impuestos</h4>
+                <h5 className="text-base font-medium text-black">
+                  {selectedCurrency} {convertedTaxAmount}
+                </h5>
+              </div>
+              <div className="flex items-center justify-between gap-4 border-t border-gray-200 pt-2">
+                <h4 className="text-base font-bold text-text3">Total</h4>
+                <h5 className="text-base font-bold text-black">
+                  {selectedCurrency} {convertedAmount}
+                </h5>
+              </div>
+            </div>
+          </div>
+
+          <div className="mt-6 flex items-center justify-center gap-20">
+            <Image
+              src="https://flowbite.s3.amazonaws.com/blocks/e-commerce/brand-logos/visa-dark.svg"
+              alt=""
+              width={100}
+              height={100}
+            />
+            <Image
+              src="https://flowbite.s3.amazonaws.com/blocks/e-commerce/brand-logos/mastercard-dark.svg"
+              alt=""
+              width={100}
+              height={100}
+            />
+          </div>
+        </div>
+      </div>
+    </div>
   );
 };
 

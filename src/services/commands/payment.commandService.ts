@@ -1,10 +1,10 @@
 import ApiService from '@/services/apiService/api.service';
 import { PAYMENT_SERVER } from '@/shared/constants/backendServices.constsnts';
-import { ILogin, ILoginResponse } from '@/shared/interfaces/services/commands/auth/login.interface';
+import { IPaymentInput } from '@/shared/interfaces/services/commands/payment/payment.interface';
 
 
 export const PaymentCommandService = {
-    payment: async (data:ILogin): Promise<ILoginResponse> => {
-      return await ApiService.post<ILoginResponse>(`${PAYMENT_SERVER}payment`, data);
+    payment: async (data:IPaymentInput): Promise<any> => {
+      return await ApiService.post<any>(`${PAYMENT_SERVER}payment`, data);
     }
 };
