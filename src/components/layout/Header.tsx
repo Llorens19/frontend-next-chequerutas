@@ -28,6 +28,10 @@ const Header = () => {
                 <Link href="/list-routes">Rutas</Link>
               </li>
 
+              <li>
+                <Link href="/payments">Suscribirse</Link>
+              </li>
+
               {user ? (
                 <li>
                   <div

@@ -9,12 +9,15 @@ import InputSelectForm from '@/components/inputs/InputSelectForm';
 import { IStripeFormProps } from '@/shared/interfaces/components/payments/StripeForm.interface';
 import { currencyOptions } from '@/shared/constants/components/payments/StripeForm.constants';
 import { PaymentQueryService } from '@/services/queries/payment.queryService';
+import { ProfileCommandService } from '@/services/commands/profile.commandService';
+import { useRouter } from 'next/navigation';
 
 const StripeForm = ({
   amount,
   currency = 'eur',
   savings = 0,
   tax = 0.21,
+  time,
 }: IStripeFormProps) => {
   const stripe = useStripe();
   const elements = useElements();
@@ -31,6 +34,7 @@ const StripeForm = ({
   const finalAmount = (amountInDollars - discount + taxAmount).toFixed(2);
   const finalAmountInCents = Math.round(parseFloat(finalAmount) * 100);
 
+  const router = useRouter();
 
 
 
@@ -106,7 +110,7 @@ const StripeForm = ({
       return;
     }
 
-    const { error: paymentError, paymentIntent } =
+    const { error: paymentError } =
       await stripe.confirmCardPayment(clientSecret, {
         payment_method: paymentMethod.id,
       });
@@ -114,7 +118,13 @@ const StripeForm = ({
     if (paymentError) {
       console.error('Payment error:', paymentError);
     } else {
-      console.log('Payment successful:', paymentIntent);
+      try{
+        await ProfileCommandService.premiumUser(time);
+        router.push('/');
+      }catch(error){
+        console.error('Error premiumUser:', error);
+      }
+
     }
   };
 

@@ -29,6 +29,7 @@ const Payments = () => {
   const [isPaying, setIsPaying] = useState(false);
 
   const [product, setProduct] = useState<IStripeFormProps>({
+    time: '1m',
     amount: 0,
     tax: 0,
   });
@@ -42,6 +43,7 @@ const Payments = () => {
   const onSubscribeCard2 = () => {
     setIsPaying(true);
     setProduct({
+      time: '1y',
       amount: 5988 ,
       tax: 0.21,
       savings: 0.1651,
@@ -51,6 +53,7 @@ const Payments = () => {
   const onSubscribeCard3 = () => {
     setIsPaying(true);
     setProduct({
+      time: '1m',
       amount: 499 ,
       tax: 0.21,
     });
@@ -60,7 +63,7 @@ const Payments = () => {
     <>
       {isPaying ? (
         <StripeProvider>
-          <StripeForm amount={product.amount} tax={product.tax} savings={product.savings} />
+          <StripeForm amount={product.amount} tax={product.tax} savings={product.savings} time={product.time}/>
         </StripeProvider>
       ) : (
         <section className="flex flex-col gap-16 items-center justify-center text-center mt-20">
