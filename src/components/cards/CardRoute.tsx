@@ -3,7 +3,7 @@
 import LevelRating from '@/components/ratings/LevelRating';
 import useFavorite from '@/hooks/useFavorite.hook';
 import { useGetUserQuery } from '@/reactQuery/queries/user.query';
-import { ICardRouteInput } from '@/shared/CardRoute.interface';
+import { ICardRouteInput } from '@/shared/interfaces/components/cards/CardRoute.interface';
 import Image from 'next/image';
 import { useRouter } from 'next/navigation';
 

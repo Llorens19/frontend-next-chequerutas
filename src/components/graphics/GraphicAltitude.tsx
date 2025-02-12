@@ -61,8 +61,7 @@ const GraphicAltitude = ({ coordinates }: IGraphicAltitudeProps) => {
   };
 
   return (
-    <div className="w-full rounded-lg shadow-sm bg-color">
-      <div className="flex justify-between"></div>
+    <div className="w-full rounded-lg bg-color2 py-4">
       <div className="w-full max-h-64">
         <Line className="w-full h-full text-text4" data={dataPoints} options={options} />
       </div>

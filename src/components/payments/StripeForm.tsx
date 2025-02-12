@@ -120,6 +120,7 @@ const StripeForm = ({
     } else {
       try{
         await ProfileCommandService.premiumUser(time);
+
         router.push('/');
       }catch(error){
         console.error('Error premiumUser:', error);

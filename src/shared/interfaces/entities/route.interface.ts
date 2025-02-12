@@ -33,7 +33,7 @@ export interface IRoute {
   idLocation: string;
   comments?: IComment[];
   favorites?: IFavorite[];
-  imagesRutes?: IImagesRoutes[];
+  imagesRoutes?: IImagesRoutes[];
   user?: IUserGeneric;
 
 };

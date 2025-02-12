@@ -1,4 +1,5 @@
 'use client';
+import ChangeTheme from '@/components/themes/ChangeTheme';
 import { useGetUserQuery } from '@/reactQuery/queries/user.query';
 import Image from 'next/image';
 import Link from 'next/link';
@@ -53,6 +54,10 @@ const Header = () => {
                   <Link href="/auth">Login/Register</Link>
                 </li>
               )}
+
+              <li>
+              <ChangeTheme />
+              </li>
             </ul>
           </nav>
         </div>
