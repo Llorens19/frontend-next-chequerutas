@@ -6,21 +6,17 @@ import Image from 'next/image';
 import { useState, useRef, useEffect } from 'react';
 
 const CommentCard = ({ comment }: { comment: IComment }) => {
-
-
   const [isReplying, setIsReplying] = useState(false);
   const [body, setBody] = useState('');
+  const [showSubCommentes, setShowSubCommentes] = useState(false);
   const inputRef = useRef<HTMLInputElement>(null);
 
-    const commentCreate = useCreateCommentMutation( );
-
-  const deteteComment = useDeleteCommentMutation();
-
-
+  const commentCreate = useCreateCommentMutation();
+  const deleteCommentMutation = useDeleteCommentMutation();
   const { data: userLogged } = useGetUserQuery();
 
   const deleteComment = () => {
-    deteteComment.mutate(comment.idComment);
+    deleteCommentMutation.mutate(comment.idComment);
   };
 
   const replyComment = () => {
@@ -43,8 +39,8 @@ const CommentCard = ({ comment }: { comment: IComment }) => {
 
   return (
     <>
-      <div className="w-full p-4 flex gap-8 bg-color2 rounded-lg shadow-lg">
-        <div className=" w-1/12">
+      <div className={`flex pt-2 gap-4 border-color2 ${comment.idParentComment ? 'w-11/12 ml-auto' : 'w-full'}`}>
+        <div>
           <Image
             className="rounded-full h-auto"
             src={comment.user?.imgUser ?? '/images/profile/perfil.jpg'}
@@ -53,7 +49,7 @@ const CommentCard = ({ comment }: { comment: IComment }) => {
             height={50}
           />
         </div>
-        <div className="w-11/12">
+        <div className="w-full">
           <div className="flex gap-4 items-center">
             <a className="font-bold text-text4">{comment.user?.username}</a>
             <p className="text-xs text-text3">
@@ -73,28 +69,32 @@ const CommentCard = ({ comment }: { comment: IComment }) => {
           )}
           <p className="text-sm text-text1">{comment.body}</p>
 
-          <div className="flex gap-4 w-full justify-end ">
+          <div className="flex gap-4 w-full justify-end">
             {userLogged && comment.idUser === userLogged.idUser && (
-              <a
-                className="text-xs text-[#8e2525] hover:text-[#ff3a3a] transition"
-                onClick={deleteComment}
-              >
+              <a className="text-xs text-[#8e2525] hover:text-[#ff3a3a] transition" onClick={deleteComment}>
                 Borrar
               </a>
             )}
             {!comment.idParentComment && userLogged && (
-              <a
-                className="text-xs text-text4 hover:text-text1 transition"
-                onClick={replyComment}
-              >
+              <a className="text-xs text-text4 hover:text-text1 transition" onClick={replyComment}>
                 Responder
               </a>
             )}
           </div>
+
+          {comment.comments && comment.comments.length > 0 && (
+            <button
+              className="mt-2 text-xs text-contrast2 hover:text-contrast2_hover transition"
+              onClick={() => setShowSubCommentes(!showSubCommentes)}
+            >
+              {showSubCommentes ? 'Ocultar respuestas' : `Ver más (${comment.comments.length})`}
+            </button>
+          )}
         </div>
       </div>
+
       {isReplying && (
-        <div className="ml-12 p-4 flex bg-color2 rounded-lg shadow-lg">
+        <div className="ml-12 p-4 flex bg-color2 rounded-lg  ">
           <input
             ref={inputRef}
             type="text"
@@ -114,10 +114,10 @@ const CommentCard = ({ comment }: { comment: IComment }) => {
         </div>
       )}
 
-      {(comment.comments && comment.comments.length > 0 ) && (
-        <div className="ml-12 flex flex-col gap-4">
-          {comment.comments.map((comment: IComment) => (
-            <CommentCard comment={comment} key={comment.idComment} />
+      {showSubCommentes && comment.comments && comment.comments.length > 0 && (
+        <div className="ml-8 border-l-2 border-color4 pl-4 mt-2">
+          {comment.comments.map((childComment: IComment) => (
+            <CommentCard comment={childComment} key={childComment.idComment} />
           ))}
         </div>
       )}

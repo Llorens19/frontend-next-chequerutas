@@ -18,7 +18,7 @@ const CardProduct = ({ title, description, amountEur, savings = 0, popular = fal
   const borderButtonColor = popular ? 'border-text1' : 'border-text3';
 
   return (
-    <div className={`${bgColor} p-8 border-2 ${borderColor} rounded-lg shadow-lg flex flex-col items-center hover:scale-105 transition`}>
+    <div className={`${bgColor} p-8 border-2 ${borderColor} rounded-lg   flex flex-col items-center hover:scale-105 transition`}>
       <h1 className={`${textColor} text-2xl font-bold text-center`}>{title}</h1>
       {savings > 0 ? (
         <div className="text-center mt-4">

@@ -99,7 +99,7 @@ const ProfileUser = ({ username }: { username: string }) => {
       </div>
 
       <div className="mt-36 w-4/5 mx-auto flex">
-        <div className="flex flex-col self-start items-center w-1/5 bg-color2 rounded-lg py-8 fixed shadow-lg">
+        <div className="flex flex-col self-start items-center w-1/5 bg-color2 rounded-lg py-8 fixed  ">
           <div className="w-1/2">
             <Image
               src={user.imgUser || '/images/profile/perfil.jpg'}

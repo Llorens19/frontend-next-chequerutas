@@ -87,7 +87,7 @@ const FilterRoute = () => {
   }, [distanceMax, distanceMin, level, category, title, location]);
 
   return (
-    <section className="bg-color3 fixed w-full mt-16 z-50 shadow-lg">
+    <section className="bg-color3 fixed w-full mt-16 z-50  ">
       <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-6 gap-x-16 m-4 mx-20">
         <div className="flex flex-col w-full">
           <label className="text-text1">Dificultad</label>
@@ -104,9 +104,9 @@ const FilterRoute = () => {
               width: '100%',
               justifyContent: 'space-between',
               '& .MuiRating-icon': { fontSize: '2.5rem' },
-              '& .MuiRating-iconEmpty': { color: '#000000' },
-              '& .MuiRating-iconFilled': { color: '#000000' },
-              '& .MuiRating-iconHover': { color: '#000000' },
+              '& .MuiRating-iconEmpty': { color: 'var(--text1)' },
+              '& .MuiRating-iconFilled': { color: 'var(--text1)' },
+              '& .MuiRating-iconHover': { color: 'var(--text1)' },
             }}
           />
         </div>
@@ -150,9 +150,9 @@ const FilterRoute = () => {
             min={0}
             max={40}
             sx={{
-              color: '#000000',
-              '& .MuiSlider-thumb': { backgroundColor: '#000000' },
-              '& .MuiSlider-track': { backgroundColor: '#000000' },
+              color: 'var(--text1)',
+              '& .MuiSlider-thumb': { backgroundColor: 'var(--text1)' },
+              '& .MuiSlider-track': { backgroundColor: 'var(--text1)' },
               '& .MuiSlider-rail': { backgroundColor: '#808080' },
             }}
           />

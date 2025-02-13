@@ -23,7 +23,7 @@ const CommentCreate = ({ idRoute }: { idRoute: string }) => {
 
 
   return (
-    <div className="p-4 flex flex-col  bg-color2 rounded-lg shadow-lg">
+    <div className="p-4 flex flex-col  bg-color2 rounded-lg  ">
       <h3 className="text-lg text-text1">Escribe un comentario</h3>
       <div className=" w-full mt-4">
           <textarea

@@ -28,7 +28,7 @@ const GalleryDetails = ({ route }: IGalleryDetailsParams) => {
             height={800}
           />
         </div>
-        <div className="flex justify-between gap-2">
+        <div className="flex  gap-2">
           {imagesRoutes?.slice(0, 4).map((image, index) => (
             <div
               key={index}
@@ -55,6 +55,18 @@ const GalleryDetails = ({ route }: IGalleryDetailsParams) => {
                 height={200}
               />
             </div>
+          )}
+
+          {!imagesRoutes?.[1] && (
+          <div className="bg-color2 w-1/4 rounded-lg"></div>
+          )}
+
+          {!imagesRoutes?.[1] && (
+          <div className="bg-color2 w-1/4 rounded-lg"></div>
+          )}
+
+          {!imagesRoutes?.[1] && (
+          <div className="bg-color2 w-1/4 rounded-lg"></div>
           )}
 
         </div>

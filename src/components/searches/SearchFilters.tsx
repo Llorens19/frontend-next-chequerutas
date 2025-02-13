@@ -28,12 +28,12 @@ const SearchFilters = ({ options, value, onSelect }: ISearchFiltersProps) =>{
         value={searchQuery}
         onChange={(e) => setSearchQuery(e.target.value)}
         placeholder="Buscar por ubicación"
-        className="text-text1 text-ms bg-color3 w-full p-1.5 px-4 pr-10 rounded-lg border-2 border-text1 focus:outline-none shadow-md placeholder-text3"
+        className="text-text1 text-ms bg-color3 w-full p-1.5 px-4 pr-10 rounded-lg border-2 border-text1 focus:outline-none   placeholder-text3"
         onFocus={() => setIsOpen(true)}
         onBlur={() => setTimeout(() => setIsOpen(false), 200)}
       />
       {isOpen && filteredOptions.length > 0 && (
-        <div className="options absolute bg-color3 rounded-lg mt-1 w-full shadow-lg max-h-[30vh] overflow-y-auto z-20">
+        <div className="options absolute bg-color3 rounded-lg mt-1 w-full   max-h-[30vh] overflow-y-auto z-20">
           {filteredOptions.map((option, index) => (
             <div
               key={index}

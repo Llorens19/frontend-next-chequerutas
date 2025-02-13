@@ -94,7 +94,7 @@ const CardCommentProfile = ({ comment }: { comment: IComment }) => {
         </div>
       </div>
       {isReplying && (
-        <div className="ml-12 p-4 flex bg-color2 rounded-lg shadow-lg">
+        <div className="ml-12 p-4 flex bg-color2 rounded-lg  ">
           <input
             ref={inputRef}
             type="text"

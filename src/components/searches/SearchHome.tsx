@@ -5,10 +5,10 @@ const SearchHome = () => {
       <input
         type="text"
         placeholder="Buscar actividades..."
-        className="text-color2 w-full h-12 px-4 pr-10 rounded-lg border border-gray-300 focus:outline-none focus:ring-2 focus:ring-color3 focus:border-transparent shadow-md "
+        className="text-color2 w-full h-12 px-4 pr-10 rounded-lg border border-gray-300 focus:outline-none focus:ring-2 focus:ring-color3 focus:border-transparent   "
       />
       {/* <div
-        className="options absolute bg-color1 border border-gray-300 rounded-xl mt-1 w-full shadow-lg max-h-[30vh] overflow-y-auto z-20"
+        className="options absolute bg-color1 border border-gray-300 rounded-xl mt-1 w-full   max-h-[30vh] overflow-y-auto z-20"
       >
         <div className="p-2 cursor-pointer hover:bg-color3 rounded-xl text-text1" >
           Opcion1
