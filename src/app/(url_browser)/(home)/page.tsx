@@ -1,4 +1,4 @@
-import CardProduct from '@/components/cards/CardProduct';
+
 import CarouselCategory from '@/components/carousels/CarouselCategory';
 import SearchHome from '@/components/searches/SearchHome';
 import { CategoryQueryService } from '@/services/queries/category.queryService';
@@ -12,6 +12,8 @@ export const metadata: Metadata = {
 const Home = async () => {
   const { categories } = await CategoryQueryService.getCategories();
 
+  console.log(categories);
+
   return (
     <>
       <section className="relative w-full h-screen">
@@ -24,11 +26,11 @@ const Home = async () => {
           <h1 className="text-text1 text-4xl font-bold">ViaSana</h1>
           <p className="text-text1 mt-4">Este es un fondo en blanco y negro</p>
           <SearchHome />
-          <div className='w-full'>
+          <div className="w-full">
             <h2 className="flex justify-center text-2xl font-bold text-text1 mb-4">
               Categorías
             </h2>
-            <CarouselCategory categories={categories} />
+            <CarouselCategory categories={categories}  />
           </div>
         </div>
       </section>
@@ -37,7 +39,6 @@ const Home = async () => {
         <h2 className="flex justify-center text-2xl font-bold text-text1 mb-4">
           Categorías
         </h2>
-        <CarouselCategory categories={categories} />
       </section>
     </>
   );

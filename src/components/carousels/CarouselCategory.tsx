@@ -1,20 +1,22 @@
 'use client';
 
-import { ICategories } from '@/shared/interfaces/entities/category.interface';
-import CardCategory from '../cards/CardCategory';
+import {
+  ICategories,
+  ICategory,
+} from '@/shared/interfaces/entities/category.interface';
 import { useState } from 'react';
 
 const CarouselCategory = ({ categories }: ICategories) => {
+  const itemsPerSlide = 3;
 
-
-  const [index, setIndex] = useState<number>(0);
+  const [index, setIndex] = useState(0);
   const [startX, setStartX] = useState<number | null>(null);
   const [isDragging, setIsDragging] = useState(false);
 
-  const categories_stacked = () => {
+  const itemsStacked = () => {
     const stack = [];
-    for (let i = 0; i < categories.length; i += 3) {
-      stack.push(categories.slice(i, i + 3));
+    for (let i = 0; i < categories.length; i += itemsPerSlide) {
+      stack.push(categories.slice(i, i + itemsPerSlide));
     }
     return stack;
   };
@@ -26,19 +28,18 @@ const CarouselCategory = ({ categories }: ICategories) => {
   };
 
   const next = () => {
-    if (index < categories_stacked().length - 1) {
+    if (index < itemsStacked().length - 1) {
       setIndex((prevIndex) => prevIndex + 1);
     }
   };
 
-  const handleTouchStart = (e: React.TouchEvent) => {
+  const handleTouchStart = (e: React.TouchEvent<HTMLDivElement>) => {
     setStartX(e.touches[0].clientX);
     setIsDragging(true);
   };
 
-  const handleTouchMove = (e: React.TouchEvent) => {
+  const handleTouchMove = (e: React.TouchEvent<HTMLDivElement>) => {
     if (!isDragging || startX === null) return;
-
     const touchX = e.touches[0].clientX;
     const deltaX = touchX - startX;
 
@@ -63,13 +64,12 @@ const CarouselCategory = ({ categories }: ICategories) => {
       onTouchMove={handleTouchMove}
       onTouchEnd={handleTouchEnd}
     >
-
       <button
         onClick={prev}
-        className="hidden md:block absolute top-1/2 left-4 transform -translate-y-1/2 p-2 rounded-full focus:outline-none z-10 bg-color3 hover:bg-color4"
+        className="hidden md:block absolute top-1/2 left-4 transform -translate-y-1/2 p-2 rounded-full focus:outline-none z-10 bg-gray-800 hover:bg-gray-600 text-white"
       >
         <svg
-          className="w-6 h-6 text-text1"
+          className="w-6 h-6"
           xmlns="http://www.w3.org/2000/svg"
           fill="none"
           viewBox="0 0 24 24"
@@ -84,12 +84,48 @@ const CarouselCategory = ({ categories }: ICategories) => {
         </svg>
       </button>
 
+      <div className="carousel-wrapper overflow-hidden w-full mx-20">
+        <div
+          className="carousel flex transition-transform duration-500 ease-in-out"
+          style={{ transform: `translateX(-${index * 100}%)` }}
+        >
+          {itemsStacked().map((stack, idx) => (
+            <div
+              key={idx}
+              className="carousel-slide flex-shrink-0 w-full grid grid-cols-3 gap-4 p-4"
+            >
+              {stack.map((category: ICategory) => (
+                <div
+                  key={category.idCategory}
+                  className="p-4 bg-color1 rounded-3xl text-center relative  hover:scale-105 transition"
+                  style={{
+                    backgroundImage: `url(/images/category/jpg/${category.imgCategory})`,
+                    backgroundSize: 'cover',
+                    backgroundPosition: 'center',
+                    height: '40vh',
+                  }}
+                >
+                  <div className="absolute inset-0 bg-black bg-opacity-40 rounded-3xl flex flex-col justify-end p-4 hover:bg-opacity-60 transition">
+                    <h3 className="text-4xl font-black text-white mb-8">
+                      {category.nameCategory}
+                    </h3>
+                    <p className="text-white text-lg mb-4 bg-opacity-50 p-2 ">
+                      {category.descCategory}
+                    </p>
+                  </div>
+                </div>
+              ))}
+            </div>
+          ))}
+        </div>
+      </div>
+
       <button
         onClick={next}
-        className="hidden md:block absolute top-1/2 right-4 transform -translate-y-1/2 p-2 rounded-full   focus:outline-none z-10 bg-color3 hover:bg-color4"
+        className="hidden md:block absolute top-1/2 right-4 transform -translate-y-1/2 p-2 rounded-full focus:outline-none z-10 bg-gray-800 hover:bg-gray-600 text-white"
       >
         <svg
-          className="w-6 h-6 text-text1"
+          className="w-6 h-6"
           xmlns="http://www.w3.org/2000/svg"
           fill="none"
           viewBox="0 0 24 24"
@@ -103,24 +139,6 @@ const CarouselCategory = ({ categories }: ICategories) => {
           />
         </svg>
       </button>
-
-      <div className="carousel-wrapper overflow-hidden">
-        <div
-          className="carousel flex transition-transform duration-500 ease-in-out"
-          style={{ transform: `translateX(-${index * 100}%)` }}
-        >
-          {categories_stacked().map((stack, idx) => (
-            <div
-              key={idx}
-              className="carousel-slide flex-shrink-0 w-full grid grid-cols-3 gap-4"
-            >
-              {stack.map((category) => (
-                <CardCategory key={category.idCategory} category={category} />
-              ))}
-            </div>
-          ))}
-        </div>
-      </div>
     </div>
   );
 };
