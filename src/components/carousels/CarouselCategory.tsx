@@ -5,8 +5,10 @@ import {
   ICategory,
 } from '@/shared/interfaces/entities/category.interface';
 import { useState } from 'react';
+import { useRouter } from 'next/navigation';
 
 const CarouselCategory = ({ categories }: ICategories) => {
+  const router = useRouter();
   const itemsPerSlide = 3;
 
   const [index, setIndex] = useState(0);
@@ -57,6 +59,15 @@ const CarouselCategory = ({ categories }: ICategories) => {
     setIsDragging(false);
   };
 
+  const handleCategoryClick = (category: ICategory) => {
+    const filters = {
+      category: category.idCategory,
+    };
+    const encodedFilters = btoa(JSON.stringify(filters));
+
+    router.push(`/list-routes?filters=${encodedFilters}`);
+  };
+
   return (
     <div
       className="carousel-container flex items-center justify-center relative"
@@ -64,9 +75,13 @@ const CarouselCategory = ({ categories }: ICategories) => {
       onTouchMove={handleTouchMove}
       onTouchEnd={handleTouchEnd}
     >
+
       <button
         onClick={prev}
-        className="hidden md:block absolute top-1/2 left-4 transform -translate-y-1/2 p-2 rounded-full focus:outline-none z-10 bg-gray-800 hover:bg-gray-600 text-white"
+        disabled={index === 0}
+        className={`hidden md:block absolute top-1/2 left-4 transform -translate-y-1/2 p-2 rounded-full focus:outline-none z-10
+          ${index === 0 ? 'bg-gray-800 bg-opacity-40 ' : 'bg-gray-800 hover:bg-gray-600 text-white'}
+        `}
       >
         <svg
           className="w-6 h-6"
@@ -97,13 +112,14 @@ const CarouselCategory = ({ categories }: ICategories) => {
               {stack.map((category: ICategory) => (
                 <div
                   key={category.idCategory}
-                  className="p-4 bg-color1 rounded-3xl text-center relative  hover:scale-105 transition"
+                  className="p-4 bg-color1 rounded-3xl text-center relative hover:scale-105 transition cursor-pointer"
                   style={{
                     backgroundImage: `url(/images/category/jpg/${category.imgCategory})`,
                     backgroundSize: 'cover',
                     backgroundPosition: 'center',
                     height: '40vh',
                   }}
+                  onClick={() => handleCategoryClick(category)}
                 >
                   <div className="absolute inset-0 bg-black bg-opacity-40 rounded-3xl flex flex-col justify-end p-4 hover:bg-opacity-60 transition">
                     <h3 className="text-4xl font-black text-white mb-8">
@@ -122,7 +138,10 @@ const CarouselCategory = ({ categories }: ICategories) => {
 
       <button
         onClick={next}
-        className="hidden md:block absolute top-1/2 right-4 transform -translate-y-1/2 p-2 rounded-full focus:outline-none z-10 bg-gray-800 hover:bg-gray-600 text-white"
+        disabled={index === itemsStacked().length - 1}
+        className={`hidden md:block absolute top-1/2 right-4 transform -translate-y-1/2 p-2 rounded-full focus:outline-none z-10
+          ${index === itemsStacked().length - 1 ? 'bg-gray-800 bg-opacity-40 ' : 'bg-gray-800 hover:bg-gray-600 text-white'}
+        `}
       >
         <svg
           className="w-6 h-6"
