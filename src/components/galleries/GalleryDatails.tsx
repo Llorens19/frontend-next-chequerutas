@@ -18,10 +18,10 @@ const GalleryDetails = ({ route }: IGalleryDetailsParams) => {
 
   return (
     <>
-      <div className="flex flex-col rounded-lg overflow-hidden w-full gap-2">
-        <div className="w-full bg-color4 rounded-lg">
+      <div className="flex flex-col rounded-3xl overflow-hidden w-full gap-2">
+        <div className="w-full bg-color4 rounded-3xl">
           <Image
-            className="rounded-lg object-cover w-full h-full"
+            className="rounded-3xl object-cover w-full h-full"
             src={selectedImage}
             alt="holaaa"
             width={1000}
@@ -32,11 +32,11 @@ const GalleryDetails = ({ route }: IGalleryDetailsParams) => {
           {imagesRoutes?.slice(0, 4).map((image, index) => (
             <div
               key={index}
-              className="bg-color4 w-1/4 rounded-lg"
+              className="bg-color4 w-1/4 rounded-3xl"
               onClick={() => onClickImage(image.imageUrl)}
             >
               <Image
-                className="rounded-lg object-cover w-full h-full"
+                className="rounded-3xl object-cover w-full h-full"
                 src={image.imageUrl}
                 alt="holaaa"
                 width={200}
@@ -46,9 +46,9 @@ const GalleryDetails = ({ route }: IGalleryDetailsParams) => {
           ))}
 
           {imagesRoutes?.length === 0 && (
-            <div className="bg-color4 w-1/4 rounded-lg">
+            <div className="bg-color4 w-1/4 rounded-3xl">
               <Image
-                className="rounded-lg object-cover w-full h-full"
+                className="rounded-3xl object-cover w-full h-full"
                 src={'/images/routes/ruta_generica.png'}
                 alt="holaaa"
                 width={200}
@@ -58,15 +58,15 @@ const GalleryDetails = ({ route }: IGalleryDetailsParams) => {
           )}
 
           {!imagesRoutes?.[1] && (
-          <div className="bg-color2 w-1/4 rounded-lg"></div>
+          <div className="bg-color2 w-1/4 rounded-3xl"></div>
           )}
 
           {!imagesRoutes?.[1] && (
-          <div className="bg-color2 w-1/4 rounded-lg"></div>
+          <div className="bg-color2 w-1/4 rounded-3xl"></div>
           )}
 
           {!imagesRoutes?.[1] && (
-          <div className="bg-color2 w-1/4 rounded-lg"></div>
+          <div className="bg-color2 w-1/4 rounded-3xl"></div>
           )}
 
         </div>

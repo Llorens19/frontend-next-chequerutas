@@ -16,7 +16,7 @@ const CardDetailRoute = ({ route }: ICardDetailRouteParams) => {
 
   return (
     <>
-      <div className="flex flex-col w-4/5 m-auto mt-24 rounded-lg gap-16">
+      <div className="flex flex-col w-4/5 m-auto mt-24 rounded-3xl gap-16">
         <div className="flex flex-col gap-4 mb-8">
           <h1 className="text-6xl font-black text-text1">{route.title}</h1>
         </div>
@@ -32,7 +32,7 @@ const CardDetailRoute = ({ route }: ICardDetailRouteParams) => {
           </div>
         </div>
 
-        <div className="flex flex-wrap xl:flex-nowrap items-center gap-4 w-full bg-color2 rounded-lg">
+        <div className="flex flex-wrap xl:flex-nowrap items-center gap-4 w-full bg-color2 rounded-3xl">
           <div className="flex xl:w-1/2 m-auto h-full  justify-between">
             <div className="grid grid-cols-2 grid-rows-3 gap-6 w-full text-center">
               <div className="flex flex-col items-center">

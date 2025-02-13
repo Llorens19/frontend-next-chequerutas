@@ -38,7 +38,7 @@ const CardUser = ({ user }: { user: IUserGeneric }) => {
 
   return (
     <>
-      <div className="flex items-center py-4  px-8 bg-color2  rounded-lg w-full gap-8 cursor-pointer hover:bg-background4 transition"
+      <div className="flex items-center py-4  px-8 bg-color2  rounded-3xl w-full gap-8 cursor-pointer hover:bg-background4 transition"
       onClick={onClickUser}>
         <div className="flex flex-col items-center justify-center align-middle">
           <Image
@@ -61,14 +61,14 @@ const CardUser = ({ user }: { user: IUserGeneric }) => {
         { (user.username !== userLogged?.username) && userLogged && (
           userLogged?.followings?.some(following => following.userFollowed === user.idUser) ? (
             <button
-              className="bg-color2 text-text1 border-2 border-text1 px-4 py-2 rounded-lg hover:bg-text1 hover:text-color2 transition"
+              className="bg-color2 text-text1 border-2 border-text1 px-4 py-2 rounded-3xl hover:bg-text1 hover:text-color2 transition"
               onClick={(e) => { e.stopPropagation(); onUnfollow(); }}
             >
               <p>Dejar de Seguir</p>
             </button>
           ) : (
             <button
-              className="bg-text1 text-color2 px-4 py-2 rounded-lg border-2 border-text1 hover:text-text1 hover:bg-color2 hover:border-text1 transition"
+              className="bg-text1 text-color2 px-4 py-2 rounded-3xl border-2 border-text1 hover:text-text1 hover:bg-color2 hover:border-text1 transition"
               onClick={(e) => { e.stopPropagation(); onFollow(); }}
             >
               <p>Seguir</p>

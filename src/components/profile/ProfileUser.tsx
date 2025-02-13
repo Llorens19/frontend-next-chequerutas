@@ -99,7 +99,7 @@ const ProfileUser = ({ username }: { username: string }) => {
       </div>
 
       <div className="mt-36 w-4/5 mx-auto flex">
-        <div className="flex flex-col self-start items-center w-1/5 bg-color2 rounded-lg py-8 fixed  ">
+        <div className="flex flex-col self-start items-center w-1/5 bg-color2 rounded-3xl py-8 fixed  ">
           <div className="w-1/2">
             <Image
               src={user.imgUser || '/images/profile/perfil.jpg'}
@@ -123,11 +123,11 @@ const ProfileUser = ({ username }: { username: string }) => {
           <div className="flex gap-4 justify-center mt-4 mx-4 w-4/5">
             {isOwner && (
               <>
-                <button className="bg-text1 text-color2 px-4 py-2 rounded-lg w-1/2 border-2 border-text1 hover:text-text1 hover:bg-color2 hover:border-text1 transition">
+                <button className="bg-text1 text-color2 px-4 py-2 rounded-3xl w-1/2 border-2 border-text1 hover:text-text1 hover:bg-color2 hover:border-text1 transition">
                   <p>Editar Perfil</p>
                 </button>
 
-                <button className="bg-color2 text-text1 border-2 border-text1 px-4 py-2 rounded-lg w-1/2 hover:bg-text1 hover:text-color2 transition">
+                <button className="bg-color2 text-text1 border-2 border-text1 px-4 py-2 rounded-3xl w-1/2 hover:bg-text1 hover:text-color2 transition">
                   <p>Cerrar Sesión</p>
                 </button>
               </>
@@ -139,14 +139,14 @@ const ProfileUser = ({ username }: { username: string }) => {
                 (following) => following.userFollowed === user.idUser
               ) ? (
                 <button
-                  className="bg-color2 text-text1 border-2 border-text1 px-4 py-2 rounded-lg w-1/2 hover:bg-text1 hover:text-color2 transition"
+                  className="bg-color2 text-text1 border-2 border-text1 px-4 py-2 rounded-3xl w-1/2 hover:bg-text1 hover:text-color2 transition"
                   onClick={onUnfollow}
                 >
                   <p>Dejar de Seguir</p>
                 </button>
               ) : (
                 <button
-                  className="bg-text1 text-color2 px-4 py-2 rounded-lg w-1/2 border-2 border-text1 hover:text-text1 hover:bg-color2 hover:border-text1 transition"
+                  className="bg-text1 text-color2 px-4 py-2 rounded-3xl w-1/2 border-2 border-text1 hover:text-text1 hover:bg-color2 hover:border-text1 transition"
                   onClick={onFollow}
                 >
                   <p>Seguir</p>
@@ -156,21 +156,21 @@ const ProfileUser = ({ username }: { username: string }) => {
           </div>
 
           <div className="flex mt-4 w-full mx-8 border-t-2 border-b-2 border-gray-300 p-4">
-            <div className="flex flex-col items-center w-1/3 hover:bg-color3 transition rounded-lg">
+            <div className="flex flex-col items-center w-1/3 hover:bg-color3 transition rounded-3xl">
               <p className="text-2xl font-bold text-text2">
                 {routesPublic?.routes.length ?? 0}
               </p>
               <p className="text-text3">Rutas</p>
             </div>
             <div
-              className="flex flex-col items-center w-1/3 hover:bg-color3 transition rounded-lg"
+              className="flex flex-col items-center w-1/3 hover:bg-color3 transition rounded-3xl"
               onClick={onClickFollowers}
             >
               <p className="text-2xl font-bold text-text2">{followers?.length ?? 0}</p>
               <p className="text-text3">Seguidores</p>
             </div>
             <div
-              className="flex flex-col items-center w-1/3 hover:bg-color3 transition rounded-lg"
+              className="flex flex-col items-center w-1/3 hover:bg-color3 transition rounded-3xl"
               onClick={onClickFollowings}
             >
               <p className="text-2xl font-bold text-text2">{followings?.length ?? 0}</p>
@@ -180,7 +180,7 @@ const ProfileUser = ({ username }: { username: string }) => {
           <div className="flex flex-wrap gap-4 justify-center mt-4 w-full">
             {isOwner && (
               <button
-                className="text-contrast2 px-4 py-2 rounded-lg flex-1 min-w-[120px] hover:underline font-bold hover:text-contrast2_hover"
+                className="text-contrast2 px-4 py-2 rounded-3xl flex-1 min-w-[120px] hover:underline font-bold hover:text-contrast2_hover"
                 onClick={onClickRoutesPrivate}
               >
                 Rutas Privadas
@@ -189,7 +189,7 @@ const ProfileUser = ({ username }: { username: string }) => {
 
             {isOwner && (
               <button
-                className="text-contrast2 px-4 py-2 rounded-lg flex-1 min-w-[120px] hover:underline font-bold hover:text-contrast2_hover"
+                className="text-contrast2 px-4 py-2 rounded-3xl flex-1 min-w-[120px] hover:underline font-bold hover:text-contrast2_hover"
                 onClick={onClickFavorites}
               >
                 Rutas Guardadas
@@ -197,13 +197,13 @@ const ProfileUser = ({ username }: { username: string }) => {
             )}
 
             <button
-              className="text-contrast2 px-4 py-2 rounded-lg flex-1 min-w-[120px] hover:underline font-bold hover:text-contrast2_hover"
+              className="text-contrast2 px-4 py-2 rounded-3xl flex-1 min-w-[120px] hover:underline font-bold hover:text-contrast2_hover"
               onClick={onClickRoutesPublic}
             >
               Rutas Públicas
             </button>
             <button
-              className="text-contrast2 px-4 py-2 rounded-lg flex-1 min-w-[120px] hover:underline font-bold hover:text-contrast2_hover"
+              className="text-contrast2 px-4 py-2 rounded-3xl flex-1 min-w-[120px] hover:underline font-bold hover:text-contrast2_hover"
               onClick={onClickPosts}
             >
               Publicaciones
@@ -212,7 +212,7 @@ const ProfileUser = ({ username }: { username: string }) => {
         </div>
 
         <div className="flex flex-col items-center bg-color1 w-9/12 ml-auto px-16">
-          <div className="rounded-lg w-full">
+          <div className="rounded-3xl w-full">
             {listSelected === 'routes-public' && (
               <ListRouteProfile routes={routesPublic?.routes ?? []} />
             )}

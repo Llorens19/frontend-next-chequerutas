@@ -4,7 +4,7 @@ const CardRouteMobile = () => {
 
   return (
     <>
-      <div className="bg-color3 p-4 border border-contrast3 rounded-lg flex flex-col mb-8">
+      <div className="bg-color3 p-4 border border-contrast3 rounded-3xl flex flex-col mb-8">
         {/* Fila 1 */}
 
         <div className="flex justify-center align-center mb-4 border-b  items-center border-contrast3 pb-2 gap-4">
@@ -13,7 +13,7 @@ const CardRouteMobile = () => {
           </h3>
 
           <div className="w-1/3 flex justify-center align-center gap-4">
-            <button className="bg-color4 text-text1 rounded-lg p-2">
+            <button className="bg-color4 text-text1 rounded-3xl p-2">
               guardar
             </button>
           </div>
@@ -22,7 +22,7 @@ const CardRouteMobile = () => {
         <div className="flex gap-4">
           <div className="w-2/3 ">
             <Image
-              className="rounded-lg border border-contrast2 w-full h-auto object-cover"
+              className="rounded-3xl border border-contrast2 w-full h-auto object-cover"
               src={'/images/category/moto.jpg'}
               alt="test"
               width={1200}
@@ -45,9 +45,9 @@ const CardRouteMobile = () => {
 
         {/* Fila 2 */}
         <div className="flex gap-4 mt-4">
-          <div className=" flex w-2/3 bg-color4 p-2 rounded-lg gap-2 justify-center align-center">
+          <div className=" flex w-2/3 bg-color4 p-2 rounded-3xl gap-2 justify-center align-center">
             <Image
-              className="w-1/4 rounded-lg border border-contrast2  h-auto object-cover"
+              className="w-1/4 rounded-3xl border border-contrast2  h-auto object-cover"
               src={'/images/profile/perfil.jpg'}
               alt="test"
               width={800}
@@ -57,7 +57,7 @@ const CardRouteMobile = () => {
               Llorensssss19
             </p>
           </div>
-          <div className=" flex w-1/3 p-2 rounded-lg gap-2 justify-center align-center">
+          <div className=" flex w-1/3 p-2 rounded-3xl gap-2 justify-center align-center">
             <h3 className="text-lg flex justify-center items-center text-center">
               89 | 100
             </h3>

@@ -17,7 +17,7 @@ const SelectForm= ({label, id, options, data, error = '', placeholder = '', onDa
               id={id}
               value={data}
               onChange={handleChange}
-              className={`bg-color3 text-ms text-text1 p-2 rounded-lg ${error ? 'border-2 border-red-500' : 'border-2 border-text1'}`}
+              className={`bg-color3 text-ms text-text1 p-2 rounded-3xl ${error ? 'border-2 border-red-500' : 'border-2 border-text1'}`}
             >
               <option value="" disabled>
                 {placeholder}

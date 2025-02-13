@@ -12,7 +12,7 @@ const InputSelectForm = ({ label, id, options, data, error, placeholder, onChang
       </label>
       <select
         id={id}
-        className={`bg-color1 border-2 text-text1 border-text1 p-2 rounded-lg  ${error ? 'border border-red-500' : ''}`}
+        className={`bg-color1 border-2 text-text1 border-text1 p-2 rounded-3xl  ${error ? 'border border-red-500' : ''}`}
         value={data}
         onChange={(e) => onChange(e.target.value)}
       >

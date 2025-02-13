@@ -1,7 +1,6 @@
 import CardProduct from '@/components/cards/CardProduct';
 import CarouselCategory from '@/components/carousels/CarouselCategory';
 import SearchHome from '@/components/searches/SearchHome';
-import StripeProvider from '@/providers/stripe/StripeProvider';
 import { CategoryQueryService } from '@/services/queries/category.queryService';
 import { Metadata } from 'next';
 

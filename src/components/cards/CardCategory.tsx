@@ -3,7 +3,7 @@ import { ICategory } from '@/shared/interfaces/entities/category.interface';
 
 const CardCategory = ({ category }: { category: ICategory }) => {
   return (
-    <div className="relative group   rounded-lg text-center w-full h-auto overflow-hidden">
+    <div className="relative group rounded-3xl text-center w-full h-auto overflow-hidden">
       <Image
         className="rounded-t-lg w-full h-auto object-cover"
         src={`/images/category/${category.imgCategory}`}

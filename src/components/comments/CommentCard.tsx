@@ -59,7 +59,7 @@ const CommentCard = ({ comment }: { comment: IComment }) => {
           {comment.imgComment && (
             <div className="w-1/2 mx-auto">
               <Image
-                className="rounded-lg"
+                className="rounded-3xl"
                 src={comment.imgComment || '/images/profile/perfil.jpg'}
                 alt={comment.body}
                 width={100}
@@ -94,11 +94,11 @@ const CommentCard = ({ comment }: { comment: IComment }) => {
       </div>
 
       {isReplying && (
-        <div className="ml-12 p-4 flex bg-color2 rounded-lg  ">
+        <div className="ml-12 p-4 flex bg-color2 rounded-3xl  ">
           <input
             ref={inputRef}
             type="text"
-            className="w-full p-2 border rounded-lg bg-color1"
+            className="w-full p-2 border rounded-3xl bg-color1"
             placeholder="Escribe un comentario"
             value={body}
             onChange={(e) => setBody(e.target.value)}

@@ -161,7 +161,7 @@ const FilterRoute = () => {
         <div className="flex flex-col w-full justify-end">
           <button
             onClick={onClickDelete}
-            className="bg-text1 text-color3 p-1.5 rounded-lg border-2 border-text1 hover:bg-color3 hover:text-text1 transition duration-300 text-ms"
+            className="bg-text1 text-color3 p-1.5 rounded-3xl border-2 border-text1 hover:bg-color3 hover:text-text1 transition duration-300 text-ms"
           >
             Borrar
           </button>

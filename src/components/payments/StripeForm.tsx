@@ -176,7 +176,7 @@ const StripeForm = ({
                 invalid: { color: '#9e2146' },
               },
               }}
-              className="text-xl border-2 p-2.5 border-text1 rounded-lg w-full text-text1"
+              className="text-xl border-2 p-2.5 border-text1 rounded-3xl w-full text-text1"
             />
             </div>
 
@@ -184,7 +184,7 @@ const StripeForm = ({
             <button
               onClick={onPay}
               disabled={!stripe}
-              className="w-5/6 self-end bg-text1 text-color3 p-2 rounded-lg border-2 border-text1 hover:bg-color1 hover:text-text1 transition duration-300 text-ms"
+              className="w-5/6 self-end bg-text1 text-color3 p-2 rounded-3xl border-2 border-text1 hover:bg-color1 hover:text-text1 transition duration-300 text-ms"
             >
               Pagar {selectedCurrency} {convertedAmount}
             </button>
@@ -204,11 +204,11 @@ const StripeForm = ({
       </div>
 
       <div className="w-2/5 h-full flex justify-center items-center bg-color4">
-        <div className="w-2/3 rounded-lg p-6">
+        <div className="w-2/3 rounded-3xl p-6">
           <h1 className="text-text1 text-3xl font-bold text-center mb-8">
             Datos del pago
           </h1>
-          <div className="space-y-4 rounded-lg text-white">
+          <div className="space-y-4 rounded-3xl text-white">
             <div className="space-y-2">
               <div className="flex items-center justify-between gap-4">
                 <h4 className="text-base font-bold text-text3">

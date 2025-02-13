@@ -241,7 +241,7 @@ const Register = () => {
         />
       </div>
       <button
-        className="bg-text1 text-color3 p-1.5 rounded-lg border-2 border-text1 hover:bg-color1 hover:text-text1 transition duration-300 text-ms"
+        className="bg-text1 text-color3 p-1.5 rounded-3xl border-2 border-text1 hover:bg-color1 hover:text-text1 transition duration-300 text-ms"
         onClick={handleRegister}
       >
         Registrarse

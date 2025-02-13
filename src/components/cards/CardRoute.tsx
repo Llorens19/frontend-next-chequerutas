@@ -19,10 +19,10 @@ const CardRoute = ({ route }: ICardRouteInput) => {
   const { isFavorite, onFavorite, onUnfavorite } = useFavorite(route.idRoute);
 
   return (
-    <div className="flex bg-color2   rounded-lg overflow-hidden p-8 mb-8">
+    <div className="flex bg-color2   rounded-3xl overflow-hidden p-8 mb-8">
       <div className="w-1/2">
         <Image
-          className="rounded-lg"
+          className="rounded-3xl"
           src={'/images/category/moto.jpg'}
           alt={route.title}
           width={800}
