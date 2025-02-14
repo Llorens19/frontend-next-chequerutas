@@ -1,4 +1,5 @@
 'use client';
+import SpinnerLoading from '@/components/spinners/SpinnerLoading';
 import { useCreateCommentMutation, useDeleteCommentMutation } from '@/reactQuery/mutations/comments.mutations';
 import { useGetUserQuery } from '@/reactQuery/queries/user.query';
 import { IComment } from '@/shared/interfaces/entities/comment.interface';
@@ -13,7 +14,7 @@ const CommentCard = ({ comment }: { comment: IComment }) => {
 
   const commentCreate = useCreateCommentMutation();
   const deleteCommentMutation = useDeleteCommentMutation();
-  const { data: userLogged } = useGetUserQuery();
+  const { data: userLogged, isLoading } = useGetUserQuery();
 
   const deleteComment = () => {
     deleteCommentMutation.mutate(comment.idComment);
@@ -36,6 +37,8 @@ const CommentCard = ({ comment }: { comment: IComment }) => {
       inputRef.current.focus();
     }
   }, [isReplying]);
+
+  if (isLoading) return <SpinnerLoading />;
 
   return (
     <>

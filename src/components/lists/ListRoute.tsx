@@ -7,6 +7,7 @@ import { IRoute } from '@/shared/interfaces/entities/route.interface';
 import { useRoutesQuery } from '@/reactQuery/queries/routes.query';
 import { IRouteFilters } from '@/shared/interfaces/services/queries/route/getRoutes.interface';
 import InfiniteScroll from 'react-infinite-scroll-component';
+import CardRouteSkeleton from '@/components/cards/skeletons/CardRouteSkeleton';
 
 const ListRoute = () => {
   const searchParams = useSearchParams();
@@ -14,7 +15,7 @@ const ListRoute = () => {
   const [routesList, setRoutesList] = useState<IRoute[]>([]);
   const [isFetching, setIsFetching] = useState(false);
 
-  const { data: routes, refetch } = useRoutesQuery(filters);
+  const { data: routes, isLoading, refetch } = useRoutesQuery(filters);
 
 
 
@@ -74,12 +75,13 @@ useEffect(() => {
         dataLength={routesList.length}
         next={loadMoreRoutes}
         hasMore={!isFetching && (routes?.routes?.length ?? 0) > 0}
-        loader={<div className="text-center text-text1 py-4">Cargando... </div>}
-        endMessage={<div className="text-center text-text1 py-4">No hay más rutas</div>}
+        loader={<CardRouteSkeleton />}
+        // endMessage={<div className="text-center text-text1 py-4">No hay más rutas</div>}
       >
-        {routesList.map((route) => (
+        {!isLoading&& routesList.map((route) => (
           <CardRoute key={route.idRoute} route={route} />
         ))}
+          {isLoading && <CardRouteSkeleton />}
       </InfiniteScroll>
     </div>
   );

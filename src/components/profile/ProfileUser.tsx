@@ -23,8 +23,8 @@ const ProfileUser = ({ username }: { username: string }) => {
   const { data: user, isLoading: isLoadingProfile } = useProfileQuery(username);
   const { data: userLogged, isLoading: isLoadingUserLogged } =
     useGetUserQuery();
-  const { data: routesPublic } = useRoutesUserPublic(username);
-  const { data: routesPrivate } = useRoutesUserPrivate(username);
+  const { data: routesPublic, isLoading:isLoadingRoutesUserPublic } = useRoutesUserPublic(username);
+  const { data: routesPrivate, isLoading:isLoadingRoutesUserPrivate} = useRoutesUserPrivate(username);
 
   const follow = useProfileFollowMutation();
 
@@ -104,8 +104,8 @@ const ProfileUser = ({ username }: { username: string }) => {
 
   return (
     <>
-      <div className="bg-color1 w-4/5 mx-auto text-center flex justify-center items-center pt-16 h-36 fixed text-4xl right-0 z-10">
-        <h1 className="mt-[-8px] w-8/12 text-text1 font-bold">{title}</h1>
+      <div className="bg-color1 w-4/5 mx-auto text-center flex justify-center items-center pt-16 h-36 fixed text-5xl right-0 z-10">
+        <h1 className="mt-[-8px] w-8/12 text-text1 font-black">{title}</h1>
       </div>
 
       <div className="mt-36 w-4/5 mx-auto flex">

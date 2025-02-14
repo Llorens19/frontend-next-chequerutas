@@ -1,5 +1,6 @@
 'use client';
 
+import CardRouteSkeleton from '@/components/cards/skeletons/CardRouteSkeleton';
 import LevelRating from '@/components/ratings/LevelRating';
 import useFavorite from '@/hooks/useFavorite.hook';
 import { useGetUserQuery } from '@/reactQuery/queries/user.query';
@@ -14,7 +15,9 @@ const CardRoute = ({ route }: ICardRouteInput) => {
     router.push(`/route/${route.idRoute}`);
   };
 
-  const { data: userLogged } = useGetUserQuery();
+  const { data: userLogged, isLoading } = useGetUserQuery();
+
+
 
   const { isFavorite, onFavorite, onUnfavorite } = useFavorite(route.idRoute);
 
@@ -23,9 +26,11 @@ const CardRoute = ({ route }: ICardRouteInput) => {
     router.push(`/profile/${route.user?.username}`);
   };
 
+  if (isLoading) return <CardRouteSkeleton />;
+
 
   return (
-    <div className="flex bg-color2   rounded-3xl overflow-hidden p-8 mb-8">
+    <div className="flex bg-color2   rounded-3xl overflow-hidden p-8 mb-8 "   onClick={detailRouteRedirect}>
       <div className="w-1/2">
         <Image
           className="rounded-3xl"
@@ -38,7 +43,6 @@ const CardRoute = ({ route }: ICardRouteInput) => {
 
       <div
         className="w-1/2 ml-8 flex flex-col justify-between"
-        onClick={detailRouteRedirect}
       >
         <div>
           <h3 className="text-2xl font-bold text-center text-text1">

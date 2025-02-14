@@ -10,6 +10,10 @@ const ListRouteProfile = ({routes}: IListRouteProfileProps) => {
         {routes.map((route) => (
           <CardRoute key={route.idRoute} route={route} />
         ))}
+
+      {routes.length === 0 && (
+        <div className="text-center text-text1 py-4  text-xl">No tienes rutas guardadas</div>
+      )}
     </div>
   );
 };

@@ -12,11 +12,17 @@ import useFavorite from '@/hooks/useFavorite.hook';
 import CategoryIcons from '@/components/SVGs/CategoryIcons';
 import { useRouter } from 'next/navigation';
 import Image from 'next/image';
+import SpinnerLoading from '@/components/spinners/SpinnerLoading';
 
 const CardDetailRoute = ({ route }: ICardDetailRouteParams) => {
   const router = useRouter();
-  const { data: userLogged } = useGetUserQuery();
-  const { isFavorite, onFavorite, onUnfavorite } = useFavorite(route.idRoute);
+  const { data: userLogged, isLoading } = useGetUserQuery();
+  const { isFavorite, onFavorite, onUnfavorite, isLoading:isLoadingFavorite } = useFavorite(route.idRoute);
+
+
+
+  if (isLoadingFavorite) return <SpinnerLoading />;
+  if (isLoading) return <SpinnerLoading />;
 
   const onClickCategory = () => {
     const filters = { category: route.category?.idCategory };
