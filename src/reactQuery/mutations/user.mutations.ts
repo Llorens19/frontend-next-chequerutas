@@ -15,3 +15,17 @@ export const useLoginMutation = () => {
     },
   });
 };
+
+
+export const useLogoutMutation = () => {
+  const queryClient = useQueryClient();
+  const router = useRouter();
+
+  return useMutation({
+    mutationFn: () => AuthCommandService.logout(),
+    onSuccess: () => {
+      queryClient.invalidateQueries({ queryKey: ['user'] });
+      router.push('/');
+    },
+  });
+};

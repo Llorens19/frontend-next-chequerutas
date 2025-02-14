@@ -14,5 +14,11 @@ export const AuthCommandService = {
     },
     register: (data:IRegister): Promise<IUserGeneric> =>{
         return ApiService.post<IUserGeneric>(`${SERVER_AUTH}register`, data);
+    },
+    logout: async (): Promise<boolean> => {
+        const resp = await ApiService.delete<{ state: boolean }>(`${SERVER_AUTH}logout`);
+        localStorage.removeItem('accessToken');
+        localStorage.removeItem('refreshToken');
+        return resp.state;
     }
 };

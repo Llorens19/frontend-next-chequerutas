@@ -17,6 +17,7 @@ import {
   useProfileUnfollowMutation,
 } from '@/reactQuery/mutations/profile.mutation';
 import ListFavoritesProfile from '@/components/lists/ListFavoritesProfile';
+import { useLogoutMutation } from '@/reactQuery/mutations/user.mutations';
 
 const ProfileUser = ({ username }: { username: string }) => {
   const { data: user, isLoading: isLoadingProfile } = useProfileQuery(username);
@@ -29,9 +30,13 @@ const ProfileUser = ({ username }: { username: string }) => {
 
   const unfollow = useProfileUnfollowMutation();
 
+  const logout = useLogoutMutation();
+
   const [isOwner, setIsOwner] = useState(false);
   const [listSelected, setListSelected] = useState('routes-public');
   const [title, setTitle] = useState('Rutas Públicas');
+
+
 
   useEffect(() => {
     if (userLogged && user) {
@@ -75,6 +80,11 @@ const ProfileUser = ({ username }: { username: string }) => {
     setListSelected('likes');
     setTitle('Rutas Favoritas');
   };
+
+  const onClickLogout = () => {
+    logout.mutate();
+  };
+
 
   const onFollow = () => {
     follow.mutate(user.idUser);
@@ -127,7 +137,8 @@ const ProfileUser = ({ username }: { username: string }) => {
                   <p>Editar Perfil</p>
                 </button>
 
-                <button className="bg-color2 text-text1 border-2 border-text1 px-4 py-2 rounded-3xl w-1/2 hover:bg-text1 hover:text-color2 transition">
+                <button className="bg-color2 text-text1 border-2 border-text1 px-4 py-2 rounded-3xl w-1/2 hover:bg-text1 hover:text-color2 transition"
+                onClick={onClickLogout}>
                   <p>Cerrar Sesión</p>
                 </button>
               </>
