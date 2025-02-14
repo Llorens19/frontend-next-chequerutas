@@ -67,7 +67,7 @@ const CommentCard = ({ comment }: { comment: IComment }) => {
               />
             </div>
           )}
-          <p className="text-sm text-text1">{comment.body}</p>
+          <p className="text-sm text-text1 whitespace-pre">{comment.body}</p>
 
           <div className="flex gap-4 w-full justify-end">
             {userLogged && comment.idUser === userLogged.idUser && (

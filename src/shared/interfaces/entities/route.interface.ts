@@ -1,7 +1,9 @@
+import { ICategory } from '@/shared/interfaces/entities/category.interface';
 import { IComment } from '@/shared/interfaces/entities/comment.interface';
 import { ICoordenate } from '@/shared/interfaces/entities/coordinate.interface';
 import { IFavorite } from '@/shared/interfaces/entities/favorite.interface';
 import { IImagesRoutes } from '@/shared/interfaces/entities/imagesRoutes.interface';
+import { ILocation } from '@/shared/interfaces/entities/location.interface';
 import { IUserGeneric } from '@/shared/interfaces/entities/user.interface';
 import { Routes } from '@prisma/client';
 
@@ -35,6 +37,8 @@ export interface IRoute {
   favorites?: IFavorite[];
   imagesRoutes?: IImagesRoutes[];
   user?: IUserGeneric;
+  category?: ICategory;
+  location?: ILocation;
 
 };
 
