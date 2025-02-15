@@ -2,6 +2,7 @@
 import SpinnerLoading from '@/components/spinners/SpinnerLoading';
 import { useCreateCommentMutation, useDeleteCommentMutation } from '@/reactQuery/mutations/comments.mutations';
 import { useGetUserQuery } from '@/reactQuery/queries/user.query';
+import { IMAGE_SERVICE_URL } from '@/shared/constants/backendServices.constsnts';
 import { IComment } from '@/shared/interfaces/entities/comment.interface';
 import Image from 'next/image';
 import { useState, useRef, useEffect } from 'react';
@@ -38,6 +39,9 @@ const CommentCard = ({ comment }: { comment: IComment }) => {
     }
   }, [isReplying]);
 
+  const [imgSrc, setImgSrc] = useState(`${IMAGE_SERVICE_URL}/${comment.user?.imgUser}`);
+  const [imgCommentSrc, setImgCommentSrc] = useState(`${IMAGE_SERVICE_URL}/${comment.imgComment}`);
+
   if (isLoading) return <SpinnerLoading />;
 
   return (
@@ -46,7 +50,8 @@ const CommentCard = ({ comment }: { comment: IComment }) => {
         <div>
           <Image
             className="rounded-full h-auto"
-            src={comment.user?.imgUser ?? '/images/profile/perfil.jpg'}
+            src={imgSrc}
+            onError={() => setImgSrc(`${IMAGE_SERVICE_URL}/images/profile/perfil.jpg`)}
             alt={comment.body}
             width={50}
             height={50}
@@ -63,7 +68,8 @@ const CommentCard = ({ comment }: { comment: IComment }) => {
             <div className="w-1/2 mx-auto">
               <Image
                 className="rounded-3xl"
-                src={comment.imgComment || '/images/profile/perfil.jpg'}
+                src={imgCommentSrc}
+                // onError={() => setImgCommentSrc(`${IMAGE_SERVICE_URL}/images/profile/perfil.jpg`)}
                 alt={comment.body}
                 width={100}
                 height={100}

@@ -1,5 +1,6 @@
 'use client';
 
+import DropzoneComment from '@/components/dropzones/DropzoneComment';
 import { useCreateCommentMutation } from '@/reactQuery/mutations/comments.mutations';
 import { useState } from 'react';
 
@@ -44,6 +45,8 @@ const CommentCreate = ({ idRoute }: { idRoute: string }) => {
         onClick={cancelComment}>
           <p>Cancelar</p>
         </button>
+
+        <DropzoneComment/>
 
       </div>
     </div>

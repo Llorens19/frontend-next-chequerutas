@@ -13,6 +13,7 @@ const Routes = async () => {
     <>
       <FilterRoute />
       <div className="flex flex-row h-full mx-auto gap-8">
+
         <div className="w-3/5 mt-48 ml-16">
           <ListRoute />
         </div>

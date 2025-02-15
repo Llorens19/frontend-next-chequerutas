@@ -1,8 +1,10 @@
 import { useProfileFollowMutation, useProfileUnfollowMutation } from '@/reactQuery/mutations/profile.mutation';
 import { useGetUserQuery } from '@/reactQuery/queries/user.query';
+import { IMAGE_SERVICE_URL } from '@/shared/constants/backendServices.constsnts';
 import { IUserGeneric } from '@/shared/interfaces/entities/user.interface';
 import Image from 'next/image';
 import { useRouter, useSearchParams } from 'next/navigation';
+import { useState } from 'react';
 
 const CardUser = ({ user }: { user: IUserGeneric }) => {
   const router = useRouter();
@@ -30,7 +32,7 @@ const CardUser = ({ user }: { user: IUserGeneric }) => {
   };
 
 
-
+  const [imgSrc, setImgSrc] = useState(`${IMAGE_SERVICE_URL}/${user?.imgUser}`);
 
 
 
@@ -42,7 +44,8 @@ const CardUser = ({ user }: { user: IUserGeneric }) => {
       onClick={onClickUser}>
         <div className="flex flex-col items-center justify-center align-middle">
           <Image
-          src={user?.imgUser ?? '/images/profile/perfil.jpg'}
+          src={ imgSrc }
+          onError={() => setImgSrc(`${IMAGE_SERVICE_URL}/profile/perfil.jpg`)}
           className="w-16 h-16 rounded-full"
           alt="User Avatar"
           width={64}

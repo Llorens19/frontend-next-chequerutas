@@ -8,6 +8,7 @@ import { useRoutesQuery } from '@/reactQuery/queries/routes.query';
 import { IRouteFilters } from '@/shared/interfaces/services/queries/route/getRoutes.interface';
 import InfiniteScroll from 'react-infinite-scroll-component';
 import CardRouteSkeleton from '@/components/cards/skeletons/CardRouteSkeleton';
+import { motion } from 'framer-motion';
 
 const ListRoute = () => {
   const searchParams = useSearchParams();
@@ -70,6 +71,11 @@ useEffect(() => {
 
 
   return (
+    <motion.div
+    initial={{ opacity: 0, y: 20 }}
+    animate={{ opacity: 1, y: 0 }}
+    transition={{ duration:0.6, ease: 'easeOut' }}
+  >
     <div className="flex-1 overflow-y-auto pr-4">
       <InfiniteScroll
         dataLength={routesList.length}
@@ -82,8 +88,12 @@ useEffect(() => {
           <CardRoute key={route.idRoute} route={route} />
         ))}
           {isLoading && <CardRouteSkeleton />}
+          {!isLoading && routesList.length === 0 && (
+            <div className="text-center text-text1 py-4  text-xl">No hay rutas que cumplan estas características</div>
+          )}
       </InfiniteScroll>
     </div>
+    </motion.div>
   );
 };
 
