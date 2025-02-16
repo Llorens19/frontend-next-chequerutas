@@ -1,5 +1,6 @@
 import AuthContent from '@/components/auth/authContent';
-import AuthGuard from '@/guards/logged.guard';
+import IsNotLogged from '@/guards/NotLogged.guard';
+
 import { Metadata } from 'next';
 
 export const metadata: Metadata = {
@@ -10,9 +11,9 @@ export const metadata: Metadata = {
 const Auth = () => {
   return (
     <>
-    <AuthGuard >
+    <IsNotLogged >
       <AuthContent />
-    </AuthGuard>
+    </IsNotLogged>
     </>
   );
 };

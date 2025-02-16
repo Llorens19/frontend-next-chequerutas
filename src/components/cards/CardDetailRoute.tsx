@@ -13,13 +13,17 @@ import CategoryIcons from '@/components/SVGs/CategoryIcons';
 import { useRouter } from 'next/navigation';
 import Image from 'next/image';
 import SpinnerLoading from '@/components/spinners/SpinnerLoading';
+import GpxForm from '@/components/gpxForm/GpxForm';
 
 const CardDetailRoute = ({ route }: ICardDetailRouteParams) => {
   const router = useRouter();
   const { data: userLogged, isLoading } = useGetUserQuery();
-  const { isFavorite, onFavorite, onUnfavorite, isLoading:isLoadingFavorite } = useFavorite(route.idRoute);
-
-
+  const {
+    isFavorite,
+    onFavorite,
+    onUnfavorite,
+    isLoading: isLoadingFavorite,
+  } = useFavorite(route.idRoute);
 
   if (isLoadingFavorite) return <SpinnerLoading />;
   if (isLoading) return <SpinnerLoading />;
@@ -152,7 +156,9 @@ const CardDetailRoute = ({ route }: ICardDetailRouteParams) => {
               </div>
 
               <div className="flex flex-col items-center">
-                <p className="text-5xl text-text2 font-black">{Number(route.level).toFixed(1)}</p>
+                <p className="text-5xl text-text2 font-black">
+                  {Number(route.level).toFixed(1)}
+                </p>
                 <p className="text-lg font-bold text-text4">Nivel</p>
               </div>
 
@@ -211,10 +217,13 @@ const CardDetailRoute = ({ route }: ICardDetailRouteParams) => {
           </div>
 
           <div className="flex justify-between w-1/2 mb-8 bg-color2 rounded-3xl p-4">
-            <div className="flex  bg-color4 rounded-full justify-center items-center hover:scale-105 transition-transform cursor-pointer" onClick={() => router.push(`/profile/${route.user?.username}`)}>
+            <div
+              className="flex  bg-color4 rounded-full justify-center items-center hover:scale-105 transition-transform cursor-pointer"
+              onClick={() => router.push(`/profile/${route.user?.username}`)}
+            >
               <Image
                 className="w-10 h-10 rounded-full border border-contrast2 object-cover"
-                src={route.user?.imgUser ||'/images/profile/perfil.jpg'}
+                src={route.user?.imgUser || '/images/profile/perfil.jpg'}
                 alt="test"
                 width={32}
                 height={32}
@@ -223,6 +232,16 @@ const CardDetailRoute = ({ route }: ICardDetailRouteParams) => {
                 {route.user?.username}
               </p>
             </div>
+
+            {userLogged && userLogged.premiumLevel> 0 && <div>
+              <GpxForm
+                coordinates={route.coordinates}
+                author={route.user!.username}
+                time={route.createdAt!.toString()}
+                title={route.title}
+                description={route.description}
+              />
+            </div>}
 
             {userLogged &&
               (isFavorite ? (
