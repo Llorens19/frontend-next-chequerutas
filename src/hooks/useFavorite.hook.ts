@@ -4,7 +4,7 @@ import { useFavoriteUserQuery } from '@/reactQuery/queries/favorites.query';
 
 const useFavorite = (idRoute: string) => {
 
-      const { data: favoritesUser } = useFavoriteUserQuery();
+      const { data: favoritesUser, isLoading } = useFavoriteUserQuery();
 
 
       const isFavorite = favoritesUser?.favorites?.some((fav) => fav.idRoute === idRoute);
@@ -23,7 +23,7 @@ const useFavorite = (idRoute: string) => {
         unfavoriteMutation.mutate(idRoute);
       };
 
-    return {isFavorite, onFavorite, onUnfavorite};
+    return {isFavorite, onFavorite, onUnfavorite, isLoading};
 };
 
 export default useFavorite;

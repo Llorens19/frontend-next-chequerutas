@@ -24,7 +24,7 @@ const GalleryDetails = ({ route }: IGalleryDetailsParams) => {
             className="rounded-3xl object-cover w-full h-full"
             src={selectedImage}
             alt="holaaa"
-            width={1000}
+            width={800}
             height={800}
           />
         </div>

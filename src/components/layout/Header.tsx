@@ -7,7 +7,7 @@ import { useRouter } from 'next/navigation';
 
 const Header = () => {
   const router = useRouter();
-  const { data: user } = useGetUserQuery();
+  const { data: user , isLoading} = useGetUserQuery();
 
   const onClickProfile = (username: string) => {
     router.push(`/profile/${username}`);

@@ -55,9 +55,9 @@ const MapListRoutes = () => {
 
   }, [searchParams]);
 
-  const { data: markers } = usePointsQuery(filters);
+  const { data: markers, isLoading } = usePointsQuery(filters);
 
-  const { data: locations } = useLocationsQuery();
+  const { data: locations, isLoading:isLoadingLocations } = useLocationsQuery();
 
   useEffect(() => {
     if (locations) {

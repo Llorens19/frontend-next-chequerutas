@@ -1,12 +1,14 @@
 import Image from 'next/image';
 import { ICategory } from '@/shared/interfaces/entities/category.interface';
+import { IMAGE_SERVICE_URL } from '@/shared/constants/backendServices.constsnts';
+
 
 const CardCategory = ({ category }: { category: ICategory }) => {
   return (
     <div className="relative group rounded-3xl text-center w-full h-auto overflow-hidden">
       <Image
         className="rounded-t-lg w-full h-auto object-cover"
-        src={`/images/category/${category.imgCategory}`}
+        src={`${IMAGE_SERVICE_URL}/category/${category.imgCategory}`}
         alt={category.nameCategory}
         width={1200}
         height={800}

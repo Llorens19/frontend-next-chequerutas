@@ -1,20 +1,27 @@
 'use client';
 
+import CardRouteSkeleton from '@/components/cards/skeletons/CardRouteSkeleton';
 import LevelRating from '@/components/ratings/LevelRating';
 import useFavorite from '@/hooks/useFavorite.hook';
 import { useGetUserQuery } from '@/reactQuery/queries/user.query';
+import { IMAGE_SERVICE_URL } from '@/shared/constants/backendServices.constsnts';
 import { ICardRouteInput } from '@/shared/interfaces/components/cards/CardRoute.interface';
 import Image from 'next/image';
 import { useRouter } from 'next/navigation';
+import { useState } from 'react';
 
 const CardRoute = ({ route }: ICardRouteInput) => {
   const router = useRouter();
+
+
 
   const detailRouteRedirect = () => {
     router.push(`/route/${route.idRoute}`);
   };
 
-  const { data: userLogged } = useGetUserQuery();
+  const { data: userLogged, isLoading } = useGetUserQuery();
+
+
 
   const { isFavorite, onFavorite, onUnfavorite } = useFavorite(route.idRoute);
 
@@ -24,21 +31,29 @@ const CardRoute = ({ route }: ICardRouteInput) => {
   };
 
 
+
+  const [imageUser, setIimageUser] = useState(`${IMAGE_SERVICE_URL}/${route.user?.imgUser}`);
+  const [imageRoute, setImageRoute] = useState(`${IMAGE_SERVICE_URL}/images/category/moto.jpg`);
+
+  if (isLoading) return <CardRouteSkeleton />;
+
+
+
+
   return (
-    <div className="flex bg-color2   rounded-3xl overflow-hidden p-8 mb-8">
+    <div className="flex bg-color2 rounded-3xl overflow-hidden p-8 my-4 transition "   onClick={detailRouteRedirect}>
       <div className="w-1/2">
         <Image
-          className="rounded-3xl"
-          src={'/images/category/moto.jpg'}
+          className="rounded-3xl w-full h-full"
+          src={`${IMAGE_SERVICE_URL}/images/category/moto.jpg`}
           alt={route.title}
           width={800}
-          height={800}
+          height={300}
         />
       </div>
 
       <div
         className="w-1/2 ml-8 flex flex-col justify-between"
-        onClick={detailRouteRedirect}
       >
         <div>
           <h3 className="text-2xl font-bold text-center text-text1">
@@ -90,8 +105,9 @@ const CardRoute = ({ route }: ICardRouteInput) => {
           >
             <Image
               className="w-10 h-10 rounded-full border border-contrast2 object-cover"
-              src={route.user?.imgUser || '/images/profile/perfil.jpg'}
-              alt="test"
+              src={imageUser}
+              onError={() => setIimageUser(`${IMAGE_SERVICE_URL}/images/profile/perfil.jpg`)}
+              alt="user"
               width={32}
               height={32}
             />

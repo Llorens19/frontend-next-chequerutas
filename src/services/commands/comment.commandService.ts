@@ -11,5 +11,8 @@ export const CommentCommandService = {
   deleteComment: async (idComment: string): Promise<void> => {
     return ApiService.delete<void>(`${SERVER_COMMENT}comments/${idComment}`);
   },
+  saveCommentImage: async (file: File): Promise<{ url: string }> => {
+    return ApiService.uploadFile<{ url: string }>('api/images/upload', file);
+  }
 
 };
