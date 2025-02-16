@@ -3,7 +3,7 @@ import { ISearchFiltersProps } from '@/shared/interfaces/components/searchers/Se
 import useSearchFilters from '@/hooks/components/searchers/SearchFilters/useSearchFilters.hook';
 import { useEffect } from 'react';
 
-const SearchFilters = ({ options, value, onSelect }: ISearchFiltersProps) =>{
+const SearchFilters = ({ options, value, colorText ='text1', color='color3', border= 'text1', onSelect }: ISearchFiltersProps) =>{
 
   const {
     isOpen,
@@ -28,16 +28,16 @@ const SearchFilters = ({ options, value, onSelect }: ISearchFiltersProps) =>{
         value={searchQuery}
         onChange={(e) => setSearchQuery(e.target.value)}
         placeholder="Buscar por ubicación"
-        className="text-text1 text-ms bg-color3 w-full p-1.5 px-4 pr-10 rounded-3xl border-2 border-text1 focus:outline-none   placeholder-text3"
+        className={`text-text1 text-ms bg-${color} w-full p-1.5 px-4 pr-10 rounded-3xl border-2 border-${border} focus:outline-none   placeholder-text3`}
         onFocus={() => setIsOpen(true)}
         onBlur={() => setTimeout(() => setIsOpen(false), 200)}
       />
       {isOpen && filteredOptions.length > 0 && (
-        <div className="options absolute bg-color3 rounded-3xl mt-1 w-full   max-h-[30vh] overflow-y-auto z-20">
+        <div className={`options absolute bg-${color}   border-2 border-${border} rounded-3xl mt-1 w-full   max-h-[30vh] overflow-y-auto z-20`}>
           {filteredOptions.map((option, index) => (
             <div
               key={index}
-              className="p-1 pl-3 cursor-pointer hover:bg-color2 rounded-xl text-text1"
+              className={`p-1 pl-3 cursor-pointer hover:bg-color2 rounded-xl text-${colorText}`}
               onClick={() => handleOptionClick(option.value, option.label)}
             >
               {option.label}

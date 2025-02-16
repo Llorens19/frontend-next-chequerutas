@@ -7,5 +7,8 @@ export interface ISearchOption {
 export interface ISearchFiltersProps {
   options: ISearchOption[];
   value: string;
+  colorText?: string;
+  color?: string;
+  border?: string;
   onSelect: (value: string) => void;
 }

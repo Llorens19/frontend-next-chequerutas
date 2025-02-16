@@ -30,7 +30,7 @@ const DropzoneComment = ({ onFileUpload }: { onFileUpload: (file: File | null) =
   });
 
   return (
-    <div className="flex items-center gap-3">
+    <div className="w-full flex items-center gap-3 mx-auto align-middle">
       {selectedFile && (
         <div className="relative">
           <Image
@@ -53,7 +53,7 @@ const DropzoneComment = ({ onFileUpload }: { onFileUpload: (file: File | null) =
         className="cursor-pointer p-2 rounded-lg transition"
       >
         <input {...getInputProps()} />
-        <Paperclip size={24} className="text-text1 hover:scale-125 transition" />
+        <Paperclip size={24} className="text-text1 hover:scale-125 transition items-centers" />
       </div>
     </div>
   );
