@@ -58,12 +58,11 @@ const FilterRoute = () => {
         if (category) setCategory(category);
         if (title) setTitle(title);
         if (location) setLocation(location);
-
       } catch (error) {
         console.error('Error al decodificar los filtros de la URL:', error);
       }
     }
-  }, []);
+  }, [searchParams]);
 
   const updateUrl = () => {
     const filters = {
@@ -87,7 +86,7 @@ const FilterRoute = () => {
   }, [distanceMax, distanceMin, level, category, title, location]);
 
   return (
-    <section className="bg-color3 fixed w-full mt-16 z-50  ">
+    <section className="bg-color3 fixed w-full mt-16 z-50">
       <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-6 gap-x-16 m-4 mx-20">
         <div className="flex flex-col w-full">
           <label className="text-text1">Dificultad</label>

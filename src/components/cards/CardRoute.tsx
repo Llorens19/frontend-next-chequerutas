@@ -2,6 +2,7 @@
 
 import CardRouteSkeleton from '@/components/cards/skeletons/CardRouteSkeleton';
 import LevelRating from '@/components/ratings/LevelRating';
+import CategoryIcons from '@/components/SVGs/CategoryIcons';
 import useFavorite from '@/hooks/useFavorite.hook';
 import { useGetUserQuery } from '@/reactQuery/queries/user.query';
 import { IMAGE_SERVICE_URL } from '@/shared/constants/backendServices.constsnts';
@@ -13,15 +14,11 @@ import { useState } from 'react';
 const CardRoute = ({ route }: ICardRouteInput) => {
   const router = useRouter();
 
-
-
   const detailRouteRedirect = () => {
     router.push(`/route/${route.idRoute}`);
   };
 
   const { data: userLogged, isLoading } = useGetUserQuery();
-
-
 
   const { isFavorite, onFavorite, onUnfavorite } = useFavorite(route.idRoute);
 
@@ -30,76 +27,124 @@ const CardRoute = ({ route }: ICardRouteInput) => {
     router.push(`/profile/${route.user?.username}`);
   };
 
-
-
-  const [imageUser, setIimageUser] = useState(`${IMAGE_SERVICE_URL}/${route.user?.imgUser}`);
+  const [imageUser, setIimageUser] = useState(
+    `${IMAGE_SERVICE_URL}/${route.user?.imgUser}`
+  );
 
   if (isLoading) return <CardRouteSkeleton />;
 
-  console.log(`${IMAGE_SERVICE_URL}/images/category/jpg/rutas_boscosas.jpg`);
+  const onClickCategory = (e: React.MouseEvent<HTMLDivElement>) => {
+    e.stopPropagation();
+    const filters = { category: route.category?.idCategory };
+    const encodedFilters = btoa(JSON.stringify(filters));
+    router.push(`/list-routes?filters=${encodedFilters}`);
 
+  };
 
+  const onClickLocation = (e: React.MouseEvent<HTMLDivElement>) => {
+    e.stopPropagation();
+    const filters = { location: route.location?.idLocation };
+    const encodedFilters = btoa(JSON.stringify(filters));
+    router.push(`/list-routes?filters=${encodedFilters}`);
 
+  };
 
   return (
-    <div className="flex bg-color2 rounded-3xl overflow-hidden p-8 my-4 transition "   onClick={detailRouteRedirect}>
+    <div
+      className="flex bg-color2 rounded-3xl overflow-hidden p-8 my-4 transition "
+      onClick={detailRouteRedirect}
+    >
       <div className="w-1/2">
         <Image
           className="rounded-3xl w-full h-full"
-          src={route.imagesRoutes?.[0].imageUrl || `${IMAGE_SERVICE_URL}/images/category/jpg/rutas_boscosas.jpg`}
+          src={
+            route.imagesRoutes?.[0].imageUrl ||
+            `${IMAGE_SERVICE_URL}/images/category/jpg/rutas_boscosas.jpg`
+          }
           alt={route.title}
           width={800}
           height={300}
         />
       </div>
 
-      <div
-        className="w-1/2 ml-8 flex flex-col justify-between"
-      >
+      <div className="w-1/2 ml-8 flex flex-col justify-between">
         <div>
-          <h3 className="text-2xl font-bold text-center text-text1">
+          <h3 className="text-4xl font-black text-center text-text1">
             {route.title}
           </h3>
-          <p className="text-sm text-center text-text4 mt-8">
-            {route.description}
-          </p>
+          <div className="flex flex-col align-middle gap-2 mt-4">
+            <div className="flex items-center gap-2 " >
+              <svg
+                width="20"
+                height="20"
+                viewBox="0 0 50 50"
+                xmlns="http://www.w3.org/2000/svg"
+              >
+                <path
+                  d="M25 0C15 0 7 8 7 18c0 12 18 30 18 30s18-18 18-30c0-10-8-18-18-18zm0 25a7 7 0 1 1 0-14 7 7 0 0 1 0 14z"
+                  fill="var(--text1)"
+                  stroke="var(--text1)"
+                  strokeWidth="2"
+                />
+              </svg>
+              <p className="text-lg text-text4 hover:scale-105 transition-transform cursor-pointer hover:underline" onClick={onClickLocation}>{route.location?.nLocation}</p>
+            </div>
+            <div className="flex items-center gap-2 "  >
 
-          <div className="flex mt-12">
+              <div
+                className=" cursor-pointer align-middle items-center">
+                <CategoryIcons
+                  size={'20px'}
+                  category={route.category?.imgCategory
+                    ?.split('.')
+                    .slice(0, -1)
+                    .join('.')}
+                  color={'var(--text1)'}
+                />
+              </div>
+              <p className="text-lg text-text4 hover:scale-105 transition-transform hover:underline cursor-pointer"  onClick={onClickCategory}>{route.category?.nameCategory}</p>
+            </div>
+          </div>
+          <div className="flex mt-4">
             <ul className="w-1/2">
-              <li className="text-text2 font-bold">
-                <span className="font-bold text-text4">Distancia</span>
-                {'   '}
-                {route.distance!.toFixed(2).toString().replace('.', ',')} km
+              <li className="flex flex-col items-center">
+                <div className="text-3xl font-black text-text2">
+                  {route.distance!.toFixed(2).toString().replace('.', ',')} km
+                </div>
+                <div className="font-bold text-text4">Distancia</div>
               </li>
-              <li className="text-text2 font-bold">
-                <span className="font-bold text-text4">Duración</span>
-                {'   '}
-                {route.duration}
+              <li className="flex flex-col items-center mt-4">
+                <div className="text-3xl font-black text-text2">
+                  {route.duration}
+                </div>
+                <div className="font-bold text-text4">Duración</div>
               </li>
             </ul>
             <ul className="w-1/2 ">
-              <li className="text-text2 font-bold">
-                <span className="font-bold text-text4">Desnivel</span>
-                {'   '}
-                {route.cumulativeGradient
-                  ? route.cumulativeGradient.toString()
-                  : '-'}{' '}
-                m
+              <li className="flex flex-col items-center">
+                <div className="text-3xl font-black text-text2">
+                  {route.cumulativeGradient
+                    ? Math.round(route.cumulativeGradient)
+                    : '-'}{' '}
+                  m
+                </div>
+                <div className="font-bold text-text4">Desnivel</div>
               </li>
-              <li className="flex gap-2 text-text2 font-bold">
-                <span className="font-bold text-text4">Nivel</span>
-                {'   '}
-                {route.level ? (
-                  <LevelRating level={Number(route.level)} />
-                ) : (
-                  '-'
-                )}
+              <li className="flex flex-col items-center  mt-4">
+                <div className="text-3xl font-black text-text2">
+                  {route.level ? (
+                    <LevelRating level={Number(route.level)} />
+                  ) : (
+                    '-'
+                  )}
+                </div>
+                <div className="font-bold text-text4">Nivel</div>
               </li>
             </ul>
           </div>
         </div>
 
-        <div className="flex gap-2 w-full  ">
+        <div className="flex gap-2 w-full  mt-8">
           <div
             className="flex  bg-color4 rounded-full justify-center items-center hover:scale-105 transition-transform cursor-pointer"
             onClick={onClickProfile}
@@ -107,7 +152,9 @@ const CardRoute = ({ route }: ICardRouteInput) => {
             <Image
               className="w-10 h-10 rounded-full border border-contrast2 object-cover"
               src={imageUser}
-              onError={() => setIimageUser(`${IMAGE_SERVICE_URL}/images/profile/perfil.jpg`)}
+              onError={() =>
+                setIimageUser(`${IMAGE_SERVICE_URL}/images/profile/perfil.jpg`)
+              }
               alt="user"
               width={32}
               height={32}

@@ -1,4 +1,4 @@
-import CreateRouteForm from '@/components/CreateRoute/CreateRouteForm';
+import CreateRouteForm from '@/components/createRoute/CreateRouteForm';
 import IsLogged from '@/guards/logged';
 import { Metadata } from 'next';
 
