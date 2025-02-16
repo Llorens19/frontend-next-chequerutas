@@ -1,5 +1,6 @@
 import ApiService from '@/services/apiService/api.service';
 import { SERVER_ROUTE } from '@/shared/constants/serverServices.constants';
+import { IOptionSelect } from '@/shared/interfaces/components/selects/Select.interface';
 import { ILocations } from '@/shared/interfaces/entities/location.interface';
 import { IRoutePoints } from '@/shared/interfaces/entities/point.interface';
 import { IRoute, IRoutes } from '@/shared/interfaces/entities/route.interface';
@@ -29,5 +30,8 @@ export const RouteQueryService = {
   getRouteById: (id: string): Promise<IRoute> => {
     return ApiService.get<IRoute>(`${SERVER_ROUTE}routes/${id}`);
   },
+  searchLocations: (search: string): Promise<{locations:IOptionSelect[]}> => {
+    return ApiService.post<{locations:IOptionSelect[]}>(`${SERVER_ROUTE}routes/locations/search`,{search});
+  }
 
 };

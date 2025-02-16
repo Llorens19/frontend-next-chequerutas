@@ -141,7 +141,7 @@ const FilterRoute = () => {
         </div>
 
         <div className="flex flex-col w-full justify-end">
-          <label className="text-text1">Distancia</label>
+          <label className="text-text1">{`Distancia ${distanceMin} - ${distanceMax} km`}</label>
           <Slider
             value={[distanceMin, distanceMax]}
             onChange={onChangeDistance}

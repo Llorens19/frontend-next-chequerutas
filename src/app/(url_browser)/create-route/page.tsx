@@ -1,5 +1,5 @@
-
 import CreateRouteForm from '@/components/CreateRoute/CreateRouteForm';
+import IsLogged from '@/guards/logged';
 import { Metadata } from 'next';
 
 export const metadata: Metadata = {
@@ -10,7 +10,9 @@ export const metadata: Metadata = {
 const CreateRoute = () => {
   return (
     <>
-      <CreateRouteForm />
+      <IsLogged>
+        <CreateRouteForm />
+      </IsLogged>
     </>
   );
 };

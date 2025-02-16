@@ -10,18 +10,11 @@ import DropzoneCreateRouteImages from '@/components/dropzones/DropzoneCrateRoute
 import DropzoneGPX from '@/components/dropzones/DropzoneGPX';
 import { titleRegex } from '@/shared/utils/regex/titleRegex.util';
 import { durationRegex } from '@/shared/utils/regex/durationRegex.util';
-import MapDetailsRoute from '@/components/maps/MapDetailsRoute';
-import { MapContainer } from 'react-leaflet';
-import MapListRoutes from '@/components/maps/MapListRoute';
 import MapWithRoute from '@/components/maps/MapCreateroute';
-
-const styles = {
-  backgroundImage: 'url(\'/images/auth/auth.jpg\')',
-  height: '100%',
-  backgroundSize: 'cover',
-  backgroundPosition: 'center top',
-  backgroundRepeat: 'no-repeat',
-};
+import { useCateogryFilterQuery } from '@/reactQuery/queries/category.query';
+import SearchLocations from '@/components/searches/SearchLocations';
+import { useCreateRouteMutation } from '@/reactQuery/mutations/route.mutations';
+import { RouteCommandService } from '@/services/commands/route.commandService';
 
 const CreateRouteForm: React.FC = () => {
   const [title, setTitle] = useState<string>('');
@@ -32,6 +25,7 @@ const CreateRouteForm: React.FC = () => {
   const [isPublic, setIsPublic] = useState<boolean>(true);
   const [coordinates, setCoordinates] = useState<number[][]>([]);
   const [images, setImages] = useState<File[]>([]);
+  const [category, setCategory] = useState<string>('');
 
   const [titleError, setTitleError] = useState<string>('');
   const [durationError, setDurationError] = useState<string>('');
@@ -39,6 +33,12 @@ const CreateRouteForm: React.FC = () => {
   const [locationError, setLocationError] = useState<string>('');
   const [coordinatesError, setCoordinatesError] = useState<string>('');
   const [imagesError, setImagesError] = useState<string>('');
+  const [categoryError, setCategoryError] = useState<string>('');
+  const [descriptionError, setDescriptionError] = useState<string>('');
+
+  const { data: categoryOptions } = useCateogryFilterQuery();
+
+  const creteRoute = useCreateRouteMutation();
 
   const onChangeLevel = (
     event: React.ChangeEvent<unknown>,
@@ -59,6 +59,10 @@ const CreateRouteForm: React.FC = () => {
       coordinates.length === 0 ? 'La ruta es un campo obligatorio' : '';
     const imagesError =
       images.length === 0 ? 'Las imágenes son un campo obligatorio' : '';
+    const categoryError =
+      category === '' ? 'La categoría es un campo obligatorio' : '';
+    const descriptionError =
+      description === '' ? 'La descripción es un campo obligatorio' : '';
 
     if (
       titleError ||
@@ -66,7 +70,9 @@ const CreateRouteForm: React.FC = () => {
       levelError ||
       locationError ||
       coordinatesError ||
-      imagesError
+      imagesError ||
+      categoryError ||
+      descriptionError
     ) {
       correct = false;
       setTitleError(titleError);
@@ -75,47 +81,71 @@ const CreateRouteForm: React.FC = () => {
       setLocationError(locationError);
       setCoordinatesError(coordinatesError);
       setImagesError(imagesError);
+      setCategoryError(categoryError);
+      setDescriptionError(descriptionError);
     }
     return correct;
   };
 
-  const handleSubmit = () => {
+  const handleSubmit = async () => {
     if (validateForm()) {
-      console.log('Formulario correcto');
-    } else {
-      console.log('Formulario incorrecto');
+      const urlImages = [];
+
+      for (const image of images) {
+        const resp = await RouteCommandService.saveRouteImage(image);
+        urlImages.push(resp.url);
+      }
+
+      try {
+        await creteRoute.mutateAsync({
+          title,
+          duration: parseInt(duration),
+          level,
+          idLocation: location,
+          description,
+          isPublic,
+          coordinates,
+          imagesRoutes: urlImages,
+          idCategory: category,
+        });
+        console.log('Route created successfully');
+      } catch (error) {
+        console.error('Error creating route:', error);
+      }
     }
+    console.log({
+      title,
+      duration,
+      level,
+      location,
+      description,
+      isPublic,
+      coordinates,
+      images,
+      category,
+    });
   };
 
   return (
     <div className="flex justify-center items-center h-screen w-full">
       <div className="w-3/5 h-screen flex justify-center relative">
         <div className="w-full h-full">
-          <MapWithRoute coordinates={coordinates as [number,number][]} />
+          <MapWithRoute coordinates={coordinates as [number, number][]} />
         </div>
       </div>
 
       <div className="w-2/5 flex justify-center items-center align-middle mt-16">
         <div className="flex flex-col gap-6 w-2/3">
-          <div className="w-full flex gap-4">
-            <div className="w-9/12">
-              <InputTextForm
-                label="Titulo"
-                type="text"
-                id="title_input"
-                placeholder="Ruta de montaña"
-                data={title}
-                onChange={setTitle}
-                error={titleError}
-              />
-            </div>
-            <div className="w-3/12">
-              <label className="text-text3">Gpx</label>
-              <DropzoneGPX
-                onGPXUpload={(value: number[][]) => setCoordinates(value)}
-              />
-              <p className="text-red-500 text-sm mt-1">{coordinatesError}</p>
-            </div>
+          <div className="w-full">
+            <InputTextForm
+              label="Titulo"
+              type="text"
+              id="title_input"
+              placeholder="Ruta de montaña"
+              data={title}
+              onChange={setTitle}
+              error={titleError}
+            />
           </div>
           <div className="flex gap-4 w-full">
             <div className="w-1/2 items-center">
@@ -153,15 +183,32 @@ const CreateRouteForm: React.FC = () => {
             </div>
           </div>
           <div className="w-full flex gap-4">
-            <div className="w-6/12">
-              <label className="text-text3">Ubicación</label>
+            <div className="w-3/4">
+              <label className="text-text3">Categoría</label>
               <SearchFilters
                 colorText="text3"
                 color="color1"
-                value={location}
-                onSelect={setLocation}
-                options={[{ value: '1', label: '1' }]}
+                value={category}
+                onSelect={setCategory}
+                options={
+                  (categoryOptions as { value: string; label: string }[]) || []
+                }
               />
+              <p className="text-red-500 text-sm mt-1">{categoryError}</p>
+            </div>
+
+            <div className="w-1/4">
+              <label className="text-text3">Gpx</label>
+              <DropzoneGPX
+                onGPXUpload={(value: number[][]) => setCoordinates(value)}
+              />
+              <p className="text-red-500 text-sm mt-1">{coordinatesError}</p>
+            </div>
+          </div>
+          <div className="w-full flex gap-4">
+            <div className="w-6/12">
+              <label className="text-text3">Ubicación</label>
+              <SearchLocations onSelect={setLocation} />
               <p className="text-red-500 text-sm mt-1">{locationError}</p>
             </div>
             <div className="w-4/12 flex flex-col justify-center">
@@ -200,6 +247,7 @@ const CreateRouteForm: React.FC = () => {
               value={description}
               onChange={(e) => setDescription(e.target.value)}
             ></textarea>
+            <p className="text-red-500 text-sm mt-1">{descriptionError}</p>
           </div>
           <div className="w-full">
             <label className="text-text3 text-lg">Imágenes</label>

@@ -3,10 +3,11 @@ import ChangeTheme from '@/components/themes/ChangeTheme';
 import { useGetUserQuery } from '@/reactQuery/queries/user.query';
 import Image from 'next/image';
 import Link from 'next/link';
-import { useRouter } from 'next/navigation';
+import { useRouter, usePathname } from 'next/navigation';
 
 const Header = () => {
   const router = useRouter();
+  const pathname = usePathname();
   const { data: user , isLoading} = useGetUserQuery();
 
   const onClickProfile = (username: string) => {
@@ -22,18 +23,23 @@ const Header = () => {
         <div className="flex items-center space-x-4">
           <nav>
             <ul className="flex gap-4 align-middle items-center">
-              <li>
+              <li className={pathname === '/' ? 'font-bold' : ''}>
                 <Link href="/">Inicio</Link>
               </li>
-              <li>
+              <li className={pathname === '/list-routes' ? 'font-bold' : ''}>
                 <Link href="/list-routes">Rutas</Link>
               </li>
 
-              <li>
+              <li className={pathname === '/payments' ? 'font-bold' : ''}>
                 <Link href="/payments">Suscribirse</Link>
               </li>
 
               {user ? (
+                <>
+                <li className={pathname === '/create-route' ? 'font-bold' : ''}>
+                  <Link href="/create-route">Crear Ruta</Link>
+                </li>
+
                 <li>
                   <div
                     className="flex items-center bg-color3 rounded-full hover:scale-105 transition-transform cursor-pointer"
@@ -49,8 +55,9 @@ const Header = () => {
                     <p className="px-4 text-text1">{user?.username}</p>
                   </div>
                 </li>
+                </>
               ) : (
-                <li>
+                <li className={pathname === '/auth' ? 'font-bold' : ''}>
                   <Link href="/auth">Login/Register</Link>
                 </li>
               )}

@@ -152,14 +152,14 @@ const CardDetailRoute = ({ route }: ICardDetailRouteParams) => {
               </div>
 
               <div className="flex flex-col items-center">
-                <p className="text-5xl text-text2 font-black">{route.level}</p>
+                <p className="text-5xl text-text2 font-black">{Number(route.level).toFixed(1)}</p>
                 <p className="text-lg font-bold text-text4">Nivel</p>
               </div>
 
               <div className="flex flex-col items-center">
                 <div className="flex items-end">
                   <p className="text-5xl text-text2 font-black">
-                    {route.positiveGradient ?? 'N/A'}
+                    {Math.floor(route.positiveGradient) ?? 'N/A'}
                   </p>
                   <span className="text-xl text-text4 font-black ml-1">m</span>
                   <span className="text-green-500 ml-1">
@@ -172,7 +172,7 @@ const CardDetailRoute = ({ route }: ICardDetailRouteParams) => {
               <div className="flex flex-col items-center">
                 <div className="flex items-end">
                   <p className="text-5xl text-text2 font-black">
-                    {route.negativeGradient ?? 'N/A'}
+                    {Math.floor(route.negativeGradient) ?? 'N/A'}
                   </p>
                   <span className="text-xl text-text4 font-black ml-1">m</span>
                   <span className="text-red-500 ml-1">
@@ -185,7 +185,7 @@ const CardDetailRoute = ({ route }: ICardDetailRouteParams) => {
               <div className="flex flex-col items-center">
                 <div className="flex items-end">
                   <p className="text-5xl text-text2 font-black">
-                    {route.cumulativeGradient ?? 'N/A'}
+                    {Math.floor(route.cumulativeGradient) ?? 'N/A'}
                   </p>
                   <span className="text-xl text-text4 font-black ml-1">m</span>
                   <span className="text-green-500 ml-1">

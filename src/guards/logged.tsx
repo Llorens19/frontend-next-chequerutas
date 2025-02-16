@@ -11,7 +11,7 @@ const IsLogged = ({ children }: { children: ReactNode }) => {
   const { data: user, isLoading } = useGetUserQuery();
 
   useEffect(() => {
-    if (user?.username) {
+    if (!user?.username) {
       router.push('/');
     }
   }, [user, router, isLoading]);
@@ -19,7 +19,7 @@ const IsLogged = ({ children }: { children: ReactNode }) => {
   if (isLoading) return <SpinnerLoading />;
 
 
-  if (!user) return <>{children}</>;
+  if (user) return <>{children}</>;
 };
 
 export default IsLogged;
