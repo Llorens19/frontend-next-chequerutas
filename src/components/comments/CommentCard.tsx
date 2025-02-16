@@ -40,7 +40,8 @@ const CommentCard = ({ comment }: { comment: IComment }) => {
   }, [isReplying]);
 
   const [imgSrc, setImgSrc] = useState(`${IMAGE_SERVICE_URL}/${comment.user?.imgUser}`);
-  const [imgCommentSrc, setImgCommentSrc] = useState(`${IMAGE_SERVICE_URL}/${comment.imgComment}`);
+
+  console.log(`${IMAGE_SERVICE_URL}`);
 
   if (isLoading) return <SpinnerLoading />;
 
@@ -65,16 +66,16 @@ const CommentCard = ({ comment }: { comment: IComment }) => {
             </p>
           </div>
           {comment.imgComment && (
-            <div className="w-1/2 mx-auto">
-              <Image
-                className="rounded-3xl"
-                src={imgCommentSrc}
-                // onError={() => setImgCommentSrc(`${IMAGE_SERVICE_URL}/images/profile/perfil.jpg`)}
-                alt={comment.body}
-                width={100}
-                height={100}
-              />
-            </div>
+            <div className="w-auto  mx-auto max-h-[600px] overflow-hidden">
+            <Image
+              className=" w-full h-auto max-h-[600px] object-contain"
+              src={`${comment.imgComment}`}
+              alt={comment.body}
+              width={1000}
+              height={600}
+            />
+          </div>
+
           )}
           <p className="text-sm text-text1 whitespace-pre">{comment.body}</p>
 
