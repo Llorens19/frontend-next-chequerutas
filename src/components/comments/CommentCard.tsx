@@ -108,7 +108,7 @@ const CommentCard = ({ comment }: { comment: IComment }) => {
           <input
             ref={inputRef}
             type="text"
-            className="w-full p-2 border rounded-3xl bg-color1"
+            className="w-full p-2 border rounded-3xl bg-color1 text-text1"
             placeholder="Escribe un comentario"
             value={body}
             onChange={(e) => setBody(e.target.value)}
