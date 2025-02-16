@@ -37,6 +37,8 @@ const CardRoute = ({ route }: ICardRouteInput) => {
 
   if (isLoading) return <CardRouteSkeleton />;
 
+  console.log(`${IMAGE_SERVICE_URL}/images/category/jpg/rutas_boscosas.jpg`);
+
 
 
 
@@ -45,7 +47,7 @@ const CardRoute = ({ route }: ICardRouteInput) => {
       <div className="w-1/2">
         <Image
           className="rounded-3xl w-full h-full"
-          src={`${IMAGE_SERVICE_URL}/images/category/moto.jpg`}
+          src={`${IMAGE_SERVICE_URL}/images/category/jpg/rutas_boscosas.jpg`}
           alt={route.title}
           width={800}
           height={300}
