@@ -24,7 +24,7 @@ export const useCategoryQuery = () =>
   useQuery({
     queryKey: ['category', 'all'],
     queryFn: CategoryQueryService.getCategories,
-    staleTime: 20000,
+    staleTime: 200000,
   });
 
 
@@ -32,5 +32,5 @@ export const useCateogryFilterQuery = () =>
   useQuery({
     queryKey: ['category', 'filters'],
     queryFn: async () => categoryFilterDto(await CategoryQueryService.getCategories()),
-    staleTime: 20000,
+    staleTime: 200000,
   });

@@ -9,34 +9,29 @@ export const generateMetadata = async ({
 }: {
   params: { id: string };
 }): Promise<Metadata> => {
-  const { id } = await Promise.resolve(params);
+  try {
+    const { id } = await Promise.resolve(params);
 
-  if (!id || !uuidRegex(id)) {
+    if (!id || !uuidRegex(id)) {
+      return {};
+    }
+
+    console.log('Route ID:', id);
+    const route = await RouteQueryService.getRouteById(id);
+
+    return route ? { title: route.title } : {};
+  } catch (error) {
     return {};
   }
-
-  console.log('Route ID:', id);
-  const route = await RouteQueryService.getRouteById(id);
-
-  return route ? { title: route.title } : {};
 };
 
 const Route = async ({ params }: { params: { id: string } }) => {
   const { id } = await Promise.resolve(params);
 
-  if (!id || !uuidRegex(id)) {
-    return <p>Error</p>;
-  }
-
-  const route = await RouteQueryService.getRouteById(id);
-  if (!route || !uuidRegex(id)) {
-    return <p>Error</p>;
-  }
 
   return (
     <>
-      <DetailsRoute route={route} />
-      <CommentsRoute route={route} />
+      <DetailsRoute idRoute={id} />
     </>
   );
 };

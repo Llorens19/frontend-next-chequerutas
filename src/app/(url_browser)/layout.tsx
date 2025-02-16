@@ -1,28 +1,27 @@
 'use client';
+import Footer from '@/components/layout/Footer';
 import Header from '@/components/layout/Header';
 import queryClient from '@/libs/react-query';
+import ThemeSwitcher from '@/providers/them/themProvider';
 import { QueryClientProvider } from '@tanstack/react-query';
 
 import { ReactNode } from 'react';
 
 const RootLayout = ({ children }: { children: ReactNode }) => {
-
-
-
   return (
     <>
       <html lang="es">
-        <body suppressHydrationWarning={true} className="bg-color1">
-          <QueryClientProvider client={queryClient}>
-            <div className="flex flex-col min-h-screen">
-              <Header />
-              <div className="flex-grow h-full">{children}</div>
-              <div className="h-1/7 w-full fixed bottom-0">
-                {/* <Navbar /> */}
+        <ThemeSwitcher>
+          <body suppressHydrationWarning={true} className="bg-color1">
+            <QueryClientProvider client={queryClient}>
+              <div className="flex flex-col min-h-screen">
+                <Header />
+                <div className="flex-grow">{children}</div>
+                <Footer />
               </div>
-            </div>
-          </QueryClientProvider>
-        </body>
+            </QueryClientProvider>
+          </body>
+        </ThemeSwitcher>
       </html>
     </>
   );

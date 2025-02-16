@@ -5,22 +5,119 @@
   margin: 0;
   padding: 0;
   box-sizing: border-box;
+  scrollbar-gutter: stable;
+  scrollbar-width: thin;
+  scrollbar-color: #ffffff #000000;
+  /* font-family:  Cambria, Cochin, Georgia, Times, 'Times New Roman', serif; */
+/*
+  font-family: Verdana, Geneva, Tahoma, sans-serif; */
 }
 
-:root {
+/* :root {
   --background: #ffffff;
   --foreground: #171717;
 }
 
 @media (prefers-color-scheme: dark) {
   :root {
-    --background: #0a0a0a;
-    --foreground: #ededed;
+    --background: #0a0a0a00;
+    --foreground: #ededed65;
   }
+} */
+
+
+
+
+.blue{
+  --background1: #e3f2fd;
+  --header: #3a5a78;
+  --card1: #b0c4de;
+  --color1: #f0f8ff;
+  --color2: #e7efff;
+  --color3: #8da8c7;
+  --color4: #5c7a99;
+  --color5: #3e5f7e;
+  --text1: #1e2f40;
+  --text2: #374f6b;
+  --text3: #3e4a5a;
+  --text4: #8ba0b3;
+  --contrast1: #1b5f8c;
+  --contrast2: #d26a38;
+  --contrast3: #7c3a2f;
+  --contrast1-hover: #144a6b;
+  --contrast2-hover: #b8572d;
 }
+
+
+.dark {
+  --background1: #14161b;
+  --header: #14161b;
+  --card1: #ffffff;
+  --color1: #070a0c;
+  --color2: #14161b;
+  --color3: #2a2a31;
+  --color4: #424a47;
+  --color5: #6a6d69;
+  --text1: #ffffff;
+  --text2: #555555;
+  --text3: #888888;
+  --text4: #999999;
+  --contrast1: #00b0ff;
+  --contrast2: #ff7139;
+  --contrast3: #006099;
+  --contrast1-hover: #0090df;
+  --contrast2-hover: #ff5c00;
+}
+
+.retro {
+  --background1: #f5efe6;
+  --header: #a67c52;
+  --card1: #d9c2a9;
+  --color1: #ffffee;
+  --color2: #f6e8c9;
+  --color3: #bfa58a;
+  --color4: #9c7b5d;
+  --color5: #855c3c;
+  --text1: #3e2f23;
+  --text2: #5c4632;
+  --text3: #776b5d;
+  --text4: #9e9b91;
+  --contrast1: #2a5c8a;
+  --contrast2: #d26a38;
+  --contrast3: #7c3a2f;
+  --contrast1-hover: #1f4a6a;
+  --contrast2-hover: #b8572d;
+}
+
+
+:root {
+  --background1: #FFFFFF;
+  --header: #48bc28;
+  --card1: #999999;
+  --color1: #f0f0f0;
+  --color2: #ffffff;
+  --color3: #cfecc7;
+  --color4: #aee0a0;
+  --color5: #3b9b21;
+  --color6: #6ac850;
+  --text1: #003000;
+  --text2: #004000;
+  --text3: #555555;
+  --text4: #888888;
+  --contrast1: #00b0ff;
+  --contrast2: #ff7139;
+  --contrast3: #006099;
+  --contrast1-hover: #0090df;
+  --contrast2-hover: #ff5c00;
+}
+
+
+
+
+
 
 body {
   color: var(--foreground);
   background: var(--background);
-  font-family: Arial, Helvetica, sans-serif;
+  overflow-y: scroll;
 }

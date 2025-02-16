@@ -1,6 +1,8 @@
 'use client';
 import InputSelectForm from '@/components/inputs/InputSelectForm';
 import InputTextForm from '@/components/inputs/InputTextForm';
+import { AuthCommandService } from '@/services/commands/auth.commandService';
+import { ErrorResp } from '@/shared/utils/error.util';
 import {
   emailRegex,
   nameRegex,
@@ -9,6 +11,7 @@ import {
   usernameRegex,
 } from '@/shared/utils/regex';
 import { useState } from 'react';
+import { useRouter } from 'next/navigation';
 
 const Register = () => {
 
@@ -17,6 +20,7 @@ const Register = () => {
     { value: 'client', label: 'Cliente' },
     { value: 'admin', label: 'Admin' },
   ];
+  const router = useRouter();
 
 
 
@@ -65,6 +69,8 @@ const Register = () => {
     setErrorRole(errorRole);
 
 
+
+
     if (role === 'client') {
       const errorPhone = phoneRegex(phone);
       setErrorPhone(errorPhone);
@@ -87,9 +93,40 @@ const Register = () => {
     return true;
   };
 
-  const handleRegister = () => {
+  const handleRegister = async () => {
     if (validateRegister()) {
-      console.log('Registrando');
+
+      const userData = {
+        name,
+        surname,
+        username,
+        email,
+        birthdate,
+        password,
+        role,
+        ...(role === 'client' ? { client: { phone } } : {}),
+      };
+
+      try {
+        await AuthCommandService.register(userData);
+        router.push('/');
+      } catch (error : unknown) {
+
+        if (error instanceof ErrorResp) {
+          if (error.code === 'EmailAlreadyInUse') {
+            setErrorEmail('El email ya está en uso');
+          }
+          if (error.code === 'UsernameAlreadyInUse') {
+            setErrorUsername('El nombre de usuario ya está en uso');
+          }
+        }
+
+
+        console.error(error);
+      }
+
+      // console.log(userData);
+
     }
   };
 
@@ -204,7 +241,7 @@ const Register = () => {
         />
       </div>
       <button
-        className="bg-white text-color3 p-1.5 rounded-lg border-2 border-white hover:bg-color1 hover:text-white transition duration-300 text-ms"
+        className="bg-text1 text-color3 p-1.5 rounded-3xl border-2 border-text1 hover:bg-color1 hover:text-text1 transition duration-300 text-ms"
         onClick={handleRegister}
       >
         Registrarse

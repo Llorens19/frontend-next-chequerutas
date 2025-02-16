@@ -1,4 +1,4 @@
-import getCategories from '@/actions/getCategories.action';
+
 import CarouselCategory from '@/components/carousels/CarouselCategory';
 import SearchHome from '@/components/searches/SearchHome';
 import { CategoryQueryService } from '@/services/queries/category.queryService';
@@ -10,37 +10,35 @@ export const metadata: Metadata = {
 };
 
 const Home = async () => {
-  const styles = {
-    backgroundImage:
-      'linear-gradient(to bottom, rgba(20, 22, 27, 0.3), rgba(20, 22, 27, 1)), url(\'/images/home_header.jpg\')',
-    height: '30vh',
-    backgroundSize: 'cover',
-    backgroundPosition: 'top center',
-  };
-
-  // const categories = await getCategories();
-
-  const {categories}= await CategoryQueryService.getCategories();
+  const { categories } = await CategoryQueryService.getCategories();
 
   console.log(categories);
 
-
-
   return (
     <>
-      <section
-        className="flex flex-col items-center justify-center bg-cover bg-center mt-16 z-10"
-        style={styles}
-      >
-        <h1 className="text-white text-4xl font-bold">ViaSana</h1>
-        <p className="text-white mt-4">Este es un fondo en blanco y negro</p>
-        <SearchHome />
+      <section className="relative w-full h-screen">
+        <div
+          className="absolute inset-0 bg-cover bg-center bg-fixed"
+          style={{ backgroundImage: 'url(\'/images/home_header.jpg\')' }}
+        />
+
+        <div className="relative z-10 flex flex-col items-center justify-center h-full bg-black/50">
+          <h1 className="text-text1 text-4xl font-bold">ViaSana</h1>
+          <p className="text-text1 mt-4">Este es un fondo en blanco y negro</p>
+          <SearchHome />
+          <div className="w-full">
+            <h2 className="flex justify-center text-2xl font-bold text-text1 mb-4">
+              Categorías
+            </h2>
+            <CarouselCategory categories={categories}  />
+          </div>
+        </div>
       </section>
-      <section className="sport-carousel p-4">
-        <h2 className="flex justify-center text-2xl font-bold text-white mb-4">
-          Categorias
+
+      <section className="sport-carousel p-4 min-h-screen bg-background1 relative z-20">
+        <h2 className="flex justify-center text-2xl font-bold text-text1 mb-4">
+          Categorías
         </h2>
-        <CarouselCategory categories={categories} />
       </section>
     </>
   );

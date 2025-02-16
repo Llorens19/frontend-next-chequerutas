@@ -6,10 +6,11 @@ import Image from 'next/image';
 import { useState } from 'react';
 
 const GalleryDetails = ({ route }: IGalleryDetailsParams) => {
-
   const { imagesRoutes } = route as IRoute;
 
-  const [selectedImage, setSelectedImage] = useState<string>(imagesRoutes?.[0]?.imageUrl || '/images/routes/ruta_generica.png');
+  const [selectedImage, setSelectedImage] = useState<string>(
+    imagesRoutes?.[0]?.imageUrl || '/images/routes/ruta_generica.png'
+  );
 
   const onClickImage = (imageUrl: string) => {
     setSelectedImage(imageUrl);
@@ -17,48 +18,56 @@ const GalleryDetails = ({ route }: IGalleryDetailsParams) => {
 
   return (
     <>
-      <div className=" flex rounded-lg overflow-hidden w-full">
-        <div className="w-5/6 bg-color4 rounded-lg">
+      <div className="flex flex-col rounded-3xl overflow-hidden w-full gap-2">
+        <div className="w-full bg-color4 rounded-3xl">
           <Image
-            className="rounded-lg object-cover w-full h-full"
+            className="rounded-3xl object-cover w-full h-full"
             src={selectedImage}
             alt="holaaa"
-            width={2000}
-            height={2000}
+            width={800}
+            height={800}
           />
         </div>
-        <div className="w-1/6 ml-8 flex flex-col justify-between gap-4">
-
-            {imagesRoutes?.slice(0, 4).map((image, index) => (
+        <div className="flex  gap-2">
+          {imagesRoutes?.slice(0, 4).map((image, index) => (
             <div
               key={index}
-              className="bg-color4 w-full rounded-lg"
+              className="bg-color4 w-1/4 rounded-3xl"
               onClick={() => onClickImage(image.imageUrl)}
             >
               <Image
-              className="rounded-lg object-cover w-full h-full"
-              src={image.imageUrl}
-              alt="holaaa"
-              width={200}
-              height={200}
+                className="rounded-3xl object-cover w-full h-full"
+                src={image.imageUrl}
+                alt="holaaa"
+                width={200}
+                height={200}
               />
             </div>
-            ))}
+          ))}
 
-
-            { imagesRoutes?.length === 0 && (
-              <div
-              className="bg-color4 w-full rounded-lg"
-            >
+          {imagesRoutes?.length === 0 && (
+            <div className="bg-color4 w-1/4 rounded-3xl">
               <Image
-              className="rounded-lg object-cover w-full h-full"
-              src={'/images/routes/ruta_generica.png'}
-              alt="holaaa"
-              width={200}
-              height={200}
+                className="rounded-3xl object-cover w-full h-full"
+                src={'/images/routes/ruta_generica.png'}
+                alt="holaaa"
+                width={200}
+                height={200}
               />
-            </div>)
-            }
+            </div>
+          )}
+
+          {!imagesRoutes?.[1] && (
+          <div className="bg-color2 w-1/4 rounded-3xl"></div>
+          )}
+
+          {!imagesRoutes?.[1] && (
+          <div className="bg-color2 w-1/4 rounded-3xl"></div>
+          )}
+
+          {!imagesRoutes?.[1] && (
+          <div className="bg-color2 w-1/4 rounded-3xl"></div>
+          )}
 
         </div>
       </div>

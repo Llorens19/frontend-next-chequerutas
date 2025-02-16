@@ -6,11 +6,9 @@ import { useGetUserQuery } from '@/reactQuery/queries/user.query';
 import SpinnerLoading from '@/components/spinners/SpinnerLoading';
 
 
-const Test = ({ children }: { children: ReactNode }) => {
+const IsLogged = ({ children }: { children: ReactNode }) => {
   const router = useRouter();
   const { data: user, isLoading } = useGetUserQuery();
-
-  console.log('User:', user);
 
   useEffect(() => {
     if (user?.username) {
@@ -18,13 +16,10 @@ const Test = ({ children }: { children: ReactNode }) => {
     }
   }, [user, router, isLoading]);
 
-  if (isLoading) {
-    return <SpinnerLoading />;
-  }
+  if (isLoading) return <SpinnerLoading />;
 
-  if (!user) {
-    return <>{children}</>;
-  }
+
+  if (!user) return <>{children}</>;
 };
 
-export default Test;
+export default IsLogged;

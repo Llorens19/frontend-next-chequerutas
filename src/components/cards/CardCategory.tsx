@@ -1,12 +1,14 @@
 import Image from 'next/image';
 import { ICategory } from '@/shared/interfaces/entities/category.interface';
+import { IMAGE_SERVICE_URL } from '@/shared/constants/backendServices.constsnts';
+
 
 const CardCategory = ({ category }: { category: ICategory }) => {
   return (
-    <div className="relative group shadow-md rounded-lg text-center w-full h-auto overflow-hidden">
+    <div className="relative group rounded-3xl text-center w-full h-auto overflow-hidden">
       <Image
         className="rounded-t-lg w-full h-auto object-cover"
-        src={`/images/category/${category.imgCategory}`}
+        src={`${IMAGE_SERVICE_URL}/category/${category.imgCategory}`}
         alt={category.nameCategory}
         width={1200}
         height={800}
@@ -17,10 +19,10 @@ const CardCategory = ({ category }: { category: ICategory }) => {
       </h3>
 
       <div className="absolute inset-0 flex flex-col items-center justify-center bg-black bg-opacity-50 opacity-0 group-hover:opacity-100 transition-opacity duration-500">
-        <h3 className="text-base sm:text-lg md:text-xl font-bold text-white">
+        <h3 className="text-base sm:text-lg md:text-xl font-bold text-text1">
           {category.nameCategory}
         </h3>
-        <p className="text-xs sm:text-sm md:text-base text-white text-center px-4 sm:px-6">
+        <p className="text-xs sm:text-sm md:text-base text-text1 text-center px-4 sm:px-6">
           {category.descCategory}
         </p>
       </div>

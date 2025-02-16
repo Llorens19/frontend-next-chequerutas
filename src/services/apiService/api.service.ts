@@ -13,9 +13,13 @@ console.log('Backend URL:', process.env.BACKEND_URL);
 axiosClient.interceptors.request.use(
   (config) => {
     if (isBrowser) {
-      const token = localStorage.getItem('accessToken');
-      if (token) {
-        config.headers.Authorization = `Bearer ${token}`;
+      const accessToken = localStorage.getItem('accessToken');
+      const refreshToken = localStorage.getItem('refreshToken');
+      if (accessToken) {
+        config.headers.Authorization = `Bearer ${accessToken}`;
+      }
+      if (refreshToken) {
+        config.headers.refresh_authorization = `Bearer ${refreshToken}`;
       }
     }
 
@@ -79,6 +83,31 @@ const ApiService = {
       throw error;
     }
   },
+
+  async uploadFile<T>(url: string, file: File, extraData?: Record<string, any>): Promise<T> {
+    try {
+        const formData = new FormData();
+        formData.append('file', file);
+
+        if (extraData) {
+            Object.keys(extraData).forEach((key) => {
+                formData.append(key, extraData[key]);
+            });
+        }
+
+        const response = await axiosClient.post<T>(url, formData, {
+            headers: {
+                'Content-Type': 'multipart/form-data',
+            },
+        });
+
+        return response.data;
+    } catch (error) {
+        this.handleError(error);
+        throw error;
+    }
+},
+
 
   handleError(error: unknown): never {
     if (axios.isAxiosError(error) && error.response) {

@@ -5,5 +5,5 @@ export const useProfileQuery = (username: string) =>
   useQuery({
     queryKey: ['profile', username],
     queryFn:async () => await ProfileQueryService.getProfileByUsername(username),
-    staleTime: 20000, //20 segundos
+    staleTime: 20000,
   });
