@@ -27,7 +27,7 @@ const SearchFilters = ({ options, value, colorText ='text1', color='color3', bor
         type="text"
         value={searchQuery}
         onChange={(e) => setSearchQuery(e.target.value)}
-        placeholder="Buscar por ubicación"
+        placeholder="Buscar"
         className={`text-text1 text-ms bg-${color} w-full p-1.5 px-4 pr-10 rounded-3xl border-2 border-${border} focus:outline-none   placeholder-text3`}
         onFocus={() => setIsOpen(true)}
         onBlur={() => setTimeout(() => setIsOpen(false), 200)}

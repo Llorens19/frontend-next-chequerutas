@@ -32,7 +32,7 @@ const CardUser = ({ user }: { user: IUserGeneric }) => {
   };
 
 
-  const [imgSrc, setImgSrc] = useState(`${IMAGE_SERVICE_URL}/${user?.imgUser}`);
+  const [imgSrc, setImgSrc] = useState(user?.imgUser || '/images/profile/perfil.jpg');
 
 
 
@@ -45,7 +45,7 @@ const CardUser = ({ user }: { user: IUserGeneric }) => {
         <div className="flex flex-col items-center justify-center align-middle">
           <Image
           src={ imgSrc }
-          onError={() => setImgSrc(`${IMAGE_SERVICE_URL}/profile/perfil.jpg`)}
+          onError={() => setImgSrc('/images/profile/perfil.jpg')}
           className="w-16 h-16 rounded-full"
           alt="User Avatar"
           width={64}
@@ -57,7 +57,7 @@ const CardUser = ({ user }: { user: IUserGeneric }) => {
         </div>
 
         <div className="flex-grow text-center">
-          <p className="text-lg font-semibold">{user.name}</p>
+          <p className="text-lg text-text2 font-semibold">{user.name}</p>
           <p className="text-sm text-text1">{user.surname}</p>
         </div>
 

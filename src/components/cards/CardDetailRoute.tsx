@@ -216,7 +216,7 @@ const CardDetailRoute = ({ route }: ICardDetailRouteParams) => {
             <p className="text-lg  text-text4 ">{route.description}</p>
           </div>
 
-          <div className="flex justify-between w-1/2 mb-8 bg-color2 rounded-3xl p-4">
+          <div className="flex justify-between w-1/2 mb-8 bg-color2 rounded-3xl p-4 max-h-20">
             <div
               className="flex  bg-color4 rounded-full justify-center items-center hover:scale-105 transition-transform cursor-pointer"
               onClick={() => router.push(`/profile/${route.user?.username}`)}
