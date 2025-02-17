@@ -15,6 +15,11 @@ import { useCateogryFilterQuery } from '@/reactQuery/queries/category.query';
 import SearchLocations from '@/components/searches/SearchLocations';
 import { useCreateRouteMutation } from '@/reactQuery/mutations/route.mutations';
 import { RouteCommandService } from '@/services/commands/route.commandService';
+import { useRouter } from 'next/navigation';
+import { NotificationCommandService } from '@/services/commands/notification.commandService';
+import { User } from 'lucide-react';
+import { useGetUserQuery } from '@/reactQuery/queries/user.query';
+import { useSendNotificationMutation } from '@/reactQuery/mutations/notification.mutations';
 
 const CreateRouteForm: React.FC = () => {
   const [title, setTitle] = useState<string>('');
@@ -46,6 +51,12 @@ const CreateRouteForm: React.FC = () => {
   ) => {
     setLevel(newValue || 0);
   };
+
+  const router = useRouter();
+
+  const {data: userLogged} = useGetUserQuery();
+
+  const sendNotification = useSendNotificationMutation();
 
   const validateForm = (): boolean => {
     let correct = true;
@@ -108,9 +119,17 @@ const CreateRouteForm: React.FC = () => {
           imagesRoutes: urlImages,
           idCategory: category,
         });
-        console.log('Route created successfully');
+
+        await sendNotification.mutateAsync({
+          email: userLogged!.email,
+          title: 'Nueva ruta creada correctamente',
+          body: `Se ha creado una nueva ruta con el título ${title}.`,
+          idUser: userLogged!.idUser,
+          type: 'success',
+        });
+
+        router.push('/');
       } catch (error) {
-        console.error('Error creating route:', error);
       }
     }
     console.log({

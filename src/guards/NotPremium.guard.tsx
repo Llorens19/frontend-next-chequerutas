@@ -19,7 +19,7 @@ const IsNotPremium = ({ children }: { children: ReactNode }) => {
   if (isLoading) return <SpinnerLoading />;
 
 
-  if (!user) return <>{children}</>;
+  return <>{children}</>;
 };
 
 export default IsNotPremium;

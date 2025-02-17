@@ -49,7 +49,7 @@ const ListNotifications = ({
         })}
 
         {(!notifications || notifications.length === 0 || notifications.every(notification => notification.deleted)) && (
-            <h2 className="text-2xl text-text1">No hay notificaciones</h2>
+            <h2 className="text-2xl text-text1 text-center">No hay notificaciones</h2>
           )}
 
 

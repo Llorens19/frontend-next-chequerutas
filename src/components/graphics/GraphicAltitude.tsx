@@ -7,6 +7,8 @@ Chart.register(...registerables);
 
 const GraphicAltitude = ({ coordinates }: IGraphicAltitudeProps) => {
   const points = altitudeDistancePoints(coordinates);
+  const minAltitude = Math.min(...points.map(p => p.altitude));
+  const maxAltitude = Math.max(...points.map(p => p.altitude));
 
   const options = {
     responsive: true,
@@ -27,9 +29,9 @@ const GraphicAltitude = ({ coordinates }: IGraphicAltitudeProps) => {
         title: {
           display: true,
         },
-        beginAtZero: true,
-        suggestedMin: 0,
-        suggestedMax: Math.max(...points.map(p => p.altitude))
+        beginAtZero: false, // No comienza en 0
+        suggestedMin: minAltitude, // Comienza en el valor mínimo
+        suggestedMax: maxAltitude
       }
     },
     plugins: {

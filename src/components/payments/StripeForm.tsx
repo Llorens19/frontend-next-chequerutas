@@ -11,6 +11,8 @@ import { currencyOptions } from '@/shared/constants/components/payments/StripeFo
 import { PaymentQueryService } from '@/services/queries/payment.queryService';
 import { ProfileCommandService } from '@/services/commands/profile.commandService';
 import { useRouter } from 'next/navigation';
+import { useSendNotificationMutation } from '@/reactQuery/mutations/notification.mutations';
+import { useGetUserQuery } from '@/reactQuery/queries/user.query';
 
 const StripeForm = ({
   amount,
@@ -35,6 +37,10 @@ const StripeForm = ({
   const finalAmountInCents = Math.round(parseFloat(finalAmount) * 100);
 
   const router = useRouter();
+
+  const sendNotification = useSendNotificationMutation();
+
+  const {data: userLogged} = useGetUserQuery();
 
 
 
@@ -120,10 +126,25 @@ const StripeForm = ({
     } else {
       try{
         await ProfileCommandService.premiumUser(time);
+        await sendNotification.mutateAsync({
+          email,
+          title: 'Pago realizado',
+          body: `Se ha realizado el pago de ${selectedCurrency} ${convertedAmount} con éxito`,
+          idUser: userLogged!.idUser,
+          type: 'info',
+        });
 
         router.push('/');
       }catch(error){
-        console.error('Error premiumUser:', error);
+
+        await sendNotification.mutateAsync({
+          email,
+          title: 'Pago no realizado',
+          body: `No se ha podido realizar el pago de ${selectedCurrency} ${convertedAmount}`,
+          idUser: userLogged!.idUser,
+          type: 'error',
+        });
+
       }
 
     }

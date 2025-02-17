@@ -3,7 +3,9 @@ import CardProduct from '@/components/cards/CardProduct';
 import StripeForm from '@/components/payments/StripeForm';
 import IsNotPremium from '@/guards/NotPremium.guard';
 import StripeProvider from '@/providers/stripe/StripeProvider';
+import { useGetUserQuery } from '@/reactQuery/queries/user.query';
 import { IStripeFormProps } from '@/shared/interfaces/components/payments/StripeForm.interface';
+import { useRouter } from 'next/navigation';
 import { useState } from 'react';
 
 const description1 = [
@@ -28,6 +30,8 @@ const description3 = [
 
 const Payments = () => {
   const [isPaying, setIsPaying] = useState(false);
+  const {data: userLogged} = useGetUserQuery();
+  const router = useRouter();
 
   const [product, setProduct] = useState<IStripeFormProps>({
     time: '1m',
@@ -38,10 +42,13 @@ const Payments = () => {
 
 
   const onSubscribeCard1 = () => {
-    console.log('1...');
+    router.push('/auth');
   };
 
   const onSubscribeCard2 = () => {
+    if(!userLogged){
+      router.push('/auth');
+    }
     setIsPaying(true);
     setProduct({
       time: '1y',
@@ -52,6 +59,9 @@ const Payments = () => {
   };
 
   const onSubscribeCard3 = () => {
+    if(!userLogged){
+      router.push('/auth');
+    }
     setIsPaying(true);
     setProduct({
       time: '1m',
@@ -77,7 +87,7 @@ const Payments = () => {
               title={'Suscipción Gratuita'}
               description={description1}
               amountEur={0}
-              isButtonEnabled={false}
+              isButtonEnabled={!userLogged}
               onSubscribe={onSubscribeCard1}
             />
             <CardProduct

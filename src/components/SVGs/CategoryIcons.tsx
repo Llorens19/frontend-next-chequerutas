@@ -302,7 +302,7 @@ const CategoryIcons = ({ category, color, size = '30px' }: { category?: string, 
     >
       <path
         fill={color}
-        fill-rule="evenodd"
+        fillRule="evenodd"
         d="
 		M 256,106
 		A 150,150 0 1,1 256,406
