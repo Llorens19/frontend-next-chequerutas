@@ -27,7 +27,7 @@ const CardRoute = ({ route }: ICardRouteInput) => {
     router.push(`/profile/${route.user?.username}`);
   };
 
-  const [imageUser, setIimageUser] = useState(route.user?.imgUser || '');
+  const [imageUser, setIimageUser] = useState(route.user?.imgUser ||  '/images/profile/perfil.jpg');
 
   if (isLoading) return <CardRouteSkeleton />;
 

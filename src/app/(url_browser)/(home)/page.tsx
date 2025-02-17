@@ -23,7 +23,7 @@ const Home = async () => {
         />
 
         <div className="relative z-10 flex flex-col items-center justify-center h-full bg-black/50">
-          <h1 className="text-text1 text-4xl font-bold">ViaSana</h1>
+          <h1 className="text-text1 text-4xl font-bold">CheQueRutas</h1>
           <p className="text-text1 mt-4">Este es un fondo en blanco y negro</p>
           <SearchHome />
           <div className="w-full">
