@@ -1,6 +1,7 @@
 'use client';
 import CardProduct from '@/components/cards/CardProduct';
 import StripeForm from '@/components/payments/StripeForm';
+import IsNotPremium from '@/guards/NotPremium.guard';
 import StripeProvider from '@/providers/stripe/StripeProvider';
 import { IStripeFormProps } from '@/shared/interfaces/components/payments/StripeForm.interface';
 import { useState } from 'react';
@@ -61,6 +62,7 @@ const Payments = () => {
 
   return (
     <>
+    <IsNotPremium>
       {isPaying ? (
         <StripeProvider>
           <StripeForm amount={product.amount} tax={product.tax} savings={product.savings} time={product.time}/>
@@ -98,6 +100,7 @@ const Payments = () => {
           </div>
         </section>
       )}
+    </IsNotPremium>
     </>
   );
 };

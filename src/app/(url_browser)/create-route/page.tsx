@@ -1,5 +1,5 @@
 import CreateRouteForm from '@/components/createRoute/CreateRouteForm';
-import IsLogged from '@/guards/logged';
+import IsLogged from '@/guards/Logged.guard';
 import { Metadata } from 'next';
 
 export const metadata: Metadata = {

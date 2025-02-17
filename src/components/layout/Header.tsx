@@ -30,9 +30,9 @@ const Header = () => {
                 <Link href="/list-routes">Rutas</Link>
               </li>
 
-              <li className={pathname === '/payments' ? 'font-bold' : ''}>
+            { user?.premiumLevel && user?.premiumLevel> 0 ? '' :  <li className={pathname === '/payments' ? 'font-bold' : ''}>
                 <Link href="/payments">Suscribirse</Link>
-              </li>
+              </li>}
 
               {user ? (
                 <>

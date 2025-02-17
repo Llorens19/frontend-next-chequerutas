@@ -1,6 +1,7 @@
 import AuthContent from '@/components/auth/authContent';
 import IsNotLogged from '@/guards/NotLogged.guard';
 
+
 import { Metadata } from 'next';
 
 export const metadata: Metadata = {
