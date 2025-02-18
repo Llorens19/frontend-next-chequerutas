@@ -9,6 +9,7 @@ module.exports = {
         card1: 'var(--card1)',
         color1: 'var(--color1)',
         color2: 'var(--color2)',
+        color2_selected: 'var(--color2_selected)',
         color3: 'var(--color3)',
         color4: 'var(--color4)',
         color5: 'var(--color5)',

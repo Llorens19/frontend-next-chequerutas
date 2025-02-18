@@ -26,30 +26,30 @@ const CardNotification = ({
     }
   > = {
     info: {
-      bg: 'bg-color3',
+      bg: 'bg-color2_selected',
       text: 'text-blue-800 dark:text-blue-400',
-      border: 'border-blue-300 dark:border-blue-800',
+      border: 'border-transparent',
       btnBg: 'bg-blue-800 dark:bg-blue-600',
       btnHover: 'hover:bg-blue-900 dark:hover:bg-blue-700',
     },
     error: {
-      bg: 'bg-color3',
+      bg: 'bg-color2_selected',
       text: 'text-red-800 dark:text-red-400',
-      border: 'border-red-300 dark:border-red-800',
+      border: 'border-transparent',
       btnBg: 'bg-red-800 dark:bg-red-600',
       btnHover: 'hover:bg-red-900 dark:hover:bg-red-700',
     },
     success: {
-      bg: 'bg-color3',
+      bg: 'bg-color2_selected',
       text: 'text-green-800 dark:text-green-400',
-      border: 'border-green-300 dark:border-green-800',
+      border: 'border-transparent',
       btnBg: 'bg-green-800 dark:bg-green-600',
       btnHover: 'hover:bg-green-900 dark:hover:bg-green-700',
     },
     warning: {
-      bg: 'bg-color3',
+      bg: 'bg-color2_selected',
       text: 'text-yellow-800 dark:text-yellow-300',
-      border: 'border-yellow-300 dark:border-yellow-800',
+      border: 'border-transparent',
       btnBg: 'bg-yellow-800 dark:bg-yellow-300 text-gray-800',
       btnHover: 'hover:bg-yellow-900 dark:hover:bg-yellow-400',
     },
@@ -75,6 +75,9 @@ const CardNotification = ({
 
         <div className="flex items-center">
           <span className="text-sm font-medium text-text1">CheQueCasas</span>
+        </div>
+        <div className="flex items-center">
+          {type}
         </div>
       </div>
 

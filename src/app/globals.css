@@ -34,6 +34,7 @@
   --card1: #b0c4de;
   --color1: #f0f8ff;
   --color2: #e7efff;
+  --color2_selected: #c5d6f1;
   --color3: #8da8c7;
   --color4: #5c7a99;
   --color5: #3e5f7e;
@@ -55,6 +56,7 @@
   --card1: #ffffff;
   --color1: #070a0c;
   --color2: #14161b;
+  --color2_selected: #1e2127;
   --color3: #2a2a31;
   --color4: #424a47;
   --color5: #6a6d69;
@@ -75,6 +77,7 @@
   --card1: #d9c2a9;
   --color1: #ffffee;
   --color2: #f6e8c9;
+  --color2_selected: #e0c8a7;
   --color3: #bfa58a;
   --color4: #9c7b5d;
   --color5: #855c3c;
@@ -96,6 +99,7 @@
   --card1: #999999;
   --color1: #f0f0f0;
   --color2: #ffffff;
+  --color2_selected: #f8f8f8;
   --color3: #cfecc7;
   --color4: #aee0a0;
   --color5: #3b9b21;

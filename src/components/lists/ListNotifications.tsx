@@ -2,7 +2,7 @@ import CardNotification from '@/components/cards/CardNotification';
 import { useReadNotificationMutation } from '@/reactQuery/mutations/notification.mutations';
 import { INotification } from '@/shared/interfaces/entities/notification.interface';
 import Image from 'next/image';
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
 
 const ListNotifications = ({
   notifications,
@@ -21,6 +21,12 @@ const ListNotifications = ({
     }
   };
 
+  const [sortedNotifications, setSortedNotifications] = useState<INotification[]>([]);
+
+  useEffect(() => {
+    setSortedNotifications(notifications.sort((a, b) => new Date(b.createdAt!).getTime() - new Date(a.createdAt!).getTime()));
+  }, [notifications]);
+
   return (
     <>
     <h1 className="text-5xl text-text1 text-center font-bold mb-8 mt-20 bg-color1">
@@ -29,8 +35,8 @@ const ListNotifications = ({
     <div className="flex justify-center mt-12 w-4/5 mx-auto">
       <div className="w-1/2 ">
 
-        {notifications.map((notification) => {
-          if (notification.deleted === false) {
+        {sortedNotifications.map((notification) => {
+            if (notification.deleted === false) {
 
           return (
             <div
