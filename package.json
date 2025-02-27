@@ -24,6 +24,7 @@
     "autoprefixer": "^10.4.20",
     "axios": "^1.7.9",
     "chart.js": "^4.4.7",
+    "dotenv": "^16.4.7",
     "file-saver": "^2.0.5",
     "framer-motion": "^12.4.2",
     "leaflet": "^1.9.4",

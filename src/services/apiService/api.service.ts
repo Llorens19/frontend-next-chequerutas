@@ -1,10 +1,14 @@
+// import { config } from 'dotenv';
+// config();
+
+
 import { ErrorResp } from '@/shared/utils/error.util';
 import axios, { AxiosInstance, AxiosRequestConfig } from 'axios';
 
 const isBrowser = typeof window !== 'undefined';
 
 export const axiosClient: AxiosInstance = axios.create({
-  baseURL: 'http://localhost:4000',
+  baseURL: process.env.BACKEND_URL || 'http://localhost:4000',
 });
 
 console.log('Backend URL:', process.env.BACKEND_URL);
