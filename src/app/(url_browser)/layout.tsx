@@ -2,16 +2,16 @@
 import Footer from '@/components/layout/Footer';
 import Header from '@/components/layout/Header';
 import Navbar from '@/compontesPhone/layout/Navbar';
+import useMobile from '@/hooks/useMobile.hook';
 import queryClient from '@/libs/react-query';
 import ThemeSwitcher from '@/providers/them/themProvider';
-import { useMediaQuery } from '@mui/material';
 import { QueryClientProvider } from '@tanstack/react-query';
 import Head from 'next/head';
 
 import { ReactNode } from 'react';
 
 const RootLayout = ({ children }: { children: ReactNode }) => {
-  const isMobile = useMediaQuery('(max-width: 600px)');
+  const isMobile = useMobile();
 
   return (
     <>
@@ -24,7 +24,6 @@ const RootLayout = ({ children }: { children: ReactNode }) => {
           <QueryClientProvider client={queryClient}>
             {isMobile ? (
               <div className="flex flex-col min-h-screen w-full">
-                <Header />
                 <div className="flex-grow">{children}</div>
                 <Navbar />
               </div>

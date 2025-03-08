@@ -1,4 +1,4 @@
-import AuthContent from '@/components/auth/authContent';
+import AuthPage from '@/components/pages/AuthPage';
 import IsNotLogged from '@/guards/NotLogged.guard';
 
 
@@ -13,7 +13,7 @@ const Auth = () => {
   return (
     <>
     <IsNotLogged >
-      <AuthContent />
+      <AuthPage />
     </IsNotLogged>
     </>
   );

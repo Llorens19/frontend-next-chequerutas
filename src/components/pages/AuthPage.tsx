@@ -4,7 +4,7 @@ import Login from '@/components/auth/Login';
 import Register from '@/components/auth/Register';
 import { useState } from 'react';
 
-const AuthContent = () => {
+const AuthPage = () => {
 
   const styles = {
     backgroundImage: 'url(\'/images/auth/auth.jpg\')',
@@ -23,7 +23,7 @@ const AuthContent = () => {
 
   return (
     <>
-        <div className="flex justify-center items-center h-full">
+        <div className="flex justify-center items-center h-screen">
         <div style ={styles} className="w-3/5 h-full flex justify-center items-center align-middle ">
         </div>
         <div className="w-2/5  flex justify-center items-center align-middle mt-16">
@@ -54,4 +54,4 @@ const AuthContent = () => {
   );
 };
 
-export default AuthContent;
+export default AuthPage;

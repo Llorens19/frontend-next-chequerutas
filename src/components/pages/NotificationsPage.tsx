@@ -2,7 +2,7 @@
 import ListNotifications from '@/components/lists/ListNotifications';
 import { useGetUserQuery } from '@/reactQuery/queries/user.query';
 
-const Notifications = () => {
+const NotificationsPage = () => {
 
   const {data:userLogged, isLoading} = useGetUserQuery();
   return (
@@ -12,4 +12,4 @@ const Notifications = () => {
   );
 };
 
-export default Notifications;
+export default NotificationsPage;
