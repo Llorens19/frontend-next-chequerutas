@@ -1,27 +1,43 @@
 'use client';
 import Footer from '@/components/layout/Footer';
 import Header from '@/components/layout/Header';
+import Navbar from '@/compontesPhone/layout/Navbar';
 import queryClient from '@/libs/react-query';
 import ThemeSwitcher from '@/providers/them/themProvider';
+import { useMediaQuery } from '@mui/material';
 import { QueryClientProvider } from '@tanstack/react-query';
+import Head from 'next/head';
 
 import { ReactNode } from 'react';
 
 const RootLayout = ({ children }: { children: ReactNode }) => {
+  const isMobile = useMediaQuery('(max-width: 600px)');
+
   return (
     <>
       <html lang="es">
-        <ThemeSwitcher>
-          <body suppressHydrationWarning={true} className="bg-color1">
-            <QueryClientProvider client={queryClient}>
-              <div className="flex flex-col min-h-screen">
+      <Head>
+        <meta name="viewport" content="width=device-width, initial-scale=1" />
+      </Head>
+      <ThemeSwitcher>
+        <body suppressHydrationWarning={true} className="bg-color1 min-h-screen w-full">
+          <QueryClientProvider client={queryClient}>
+            {isMobile ? (
+              <div className="flex flex-col min-h-screen w-full">
+                <Header />
+                <div className="flex-grow">{children}</div>
+                <Navbar />
+              </div>
+            ) : (
+              <div className="flex flex-col min-h-screen w-full">
                 <Header />
                 <div className="flex-grow">{children}</div>
                 <Footer />
               </div>
-            </QueryClientProvider>
-          </body>
-        </ThemeSwitcher>
+            )}
+          </QueryClientProvider>
+        </body>
+      </ThemeSwitcher>
       </html>
     </>
   );

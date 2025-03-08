@@ -23,7 +23,7 @@ const AuthContent = () => {
 
   return (
     <>
-        <div className="flex justify-center items-center h-screen">
+        <div className="flex justify-center items-center h-full">
         <div style ={styles} className="w-3/5 h-full flex justify-center items-center align-middle ">
         </div>
         <div className="w-2/5  flex justify-center items-center align-middle mt-16">
