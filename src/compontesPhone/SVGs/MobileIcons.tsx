@@ -1,4 +1,4 @@
-const NavbarIcons = ({
+const MobileIcons = ({
   icon,
   color,
   size = '30px',
@@ -18,9 +18,9 @@ const NavbarIcons = ({
       <path
         d="M14.9536 14.9458L21 21M17 10C17 13.866 13.866 17 10 17C6.13401 17 3 13.866 3 10C3 6.13401 6.13401 3 10 3C13.866 3 17 6.13401 17 10Z"
         stroke={color}
-        stroke-width="2.5"
-        stroke-linecap="round"
-        stroke-linejoin="round"
+        strokeWidth="2.5"
+        strokeLinecap="round"
+        strokeLinejoin="round"
       />
     </svg>
   );
@@ -322,4 +322,4 @@ const NavbarIcons = ({
 
   return null;
 };
-export default NavbarIcons;
+export default MobileIcons;

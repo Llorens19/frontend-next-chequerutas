@@ -3,8 +3,7 @@ import ListNotifications from '@/components/lists/ListNotifications';
 import { useGetUserQuery } from '@/reactQuery/queries/user.query';
 
 const NotificationsPage = () => {
-
-  const {data:userLogged, isLoading} = useGetUserQuery();
+  const { data: userLogged, isLoading } = useGetUserQuery();
   return (
     <>
       <ListNotifications notifications={userLogged?.notifications || []} />
