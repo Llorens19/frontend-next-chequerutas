@@ -1,5 +1,5 @@
+import FiltersRoute from '@/compontesPhone/filters/FilterRoute';
 import SearchHeader from '@/compontesPhone/searchers/SearchHeader';
-import MobileIcons from '@/compontesPhone/SVGs/MobileIcons';
 
 const HeaderRoute = () => {
   return (
@@ -9,8 +9,8 @@ const HeaderRoute = () => {
           <SearchHeader />
         </div>
 
-        <div className="flex justify-end items-end w-[45px]">
-          <MobileIcons size="34px" color="var(--text1)" icon="filters" />
+        <div className="w-[45px]">
+          <FiltersRoute />
         </div>
       </div>
     </header>
