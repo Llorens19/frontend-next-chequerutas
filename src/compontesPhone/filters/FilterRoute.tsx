@@ -15,35 +15,33 @@ import MobileIcons from '@/compontesPhone/SVGs/MobileIcons';
 
 const FiltersRoute = () => {
   const [isFiltersOpen, setIsFiltersOpen] = useState(false);
-  const router = useRouter();
-  const searchParams = useSearchParams();
 
   const onClickFilters = () => {
     setIsFiltersOpen(true);
     window.history.pushState({ modalOpen: true }, '');
   };
 
-  const closeFilters = () => {
+  const closeModal = () => {
     setIsFiltersOpen(false);
-    window.history.back();
   };
 
+
   useEffect(() => {
-    const handleBackButton = () => {
+    const handlePopState = () => {
       if (isFiltersOpen) {
         setIsFiltersOpen(false);
-        return;
       }
     };
 
-    window.addEventListener('popstate', handleBackButton);
-
+    window.addEventListener('popstate', handlePopState);
     return () => {
-      window.removeEventListener('popstate', handleBackButton);
+      window.removeEventListener('popstate', handlePopState);
     };
   }, [isFiltersOpen]);
 
-  const { categoryOptions, locationOptions, titleOptions } = useFilterRouteSearchOptions();
+
+  const { categoryOptions, locationOptions, titleOptions } =
+    useFilterRouteSearchOptions();
   const {
     distanceMax,
     distanceMin,
@@ -65,6 +63,9 @@ const FiltersRoute = () => {
     onClickDelete,
   } = useFilterRouteControl();
 
+  const router = useRouter();
+  const searchParams = useSearchParams();
+
   useEffect(() => {
     const encodedFilters = searchParams.get('filters');
     if (encodedFilters) {
@@ -85,7 +86,14 @@ const FiltersRoute = () => {
   }, [searchParams]);
 
   const updateUrl = () => {
-    const filters = { distanceMax, distanceMin, level, category, title, location };
+    const filters = {
+      distanceMax,
+      distanceMin,
+      level,
+      category,
+      title,
+      location,
+    };
     const encodedFilters = btoa(JSON.stringify(filters));
 
     const params = new URLSearchParams(searchParams);
@@ -100,7 +108,10 @@ const FiltersRoute = () => {
 
   return (
     <>
-      <div className="w-full flex justify-end items-end" onClick={onClickFilters}>
+      <div
+        className="w-full flex justify-end items-end"
+        onClick={onClickFilters}
+      >
         <MobileIcons size="34px" color="var(--text1)" icon="filters" />
       </div>
 
@@ -112,16 +123,27 @@ const FiltersRoute = () => {
           exit={{ y: '100%' }}
           transition={{ duration: 0.3, ease: 'easeInOut' }}
         >
-          <div className="w-full grid grid-cols-1 gap-16 px-8 mt-6">
-            <div className="flex flex-col w-full justify-end">
+          <div className="w-full grid grid-cols-1 gap-12 px-8 mt-6">
+
+          <div className="flex flex-col w-full justify-end">
               <label className="text-text1">Ubicación</label>
-              <SearchFilters value={location ?? ''} onSelect={onSelectLocation} options={locationOptions} />
+              <SearchFilters
+                value={location ?? ''}
+                onSelect={onSelectLocation}
+                options={locationOptions}
+              />
             </div>
 
             <div className="flex flex-col w-full justify-end">
               <label className="text-text1">Nombre</label>
-              <SearchFilters value={title ?? ''} onSelect={onSelectTitle} options={titleOptions} />
+              <SearchFilters
+                value={title ?? ''}
+                onSelect={onSelectTitle}
+                options={titleOptions}
+              />
             </div>
+
+
 
             <div className="flex flex-col w-full">
               <label className="text-text1">Dificultad</label>
@@ -156,6 +178,7 @@ const FiltersRoute = () => {
               />
             </div>
 
+
             <div className="flex flex-col w-full justify-end">
               <label className="text-text1">{`Distancia ${distanceMin} - ${distanceMax} km`}</label>
               <Slider
@@ -181,14 +204,12 @@ const FiltersRoute = () => {
               >
                 Borrar
               </button>
-            </div>
 
-            <div className="flex flex-col w-full justify-end">
               <button
-                onClick={closeFilters}
-                className="bg-gray-600 text-white p-1.5 rounded-3xl border-2 border-gray-500 text-ms"
+                onClick={closeModal}
+                className="bg-text1 text-color3 p-1.5 rounded-3xl border-2 border-text text-ms"
               >
-                Cerrar
+                Aplicar
               </button>
             </div>
           </div>
