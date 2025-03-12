@@ -4,7 +4,7 @@ import Link from 'next/link';
 const Navbar = () => {
   return (
     <>
-      <nav className="bg-color3 p-2 w-full z-10 fixed bottom-0 flex justify-around items-center shadow-lg">
+      <nav className="bg-color3 p-2 w-full z-[999999] fixed bottom-0 flex justify-around items-center shadow-lg">
 
         <Link href="/list-routes" className = "flex flex-col items-center">
           <MobileIcons icon="search" color="var(--text1)" size={'34px'}/>
