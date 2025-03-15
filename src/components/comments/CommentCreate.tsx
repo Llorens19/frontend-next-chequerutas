@@ -6,7 +6,6 @@ import { CommentCommandService } from '@/services/commands/comment.commandServic
 import { useState } from 'react';
 
 const CommentCreate = ({ idRoute }: { idRoute: string }) => {
-
   const [body, setBody] = useState<string>('');
   const [uploadedFile, setUploadedFile] = useState<File | null>(null);
 
@@ -16,14 +15,16 @@ const CommentCreate = ({ idRoute }: { idRoute: string }) => {
     let imgUrl = '';
     if (uploadedFile) {
       try {
-      const { url } = await CommentCommandService.saveCommentImage(uploadedFile);
-      imgUrl = url;
+        const { url } = await CommentCommandService.saveCommentImage(
+          uploadedFile
+        );
+        imgUrl = url;
       } catch (error) {
+        console.error('Error al subir la imagen:', error);
       }
     }
 
-
-      console.log('Imagen subida, URL:', imgUrl);
+    console.log('Imagen subida, URL:', imgUrl);
     commentCreate.mutate({ idRoute, body, imgComment: imgUrl });
     setBody('');
     setUploadedFile({} as File);
@@ -34,7 +35,7 @@ const CommentCreate = ({ idRoute }: { idRoute: string }) => {
     setUploadedFile({} as File);
   };
 
-  const handleFilesChange = (file: File| null):void => {
+  const handleFilesChange = (file: File | null): void => {
     setUploadedFile(file);
   };
 
@@ -62,7 +63,7 @@ const CommentCreate = ({ idRoute }: { idRoute: string }) => {
         >
           <p>Cancelar</p>
         </button>
-        <DropzoneComment  onFileUpload={handleFilesChange} />
+        <DropzoneComment onFileUpload={handleFilesChange} />
       </div>
     </div>
   );

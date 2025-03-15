@@ -39,11 +39,11 @@ const DetailsRoute = ({ idRoute }: IDetailsRouteParams) => {
             {isMobile ? (
               <CardDetailRouteMobile route={route} />
             ) : (
-              <CardDetailRoute route={route} />
+              <>
+                <CardDetailRoute route={route} />
+                <CommentsRoute idRoute={idRoute} />
+              </>
             )}
-            <CommentsRoute idRoute={idRoute} />
-
-
           </motion.div>
         </>
       ) : (

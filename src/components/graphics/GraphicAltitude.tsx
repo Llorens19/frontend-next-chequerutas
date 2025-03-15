@@ -29,8 +29,8 @@ const GraphicAltitude = ({ coordinates }: IGraphicAltitudeProps) => {
         title: {
           display: true,
         },
-        beginAtZero: false, // No comienza en 0
-        suggestedMin: minAltitude, // Comienza en el valor mínimo
+        beginAtZero: false,
+        suggestedMin: minAltitude,
         suggestedMax: maxAltitude
       }
     },

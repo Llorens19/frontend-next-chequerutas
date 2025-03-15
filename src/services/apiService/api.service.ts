@@ -5,7 +5,7 @@ const isBrowser = typeof window !== 'undefined';
 
 export const axiosClient: AxiosInstance = axios.create({
   // baseURL: 'http://localhost:4000',
-  baseURL: 'http://192.168.68.59:4000',
+  baseURL: 'http://192.168.68.60:4000',
   // baseURL: 'http://0.0.0.0:4000',
 });
 

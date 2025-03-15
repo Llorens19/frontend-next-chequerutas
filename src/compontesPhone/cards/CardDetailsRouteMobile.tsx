@@ -14,6 +14,7 @@ import { useRouter } from 'next/navigation';
 import Image from 'next/image';
 import SpinnerLoading from '@/components/spinners/SpinnerLoading';
 import GpxForm from '@/components/gpxForm/GpxForm';
+import ListCommentsMobile from '@/compontesPhone/lists/ListCommentsMobile';
 
 const CardDetailRouteMobile = ({ route }: ICardDetailRouteParams) => {
   const router = useRouter();
@@ -44,7 +45,7 @@ const CardDetailRouteMobile = ({ route }: ICardDetailRouteParams) => {
 
   return (
     <>
-      <div className="flex flex-col p-4 m-auto rounded-3xl gap-4">
+      <div className="flex flex-col p-4 m-auto rounded-3xl gap-4 mb-20">
         <div className="flex w-full text-lg whitespace-pre font-bold items-center ">
           <p
             className="text-text1 text-lg whitespace-pre hover:underline cursor-pointer"
@@ -189,7 +190,7 @@ const CardDetailRouteMobile = ({ route }: ICardDetailRouteParams) => {
         <GraphicAltitude coordinates={route.coordinates!} />
         <p className="text-lg  text-text4 ">{route.description}</p>
 
-        <div className="flex justify-between mb-8 bg-color2 rounded-3xl p-4 max-h-20">
+        <div className="flex justify-between bg-color2 rounded-3xl p-4 max-h-20">
           <div
             className="flex  bg-color4 rounded-full justify-center items-center hover:scale-105 transition-transform cursor-pointer"
             onClick={() => router.push(`/profile/${route.user?.username}`)}
@@ -205,6 +206,7 @@ const CardDetailRouteMobile = ({ route }: ICardDetailRouteParams) => {
               {route.user?.username}
             </p>
           </div>
+          <ListCommentsMobile idRoute={route.idRoute} />
 
           {userLogged && userLogged.premiumLevel > 0 && (
             <div>
