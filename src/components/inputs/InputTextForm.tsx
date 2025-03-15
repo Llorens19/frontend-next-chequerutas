@@ -3,7 +3,7 @@ import React from 'react';
 
 const InputTextForm = ({label, type = 'text', id, placeholder = '',data, error = '', readonly = false, onChange }: IInputTextFormProps) => {
   return (
-    <div className="flex flex-col">
+    <div className="flex flex-col w-full">
       <label htmlFor={id} className="text-text3">
         {label}
       </label>
