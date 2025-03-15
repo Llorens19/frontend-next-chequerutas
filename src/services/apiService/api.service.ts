@@ -8,13 +8,9 @@ import axios, { AxiosInstance, AxiosRequestConfig } from 'axios';
 const isBrowser = typeof window !== 'undefined';
 
 export const axiosClient: AxiosInstance = axios.create({
-<<<<<<< HEAD
-  baseURL: process.env.BACKEND_URL || 'http://localhost:4000',
-=======
   // baseURL: 'http://localhost:4000',
   baseURL: 'http://192.168.68.60:4000',
   // baseURL: 'http://0.0.0.0:4000',
->>>>>>> feature/inicio_aplicación_movil
 });
 
 console.log('Backend URL:', process.env.BACKEND_URL);
