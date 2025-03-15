@@ -4,7 +4,7 @@ import Login from '@/components/auth/Login';
 import Register from '@/components/auth/Register';
 import { useState } from 'react';
 
-const AuthContent = () => {
+const AuthPage = () => {
 
   const styles = {
     backgroundImage: 'url(\'/images/auth/auth.jpg\')',
@@ -54,4 +54,4 @@ const AuthContent = () => {
   );
 };
 
-export default AuthContent;
+export default AuthPage;

@@ -1,4 +1,4 @@
-import CreateRouteForm from '@/components/createRoute/CreateRouteForm';
+import CreateRoutePage from '@/components/pages/CreateRoutePage';
 import IsLogged from '@/guards/Logged.guard';
 import { Metadata } from 'next';
 
@@ -11,7 +11,7 @@ const CreateRoute = () => {
   return (
     <>
       <IsLogged>
-        <CreateRouteForm />
+        <CreateRoutePage />
       </IsLogged>
     </>
   );
