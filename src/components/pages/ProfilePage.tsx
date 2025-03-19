@@ -97,7 +97,7 @@ const ProfileUser = ({ username }: { username: string }) => {
   return (
     <>
       {isMobile ? (
-        <div className="flex flex-col w-full p-4 pt-8 pb-16">
+        <div className="flex flex-col w-full p-4 pt-8 pb-20">
           <div className="flex w-full">
             <div className="w-1/4 ">
               <Image
