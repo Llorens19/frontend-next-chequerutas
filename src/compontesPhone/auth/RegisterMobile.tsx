@@ -13,16 +13,12 @@ import {
 import { useState } from 'react';
 import { useRouter } from 'next/navigation';
 
-const Register = () => {
-
-
+const RegisterMobile = () => {
   const options = [
     { value: 'client', label: 'Cliente' },
     { value: 'admin', label: 'Admin' },
   ];
   const router = useRouter();
-
-
 
   const [name, setName] = useState('');
   const [surname, setSurname] = useState('');
@@ -43,8 +39,6 @@ const Register = () => {
   const [errorPassword, setErrorPassword] = useState('');
   const [errorPasswordRepeat, setErrorPasswordRepeat] = useState('');
   const [errorRole, setErrorRole] = useState('');
-
-
 
   const validateRegister = (): boolean => {
     const errorName = nameRegex(name);
@@ -67,9 +61,6 @@ const Register = () => {
     setErrorPassword(errorPassword);
     setErrorPasswordRepeat(errorPasswordRepeat);
     setErrorRole(errorRole);
-
-
-
 
     if (role === 'client') {
       const errorPhone = phoneRegex(phone);
@@ -95,7 +86,6 @@ const Register = () => {
 
   const handleRegister = async () => {
     if (validateRegister()) {
-
       const userData = {
         name,
         surname,
@@ -110,8 +100,7 @@ const Register = () => {
       try {
         await AuthCommandService.register(userData);
         router.push('/');
-      } catch (error : unknown) {
-
+      } catch (error: unknown) {
         if (error instanceof ErrorResp) {
           if (error.code === 'EmailAlreadyInUse') {
             setErrorEmail('El email ya está en uso');
@@ -123,13 +112,12 @@ const Register = () => {
 
         console.error(error);
       }
-
     }
   };
 
   return (
     <div className="flex flex-col gap-4 mx-auto w-full">
-      <div className="flex gap-4">
+      <div className="flex">
         <div className="w-2/5">
           <InputTextForm
             label="Nombre"
@@ -141,7 +129,7 @@ const Register = () => {
             error={errorName}
           />
         </div>
-        <div className="w-3/5">
+        <div className="w-3/5 pl-4">
           <InputTextForm
             label="Apellidos"
             type="text"
@@ -153,8 +141,8 @@ const Register = () => {
           />
         </div>
       </div>
-      <div className="flex gap-4">
-        <div className="w-3/5">
+      <div className="flex">
+        <div className="w-3/5 pr-4">
           <InputTextForm
             label="Nombre de usuario"
             type="text"
@@ -177,22 +165,23 @@ const Register = () => {
           />
         </div>
       </div>
-      {role === 'client' ? <div className="flex gap-4">
-        <div className="w-full">
-          <InputTextForm
-            label="Teléfono"
-            type="number"
-            id="phoneInput"
-            placeholder="654321123"
-            data={phone}
-            onChange={setPhone}
-            error={errorPhone}
-          />
+      {role === 'client' ? (
+        <div className="flex gap-4">
+          <div className="w-full">
+            <InputTextForm
+              label="Teléfono"
+              type="number"
+              id="phoneInput"
+              placeholder="654321123"
+              data={phone}
+              onChange={setPhone}
+              error={errorPhone}
+            />
+          </div>
         </div>
-      </div> : null}
+      ) : null}
 
-      <div className="flex gap-4">
-        <div className="w-3/5">
+        <div className="w-full">
           <InputTextForm
             label="Email"
             type="email"
@@ -203,7 +192,7 @@ const Register = () => {
             error={errorEmail}
           />
         </div>
-        <div className="w-2/5">
+        <div className="w-full">
           <InputTextForm
             label="Nacimiento"
             type="date"
@@ -212,9 +201,9 @@ const Register = () => {
             data={birthdate}
             onChange={setBirthdate}
             error={errorBirthdate}
+
           />
         </div>
-      </div>
       <div className="w-full">
         <InputTextForm
           label="Contraseña"
@@ -247,4 +236,4 @@ const Register = () => {
   );
 };
 
-export default Register;
+export default RegisterMobile;

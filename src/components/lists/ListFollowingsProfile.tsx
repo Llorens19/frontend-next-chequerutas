@@ -1,15 +1,25 @@
 import CardUser from '@/components/cards/CardUser';
+import CardUserMobile from '@/compontesPhone/cards/CardUserMobile';
+import useMobile from '@/hooks/useMobile.hook';
 import { IFollow } from '@/shared/interfaces/entities/follow.interface';
 
 const ListFollowingsProfile = ({ followings }: { followings: IFollow[] }) => {
-  console.log({ followings });
+  const isMobile = useMobile();
   return (
     <>
-      <div className="grid grid-cols-2 gap-4">
-        {followings.map((follow) => (
-          <CardUser user={follow.followerUser} key={follow.idUser} />
-        ))}
-      </div>
+      {isMobile ? (
+        <div className="grid grid-cols-1 gap-4">
+          {followings.map((follow) => (
+            <CardUserMobile user={follow.followerUser} key={follow.idUser} />
+          ))}
+        </div>
+      ) : (
+        <div className="grid grid-cols-2 gap-4">
+          {followings.map((follow) => (
+            <CardUser user={follow.followerUser} key={follow.idUser} />
+          ))}
+        </div>
+      )}
 
       {followings.length === 0 && (
         <div className="grid grid-cols-1 gap-4">
