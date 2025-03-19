@@ -19,6 +19,8 @@ import { useRouter } from 'next/navigation';
 import { useGetUserQuery } from '@/reactQuery/queries/user.query';
 import { useSendNotificationMutation } from '@/reactQuery/mutations/notification.mutations';
 import DropzoneCreateRouteImagesMobile from '@/compontesPhone/dropzone/DropzoneCreateRouteImagesMobile';
+import MapButton from '@/compontesPhone/maps/MapRouteMobile';
+import MapRouteMobile from '@/compontesPhone/maps/MapRouteMobile';
 
 const CreateRouteMobile = () => {
   const [title, setTitle] = useState<string>('');
@@ -137,15 +139,17 @@ const CreateRouteMobile = () => {
 
   return (
     <>
-      <div className="w-3/5 h-screen flex justify-center relative">
-        <div className="w-full h-full">
-          <MapWithRoute coordinates={coordinates as [number, number][]} />
-        </div>
-      </div>
-
       <div className="w-full flex justify-center items-center align-middle p-4 pb-20">
-        <div className="flex flex-col gap-4">
-          <h1 className = "text-2xl font-bold text-text2 text-center">Crear Ruta</h1>
+        <div className="flex flex-col gap-4 align-middle">
+          <div className='flex'>
+            <h1 className="text-2xl font-bold text-text2 text-center w-11/12">
+              Crear Ruta
+            </h1>
+            <div className="w-1/12 flex items-center">
+              <MapRouteMobile coordinates={coordinates as [number, number][]} />
+            </div>
+          </div>
+
           <div className="w-full">
             <InputTextForm
               label="Titulo"
