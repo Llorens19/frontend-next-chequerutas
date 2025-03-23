@@ -1,5 +1,5 @@
-
 import CarouselCategory from '@/components/carousels/CarouselCategory';
+import HomePage from '@/components/pages/HomePage';
 import SearchHome from '@/components/searches/SearchHome';
 import { CategoryQueryService } from '@/services/queries/category.queryService';
 import { Metadata } from 'next';
@@ -16,35 +16,7 @@ const Home = async () => {
 
   return (
     <>
-      <section className="relative w-full h-screen">
-        <div
-          className="absolute inset-0 bg-cover bg-center bg-fixed"
-          style={{ backgroundImage: 'url(\'/images/home_header.jpg\')' }}
-        />
-
-        <div className="relative z-10 flex flex-col items-center justify-center h-full bg-black/50">
-
-          <h1 className="text-white text-7xl font-black">CheQueRutas</h1>
-          <p className="text-white text-2xl my-4">¿Perdido? Busca tu camino.</p>
-          <SearchHome />
-
-
-
-          <div className="w-full">
-            <h2 className="flex justify-center text-2xl font-bold text-white mb-4 mt-8">
-              Categorías
-            </h2>
-            <CarouselCategory categories={categories}  />
-          </div>
-        </div>
-
-      </section>
-
-      {/* <section className="sport-carousel p-4 min-h-screen bg-background1 relative z-20">
-        <h2 className="flex justify-center text-2xl font-bold text-text1 mb-4">
-          Categorías
-        </h2>
-      </section> */}
+      <HomePage categories={categories} />
     </>
   );
 };
