@@ -87,7 +87,7 @@ const PaymentsPage = () => {
                 />
               </StripeProvider>
             ) : (
-              <div className="flex flex-col gap-4 items-center justify-center p-4">
+              <div className="flex flex-col gap-4 items-center justify-center p-4 pb-20">
                 <h1 className="text-text3 text-5xl font-bold mb-8">
                   Suscripciones
                 </h1>

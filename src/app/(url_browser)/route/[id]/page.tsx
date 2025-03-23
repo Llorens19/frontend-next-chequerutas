@@ -1,4 +1,3 @@
-import CommentsRoute from '@/components/comments/CommentsRoute';
 import DetailsRoute from '@/components/details/DetailsRoute';
 import { RouteQueryService } from '@/services/queries/route.queryService';
 import { uuidRegex } from '@/shared/utils/regex/uuidRegex.util';
