@@ -344,6 +344,29 @@ const MobileIcons = ({
     </svg>
   );
 
+  const home = (
+    <svg
+      fill={color}
+      width={size}
+      height={size}
+      viewBox="0 0 24 24"
+      id="home-alt-2"
+      data-name="Line Color"
+      xmlns="http://www.w3.org/2000/svg"
+      className="icon line-color"
+    >
+      <polygon
+        id="primary"
+        points="19 10 19 21 14 21 14 14 10 14 10 21 5 21 5 10 12 3 19 10"
+        fill="none"
+        stroke={color}
+        strokeLinecap="round"
+        strokeLinejoin="round"
+        strokeWidth="2"
+      />
+    </svg>
+  );
+
   if (icon === 'search') return search;
   if (icon === 'profile') return profile;
   if (icon === 'premium') return premium;
@@ -359,6 +382,7 @@ const MobileIcons = ({
   if (icon === 'more') return more;
   if (icon === 'comments') return comments;
   if (icon === 'map') return map;
+  if (icon === 'home') return home;
 
   return null;
 };

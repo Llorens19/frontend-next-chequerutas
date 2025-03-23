@@ -1,7 +1,8 @@
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
-*{
+
+* {
   margin: 0;
   padding: 0;
   box-sizing: border-box;
@@ -9,7 +10,7 @@
   scrollbar-width: thin;
   scrollbar-color: #ffffff #000000;
   /* font-family:  Cambria, Cochin, Georgia, Times, 'Times New Roman', serif; */
-/*
+  /*
   font-family: Verdana, Geneva, Tahoma, sans-serif; */
 }
 
@@ -28,7 +29,7 @@
 
 
 
-.blue{
+.blue {
   --background1: #e3f2fd;
   --header: #3a5a78;
   --card1: #b0c4de;
@@ -39,6 +40,7 @@
   --color4: #5c7a99;
   --color5: #3e5f7e;
   --text1: #1e2f40;
+  --text1_hover: #161c22;
   --text2: #374f6b;
   --text3: #3e4a5a;
   --text4: #8ba0b3;
@@ -61,6 +63,7 @@
   --color4: #424a47;
   --color5: #6a6d69;
   --text1: #ffffff;
+  --text1_hover: #5b5656;
   --text2: #555555;
   --text3: #888888;
   --text4: #999999;
@@ -82,6 +85,7 @@
   --color4: #9c7b5d;
   --color5: #855c3c;
   --text1: #3e2f23;
+  --text1_hover: #15100b;
   --text2: #5c4632;
   --text3: #776b5d;
   --text4: #9e9b91;
@@ -105,6 +109,7 @@
   --color5: #3b9b21;
   --color6: #6ac850;
   --text1: #003000;
+  --text1_hover: #000600;
   --text2: #004000;
   --text3: #555555;
   --text4: #888888;
