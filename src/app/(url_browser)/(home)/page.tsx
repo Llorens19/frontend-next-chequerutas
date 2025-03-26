@@ -1,6 +1,4 @@
-import CarouselCategory from '@/components/carousels/CarouselCategory';
 import HomePage from '@/components/pages/HomePage';
-import SearchHome from '@/components/searches/SearchHome';
 import { CategoryQueryService } from '@/services/queries/category.queryService';
 import { Metadata } from 'next';
 

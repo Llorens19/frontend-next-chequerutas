@@ -19,7 +19,7 @@ export const generateMetadata = async ({
     const route = await RouteQueryService.getRouteById(id);
 
     return route ? { title: route.title } : {};
-  } catch (error) {
+  } catch (e) {
     return {};
   }
 };
