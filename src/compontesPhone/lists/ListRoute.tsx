@@ -79,7 +79,6 @@ const ListRoute = () => {
           {routesList.map((route) => (
             isMobile ? <CardRouteMobile key={route.idRoute} route={route} /> : <CardRoute key={route.idRoute} route={route} />
           ))}
-          {/* {isLoading && <CardRouteSkeleton />} */}
           {!isLoading && routesList.length === 0 && (
             <div className="text-center text-text1 py-4  text-xl">
               No hay rutas que cumplan estas características

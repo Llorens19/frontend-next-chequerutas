@@ -127,9 +127,9 @@ const ProfileUser = ({ username }: { username: string }) => {
           <div className="flex gap-4 justify-center mt-4 mx-4">
             {isOwner && (
               <>
-                <button className="bg-text1 text-color2 px-4 py-2 rounded-3xl w-1/2 border-2 border-text1 hover:text-text1 hover:bg-color2 hover:border-text1 transition">
+                {/* <button className="bg-text1 text-color2 px-4 py-2 rounded-3xl w-1/2 border-2 border-text1 hover:text-text1 hover:bg-color2 hover:border-text1 transition">
                   <p>Editar Perfil</p>
-                </button>
+                </button> */}
 
                 <button
                   className="bg-color2 text-text1 border-2 border-text1 px-4 py-2 rounded-3xl w-1/2 hover:bg-text1 hover:text-color2 transition"
@@ -162,14 +162,14 @@ const ProfileUser = ({ username }: { username: string }) => {
           </div>
 
           <div className="flex mt-4 w-full border-t-2 border-b-2 border-gray-300 p-4">
-            <div className="flex flex-col items-center w-1/3 hover:bg-color3 transition rounded-3xl" onClick={onClickRoutesPublic}>
+            <div className={`flex flex-col items-center w-1/3 rounded-3xl ${listSelected === 'routes-public'&&'bg-color3'}`} onClick={onClickRoutesPublic}>
               <p className="text-2xl font-bold text-text2">
                 {routesPublic?.routes.length ?? 0}
               </p>
               <p className="text-text3">Rutas</p>
             </div>
             <div
-              className="flex flex-col items-center w-1/3 hover:bg-color3 transition rounded-3xl"
+              className={`flex flex-col items-center w-1/3 rounded-3xl ${listSelected === 'followers'&&'bg-color3'}`}
               onClick={onClickFollowers}
             >
               <p className="text-2xl font-bold text-text2">
@@ -178,7 +178,7 @@ const ProfileUser = ({ username }: { username: string }) => {
               <p className="text-text3">Seguidores</p>
             </div>
             <div
-              className="flex flex-col items-center w-1/3 hover:bg-color3 transition rounded-3xl"
+              className={`flex flex-col items-center w-1/3 rounded-3xl ${listSelected === 'followings'&&'bg-color3'}`}
               onClick={onClickFollowings}
             >
               <p className="text-2xl font-bold text-text2">
@@ -191,7 +191,7 @@ const ProfileUser = ({ username }: { username: string }) => {
           <div className="flex flex-wrap justify-center w-full gap-4">
                 {isOwner && (
                   <button
-                    className="text-contrast2 py-2 rounded-3xl  font-bold "
+                    className={` py-2 rounded-3xl  font-bold ${listSelected === 'routes-private' ? 'text-contrast1': 'text-contrast2'}`}
                     onClick={onClickRoutesPrivate}
                   >
                     Privadas
@@ -200,7 +200,7 @@ const ProfileUser = ({ username }: { username: string }) => {
 
                 {isOwner && (
                   <button
-                    className="text-contrast2 py-2 rounded-3xl font-bold "
+                      className={`py-2 rounded-3xl  font-bold ${listSelected === 'likes' ? 'text-contrast1': 'text-contrast2'}`}
                     onClick={onClickFavorites}
                   >
                     Guardadas
@@ -208,13 +208,13 @@ const ProfileUser = ({ username }: { username: string }) => {
                 )}
 
                 <button
-                  className="text-contrast2 py-2 rounded-3xl font-bold "
+                    className={`py-2 rounded-3xl  font-bold ${listSelected === 'routes-public' ? 'text-contrast1': 'text-contrast2'}`}
                   onClick={onClickRoutesPublic}
                 >
                   Públicas
                 </button>
                 <button
-                  className="text-contrast2 py-2 rounded-3xl font-bold "
+                    className={`py-2 rounded-3xl  font-bold ${listSelected === 'posts' ? 'text-contrast1': 'text-contrast2'}`}
                   onClick={onClickPosts}
                 >
                   Publicaciones
@@ -282,9 +282,9 @@ const ProfileUser = ({ username }: { username: string }) => {
               <div className="flex gap-4 justify-center mt-4 mx-4 w-4/5">
                 {isOwner && (
                   <>
-                    <button className="bg-text1 text-color2 px-4 py-2 rounded-3xl w-1/2 border-2 border-text1 hover:text-text1 hover:bg-color2 hover:border-text1 transition">
+                    {/* <button className="bg-text1 text-color2 px-4 py-2 rounded-3xl w-1/2 border-2 border-text1 hover:text-text1 hover:bg-color2 hover:border-text1 transition">
                       <p>Editar Perfil</p>
-                    </button>
+                    </button> */}
 
                     <button
                       className="bg-color2 text-text1 border-2 border-text1 px-4 py-2 rounded-3xl w-1/2 hover:bg-text1 hover:text-color2 transition"

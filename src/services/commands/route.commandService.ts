@@ -18,5 +18,8 @@ export const RouteCommandService = {
   },
   saveRouteImage: async (file: File): Promise<{ url: string }> => {
     return ApiService.uploadFile<{ url: string }>('api/images/upload', file);
+  },
+  deleteRoute: (routeId: string): Promise<void> => {
+    return ApiService.delete<void>(`${SERVER_ROUTE}routes/${routeId}`);
   }
 };
