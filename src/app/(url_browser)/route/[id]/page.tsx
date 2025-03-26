@@ -1,4 +1,3 @@
-import CommentsRoute from '@/components/comments/CommentsRoute';
 import DetailsRoute from '@/components/details/DetailsRoute';
 import { RouteQueryService } from '@/services/queries/route.queryService';
 import { uuidRegex } from '@/shared/utils/regex/uuidRegex.util';
@@ -20,7 +19,7 @@ export const generateMetadata = async ({
     const route = await RouteQueryService.getRouteById(id);
 
     return route ? { title: route.title } : {};
-  } catch (error) {
+  } catch (e) {
     return {};
   }
 };

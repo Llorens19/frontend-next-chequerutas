@@ -1,4 +1,4 @@
-import Notifications from '@/components/notifications/Notifications';
+import NotificationsPage from '@/components/pages/NotificationsPage';
 import { Metadata } from 'next';
 
 export const metadata: Metadata = {
@@ -10,7 +10,7 @@ const NotificationsUser = async () => {
 
   return (
     <>
-      <Notifications />
+      <NotificationsPage />
     </>
   );
 };

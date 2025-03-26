@@ -121,17 +121,14 @@ const Register = () => {
           }
         }
 
-
         console.error(error);
       }
-
-      // console.log(userData);
 
     }
   };
 
   return (
-    <div className="flex flex-col gap-4 mx-auto">
+    <div className="flex flex-col gap-4 mx-auto w-full">
       <div className="flex gap-4">
         <div className="w-2/5">
           <InputTextForm
@@ -170,7 +167,7 @@ const Register = () => {
         </div>
         <div className="w-2/5">
           <InputSelectForm
-            label="Selecciona una opción"
+            label="Rol"
             id="mySelect"
             options={options}
             data={role}
@@ -208,7 +205,7 @@ const Register = () => {
         </div>
         <div className="w-2/5">
           <InputTextForm
-            label="Fecha de nacimiento"
+            label="Nacimiento"
             type="date"
             id="birthInput"
             placeholder=""

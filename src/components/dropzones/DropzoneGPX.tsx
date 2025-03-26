@@ -67,7 +67,7 @@ const DropzoneGPX = ({ onGPXUpload }: { onGPXUpload: (coordinates: number[][]) =
       </div>
       {selectedFile && (
         <div className="relative flex items-center gap-2 rounded-md text-text1">
-          <span className="text-sm">Puntos</span>
+          <span className="text-sm"></span>
           <button
             className="bg-red-500 text-white rounded-full text-xs"
             onClick={removeFile}

@@ -16,12 +16,11 @@ import SearchLocations from '@/components/searches/SearchLocations';
 import { useCreateRouteMutation } from '@/reactQuery/mutations/route.mutations';
 import { RouteCommandService } from '@/services/commands/route.commandService';
 import { useRouter } from 'next/navigation';
-import { NotificationCommandService } from '@/services/commands/notification.commandService';
-import { User } from 'lucide-react';
 import { useGetUserQuery } from '@/reactQuery/queries/user.query';
 import { useSendNotificationMutation } from '@/reactQuery/mutations/notification.mutations';
 
-const CreateRouteForm: React.FC = () => {
+const CreateRoute = () => {
+
   const [title, setTitle] = useState<string>('');
   const [duration, setDuration] = useState<string>('');
   const [level, setLevel] = useState<number>(0);
@@ -54,7 +53,7 @@ const CreateRouteForm: React.FC = () => {
 
   const router = useRouter();
 
-  const {data: userLogged} = useGetUserQuery();
+  const { data: userLogged } = useGetUserQuery();
 
   const sendNotification = useSendNotificationMutation();
 
@@ -130,19 +129,9 @@ const CreateRouteForm: React.FC = () => {
 
         router.push('/');
       } catch (error) {
+        console.error(error);
       }
     }
-    console.log({
-      title,
-      duration,
-      level,
-      location,
-      description,
-      isPublic,
-      coordinates,
-      images,
-      category,
-    });
   };
 
   return (
@@ -287,4 +276,4 @@ const CreateRouteForm: React.FC = () => {
   );
 };
 
-export default CreateRouteForm;
+export default CreateRoute;

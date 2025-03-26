@@ -9,6 +9,19 @@ export const useCreateRouteMutation = () => {
     mutationFn: (route:ICreteRouteInput) => RouteCommandService.createRoute(route),
     onSuccess: () => {
       queryClient.invalidateQueries({ queryKey: ['route'], });
+      queryClient.invalidateQueries({ queryKey: ['routes'], });
+    },
+  });
+};
+
+export const useDeleteRouteMutation = () => {
+  const queryClient = useQueryClient();
+
+  return useMutation({
+    mutationFn: (routeId: string) => RouteCommandService.deleteRoute(routeId),
+    onSuccess: () => {
+      queryClient.invalidateQueries({ queryKey: ['route'], });
+      queryClient.invalidateQueries({ queryKey: ['routes'], });
     },
   });
 };

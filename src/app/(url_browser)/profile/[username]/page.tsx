@@ -1,4 +1,4 @@
-import ProfileUser from '@/components/profile/ProfileUser';
+import ProfilePage from '@/components/pages/ProfilePage';
 import { ProfileQueryService } from '@/services/queries/profile.queryService';
 import { Metadata } from 'next';
 
@@ -17,7 +17,7 @@ const Profile = async ({ params }: { params: { username: string } }) => {
 
   return (
     <>
-      <ProfileUser username={username} />
+      <ProfilePage username={username} />
     </>
   );
 };

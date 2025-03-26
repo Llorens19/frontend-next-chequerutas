@@ -7,9 +7,13 @@ import { IDetailsRouteParams } from '@/shared/interfaces/components/details/Deta
 import { useRouter } from 'next/navigation';
 import SpinnerLoading from '@/components/spinners/SpinnerLoading';
 import { motion } from 'framer-motion';
+import useMobile from '@/hooks/useMobile.hook';
+import CardDetailRouteMobile from '@/compontesPhone/cards/CardDetailsRouteMobile';
 
 const DetailsRoute = ({ idRoute }: IDetailsRouteParams) => {
   const router = useRouter();
+
+  const isMobile = useMobile();
 
   const { data: route, isLoading: isLoadingRoute } = useRouteQuery(idRoute);
 
@@ -32,8 +36,14 @@ const DetailsRoute = ({ idRoute }: IDetailsRouteParams) => {
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.6, ease: 'easeOut' }}
           >
-            <CardDetailRoute route={route} />
-            <CommentsRoute idRoute={idRoute} />
+            {isMobile ? (
+              <CardDetailRouteMobile route={route} />
+            ) : (
+              <>
+                <CardDetailRoute route={route} />
+                <CommentsRoute idRoute={idRoute} />
+              </>
+            )}
           </motion.div>
         </>
       ) : (

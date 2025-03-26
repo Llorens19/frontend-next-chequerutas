@@ -10,7 +10,8 @@ const CardNotification = ({
   const { idNotification, title,  type, readed } = notification;
 
   const deleteNotification = useDeleteNotificationMutation();
-  const onClickDelete = () => {
+  const onClickDelete = (e: React.MouseEvent) => {
+    e.stopPropagation();
     deleteNotification.mutate(idNotification);
   };
 

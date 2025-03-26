@@ -29,8 +29,8 @@ const GraphicAltitude = ({ coordinates }: IGraphicAltitudeProps) => {
         title: {
           display: true,
         },
-        beginAtZero: false, // No comienza en 0
-        suggestedMin: minAltitude, // Comienza en el valor mínimo
+        beginAtZero: false,
+        suggestedMin: minAltitude,
         suggestedMax: maxAltitude
       }
     },
@@ -63,7 +63,7 @@ const GraphicAltitude = ({ coordinates }: IGraphicAltitudeProps) => {
   };
 
   return (
-    <div className="w-full rounded-3xl bg-color2 py-4">
+    <div className="w-full ">
       <div className="w-full max-h-64">
         <Line className="w-full h-full text-text4" data={dataPoints} options={options} />
       </div>
